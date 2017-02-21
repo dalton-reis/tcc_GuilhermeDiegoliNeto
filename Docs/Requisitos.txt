@@ -1,0 +1,25 @@
+PRIORIDADES DOS REQUISITOS
+Crucial: Absolutamente deve estar presente na versão final
+Prioritário: Preferencialmente deve estar presente na versão final
+Dispensável: Importante, mas pode ser dispensado se necessário
+Extra: Não necessário para o projeto base, mas interessante para extensão
+
+[SIMULAÇÃO]
+Efetuar simulação da dinâmica de relevo - Crucial
+Parametrizar ambiente da simulação - Crucial
+Simulações adicionais de dinâmica de relevo - Prioritário
+Simular camadas de terra e rocha - Dispensável
+Simulação de fluidos - Extra
+
+[EDITOR]
+Disponibilizar mapas pré-moldados - Crucial
+Salvar informações do terreno - Prioritário
+Permitir importação de mapas de altura customizados - Prioritário
+Permitir edição manual do terreno na aplicação - Dispensável
+Ferramentas avançadas para edição do terreno - Extra
+
+[VISUALIZAÇÃO]
+Visualização 3D do terreno - Crucial
+Visualização de dados numéricos - Prioritário
+Visualização de dados gráficos - Extra
+Visualização detalhada do terreno - Extra
