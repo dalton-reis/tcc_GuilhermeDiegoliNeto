@@ -1,0 +1,4 @@
+CoolTerrainTutorial.unitypackage (Assets de terreno) http://kostiantyn-dvornik.blogspot.com.br/2013/01/unity-4-cool-sweet-terrain-tutorial.html
+Função LoadHeightmap http://damienclassen.blogspot.com.br/2014/02/loading-terrain-heightmap-data-via-c.html
+Funções edição de terreno https://forum.unity3d.com/threads/edit-terrain-in-real-time.98410/
+Ferramenta web para obter mapa de altura de locais reais http://terrain.party/
