@@ -5,24 +5,20 @@ using UnityEngine.UI;
 
 public class TerrainControl : MonoBehaviour
 {
+    /*
+     * Classe geral de controle e acesso ao terreno
+     */
+
     public Terrain myTerrain;
 
     int xResolution;
     int zResolution;
     float[,] heights;
 
-    TerrainTransform[] transformArray = null;
+    public TransformSet transformSet { get; private set; }
 
     // Parâmetros UI
     public Text textMass = null;
-
-    // Parâmetros suavização
-    public int smoothRange = 1;
-    public float smoothFactor = 1.0f;
-
-    // Parâmetros unilateral
-    public int oneSideDigRange = 1;
-    public float oneSideDigFactor = 1.0f;
 
     void Start()
     {
@@ -30,17 +26,13 @@ public class TerrainControl : MonoBehaviour
         zResolution = myTerrain.terrainData.heightmapHeight;
         heights = myTerrain.terrainData.GetHeights(0, 0, xResolution, zResolution);
 
-        transformArray = new TerrainTransform[] { 
-            new SmoothTransform{active = false, range = smoothRange, factor = smoothFactor}, 
-            new OneSideDigTransform{active = false, range = oneSideDigRange, factor = oneSideDigFactor}, 
-            new DepositTransform{active = false}
-        };
-
+        transformSet = new TransformSet();
     }
 
     public void ToggleTransform(int index)
     {
-        transformArray[index].active = !transformArray[index].active;
+        TerrainTransform transform = transformSet.transformSet[index];
+        transform.active = !transform.active;
     }
 
     public void LoadHeightmap(string filename)
@@ -78,23 +70,23 @@ public class TerrainControl : MonoBehaviour
         myTerrain.ApplyDelayedHeightmapModification();
     }
 
-    public void UpdateConfigs()
-    {
-        (transformArray[0] as SmoothTransform).range = smoothRange;
-        (transformArray[0] as SmoothTransform).factor = smoothFactor;
-
-        (transformArray[1] as OneSideDigTransform).range = oneSideDigRange;
-        (transformArray[1] as OneSideDigTransform).factor = oneSideDigFactor;
-    }
-
     private void RunAllTransforms()
     {
-        for (int i = 0; i < transformArray.Length; i++)
+        foreach (TerrainTransform transform in transformSet.transformSet)
         {
-            if (transformArray[i].active)
-                transformArray[i].ApplyTransform(ref heights);
+            if (transform.active)
+            {
+                transform.ApplyTransform(ref heights);
+            }
         }
 
+        myTerrain.terrainData.SetHeightsDelayLOD(0, 0, heights);
+
+        UpdateMass();
+    }
+
+    private void UpdateMass()
+    {
         if (textMass != null)
         {
             float sumHeights = 0.0f;
@@ -104,8 +96,6 @@ public class TerrainControl : MonoBehaviour
             }
             textMass.text = sumHeights.ToString();
         }
-        
-        myTerrain.terrainData.SetHeightsDelayLOD(0, 0, heights);
     }
 
     private void MouseEditTerrain()

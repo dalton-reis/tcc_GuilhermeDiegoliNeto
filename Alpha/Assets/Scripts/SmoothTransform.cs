@@ -9,8 +9,14 @@ namespace TerrainAlgorithm
 {
     public class SmoothTransform : TerrainTransform
     {
-        public int range = 1;
-        public float factor = 1.0f;
+        public int range { get; set; }
+        public float factor { get; set; }
+
+        public SmoothTransform()
+        {
+            range = 1;
+            factor = 1.0f;
+        }
 
         public override void ApplyTransform(ref float[,] heights)
         {

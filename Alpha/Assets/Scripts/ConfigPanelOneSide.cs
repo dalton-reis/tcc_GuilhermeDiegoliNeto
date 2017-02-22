@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using TerrainAlgorithm;
 
 
 public class ConfigPanelOneSide : ConfigPanel {
@@ -20,17 +21,19 @@ public class ConfigPanelOneSide : ConfigPanel {
 
     protected override void LoadConfigs(TerrainControl terrainControl)
     {
-        sliderRange.value = terrainControl.oneSideDigRange;
-        sliderFactor.value = terrainControl.oneSideDigFactor;
+        OneSideDigTransform transform = terrainControl.transformSet.transformSet[(int)TransformIndex.OneSideDig] as OneSideDigTransform;
+
+        sliderRange.value = transform.range;
+        sliderFactor.value = transform.factor;
 
         UpdateValues();
     }
 
     protected override void SaveConfigs(TerrainControl terrainControl)
     {
-        terrainControl.oneSideDigRange = (int)sliderRange.value;
-        terrainControl.oneSideDigFactor = sliderFactor.value;
+        OneSideDigTransform transform = terrainControl.transformSet.transformSet[(int)TransformIndex.OneSideDig] as OneSideDigTransform;
 
-        terrainControl.UpdateConfigs();
+        transform.range = (int)sliderRange.value;
+        transform.factor = sliderFactor.value;
     }
 }

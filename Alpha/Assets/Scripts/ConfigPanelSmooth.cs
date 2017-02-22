@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using TerrainAlgorithm;
 
 public class ConfigPanelSmooth : ConfigPanel
 {
@@ -19,17 +20,19 @@ public class ConfigPanelSmooth : ConfigPanel
 
     protected override void LoadConfigs(TerrainControl terrainControl)
     {
-        sliderRange.value = terrainControl.smoothRange;
-        sliderFactor.value = terrainControl.smoothFactor;
+        SmoothTransform transform = terrainControl.transformSet.transformSet[(int)TransformIndex.Smooth] as SmoothTransform;
+
+        sliderRange.value = transform.range;
+        sliderFactor.value = transform.factor;
 
         UpdateValues();
     }
 
     protected override void SaveConfigs(TerrainControl terrainControl)
     {
-        terrainControl.smoothRange = (int)sliderRange.value;
-        terrainControl.smoothFactor = sliderFactor.value;
+        SmoothTransform transform = terrainControl.transformSet.transformSet[(int)TransformIndex.Smooth] as SmoothTransform;
 
-        terrainControl.UpdateConfigs();
+        transform.range = (int)sliderRange.value;
+        transform.factor = sliderFactor.value;
     }
 }

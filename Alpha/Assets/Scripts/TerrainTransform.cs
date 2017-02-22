@@ -7,7 +7,8 @@ namespace TerrainAlgorithm
 {
     public abstract class TerrainTransform
     {
-        /* Classe base para algoritmos de transformação do terreno
+        /* 
+         * Classe base para algoritmos de transformação do terreno
          * 
          * Algoritmos iniciais para experimentação:
          *  Suavização simples (média)
@@ -15,7 +16,12 @@ namespace TerrainAlgorithm
          *  Escavação unilateral (média pra baixo de um lado da matriz de transformação)
         */
 
-        public bool active = false;
+        public bool active { get; set; }
+
+        protected TerrainTransform()
+        {
+            active = false;
+        }
 
         // Deve ser implementado com o algoritmo de transformação
         public abstract void ApplyTransform(ref float[,] heights);

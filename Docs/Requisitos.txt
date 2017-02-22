@@ -10,6 +10,7 @@ Parametrizar ambiente da simulação - Crucial
 Simulações adicionais de dinâmica de relevo - Prioritário
 Simular camadas de terra e rocha - Dispensável
 Simulação de fluidos - Extra
+Permitir algoritmos personalizados - Extra
 
 [EDITOR]
 Disponibilizar mapas pré-moldados - Crucial
