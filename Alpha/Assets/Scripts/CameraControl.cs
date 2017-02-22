@@ -11,6 +11,8 @@ public class CameraControl : MonoBehaviour {
     private Vector3 rotateMousePos;
     private bool rotating = false;
 
+    public float zoomSpeed = 10.0f;
+
     private Plane hitPlane;
 
     void Start()
@@ -21,6 +23,7 @@ public class CameraControl : MonoBehaviour {
 	void Update () {
         DoPan();
         DoRotate();
+        DoZoom();
 	}
 
     void DoPan()
@@ -76,6 +79,15 @@ public class CameraControl : MonoBehaviour {
 
             transform.Translate(new Vector3(pos.x * rotateSpeed, pos.y * rotateSpeed, 0));
             transform.LookAt(rotateOrigin);
+        }
+    }
+
+    void DoZoom()
+    {
+        float scroll = Input.GetAxis("Mouse ScrollWheel");
+        if (scroll != 0)
+        {
+            Camera.main.fieldOfView -= scroll * zoomSpeed;
         }
     }
 
