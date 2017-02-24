@@ -11,9 +11,9 @@ public class TerrainControl : MonoBehaviour
 
     public Terrain myTerrain;
 
-    int xResolution;
-    int zResolution;
-    float[,] heights;
+    public int xResolution { get; private set; }
+    public int zResolution { get; private set; }
+    public float[,] heights;
 
     public TransformSet transformSet { get; private set; }
 
@@ -58,6 +58,14 @@ public class TerrainControl : MonoBehaviour
 
         // Now set terrain heights.
         myTerrain.terrainData.SetHeights(0, 0, heights);
+    }
+
+    public void LoadHeights(int newX, int newZ, float [,] newHeights)
+    {
+        xResolution = newX;
+        zResolution = newZ;
+        heights = newHeights;
+        myTerrain.terrainData.SetHeights(0, 0, newHeights);
     }
 
     void Update()

@@ -51,6 +51,7 @@
      <Compile Include="Assets\Scripts\ConfigPanelOneSide.cs" />
      <Compile Include="Assets\Scripts\ConfigPanelSmooth.cs" />
      <Compile Include="Assets\Scripts\DepositTransform.cs" />
+     <Compile Include="Assets\Scripts\GameControl.cs" />
      <Compile Include="Assets\Scripts\HeightMapLoader.cs" />
      <Compile Include="Assets\Scripts\OneSideDigTransform.cs" />
      <Compile Include="Assets\Scripts\SmoothTransform.cs" />
