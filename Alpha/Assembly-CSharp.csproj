@@ -46,19 +46,22 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Scripts\CameraControl.cs" />
-     <Compile Include="Assets\Scripts\ConfigButtonControl.cs" />
-     <Compile Include="Assets\Scripts\ConfigPanel.cs" />
-     <Compile Include="Assets\Scripts\ConfigPanelOneSide.cs" />
-     <Compile Include="Assets\Scripts\ConfigPanelSmooth.cs" />
-     <Compile Include="Assets\Scripts\DepositTransform.cs" />
-     <Compile Include="Assets\Scripts\GameControl.cs" />
-     <Compile Include="Assets\Scripts\HeightMapLoader.cs" />
-     <Compile Include="Assets\Scripts\OneSideDigTransform.cs" />
-     <Compile Include="Assets\Scripts\SmoothTransform.cs" />
-     <Compile Include="Assets\Scripts\TerrainControl.cs" />
-     <Compile Include="Assets\Scripts\TerrainTransform.cs" />
-     <Compile Include="Assets\Scripts\TransformSet.cs" />
+     <Compile Include="Assets\Scripts\SimulationConfigs\EventManager.cs" />
+     <Compile Include="Assets\Scripts\SimulationConfigs\OneSideConfigsControl.cs" />
+     <Compile Include="Assets\Scripts\SimulationConfigs\SmoothConfigsControl.cs" />
+     <Compile Include="Assets\Scripts\SimulationConfigs\UIControl.cs" />
+     <Compile Include="Assets\Scripts\TerrainView\CameraControl.cs" />
+     <Compile Include="Assets\Scripts\TerrainView\EventManager.cs" />
+     <Compile Include="Assets\Scripts\TerrainView\GameControl.cs" />
+     <Compile Include="Assets\Scripts\TerrainView\TerrainControl.cs" />
+     <Compile Include="Assets\Scripts\Utility\DepositTransform.cs" />
+     <Compile Include="Assets\Scripts\Utility\HeightMapLoader.cs" />
+     <Compile Include="Assets\Scripts\Utility\OneSideDigTransform.cs" />
+     <Compile Include="Assets\Scripts\Utility\OneSideSimConfigs.cs" />
+     <Compile Include="Assets\Scripts\Utility\SmoothSimConfigs.cs" />
+     <Compile Include="Assets\Scripts\Utility\SmoothTransform.cs" />
+     <Compile Include="Assets\Scripts\Utility\TerrainTransform.cs" />
+     <Compile Include="Assets\Scripts\Utility\TransformSet.cs" />
      <None Include="Assets\Shaders\TerrBumpAddPass.shader" />
      <None Include="Assets\Shaders\TerrBumpFirstPass.shader" />
  <Reference Include="UnityEngine.UI">
