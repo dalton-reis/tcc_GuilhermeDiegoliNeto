@@ -4,6 +4,9 @@ using UnityEngine.UI;
 using System.IO;
 using SimulationConfigs;
 using Utility.TerrainAlgorithm;
+using System.Text;
+using System.Runtime.Serialization;
+using System.Runtime.Serialization.Formatters.Binary;
 
 namespace TerrainView
 {
@@ -32,45 +35,21 @@ namespace TerrainView
 
         public void SaveToFile()
         {
-            BinaryWriter saveFile = new BinaryWriter(File.Open(fileText.text, FileMode.Create));
+            Stream saveStream = new FileStream(fileText.text, FileMode.Create);
+            IFormatter formatter = new BinaryFormatter();
 
-            int x = TerrainControl.Instance.xResolution;
-            int z = TerrainControl.Instance.zResolution;
-            float[,] heights = TerrainControl.Instance.heights;
-
-            // Estrutura do arquivo: 2 ints para resolução x e z do mapa + sequência de floats (alturas)
-            saveFile.Write(x);
-            saveFile.Write(z);
-
-            foreach (float item in heights)
-            {
-                saveFile.Write(item);
-            }
-
-            saveFile.Close();
+            formatter.Serialize(saveStream, TerrainControl.Instance.heights);
+            saveStream.Close();
         }
 
         public void LoadFromFile()
         {
-            BinaryReader loadFile = new BinaryReader(File.Open(fileText.text, FileMode.Open));
+            Stream loadStream = new FileStream(fileText.text, FileMode.Open);
+            IFormatter formatter = new BinaryFormatter();
 
-            int x = loadFile.ReadInt32();
-            int z = loadFile.ReadInt32();
-            float[,] heights = new float[x, z];
+            float[,] heights = formatter.Deserialize(loadStream) as float[,];
 
-            float sum = 0;
-
-            for (int i = 0; i < x; i++)
-            {
-                for (int j = 0; j < z; j++)
-                {
-                    heights[i, j] = loadFile.ReadSingle();
-                    sum += heights[i, j];
-                }
-            }
-
-            loadFile.Close();
-            TerrainControl.Instance.LoadHeights(x, z, heights);
+            TerrainControl.Instance.LoadHeights(heights);
         }
 
         public void LoadSmoothConfigs(SmoothSimConfigs configs)

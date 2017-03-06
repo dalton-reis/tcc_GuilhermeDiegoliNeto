@@ -67,10 +67,10 @@ namespace TerrainView
             myTerrain.terrainData.SetHeights(0, 0, heights);
         }
 
-        public void LoadHeights(int newX, int newZ, float[,] newHeights)
+        public void LoadHeights(float[,] newHeights)
         {
-            xResolution = newX;
-            zResolution = newZ;
+            xResolution = newHeights.GetLength(0);
+            zResolution = newHeights.GetLength(1);
             heights = newHeights;
             myTerrain.terrainData.SetHeights(0, 0, newHeights);
         }
