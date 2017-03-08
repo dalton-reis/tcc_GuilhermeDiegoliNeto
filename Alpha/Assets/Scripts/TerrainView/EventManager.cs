@@ -4,11 +4,17 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using SimulationConfigs;
 using Utility.TerrainAlgorithm;
+using UnityEngine.UI;
 
 namespace TerrainView
 {
     public class EventManager : MonoBehaviour
     {
+        public void OnLoadSave()
+        {
+            GameControl.Instance.SetBackgroundMode(true);
+            SceneManager.LoadScene("LoadSaveScreen", LoadSceneMode.Additive);
+        }
 
         public void OnSimulationConfigs()
         {

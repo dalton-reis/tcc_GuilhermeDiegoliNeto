@@ -46,6 +46,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Scripts\LoadSaveScreen\EventManager.cs" />
+     <Compile Include="Assets\Scripts\LoadSaveScreen\UIControl.cs" />
      <Compile Include="Assets\Scripts\SimulationConfigs\EventManager.cs" />
      <Compile Include="Assets\Scripts\SimulationConfigs\OneSideConfigsControl.cs" />
      <Compile Include="Assets\Scripts\SimulationConfigs\SmoothConfigsControl.cs" />
@@ -55,7 +57,6 @@
      <Compile Include="Assets\Scripts\TerrainView\GameControl.cs" />
      <Compile Include="Assets\Scripts\TerrainView\TerrainControl.cs" />
      <Compile Include="Assets\Scripts\Utility\DepositTransform.cs" />
-     <Compile Include="Assets\Scripts\Utility\HeightMapLoader.cs" />
      <Compile Include="Assets\Scripts\Utility\OneSideDigTransform.cs" />
      <Compile Include="Assets\Scripts\Utility\OneSideSimConfigs.cs" />
      <Compile Include="Assets\Scripts\Utility\SmoothSimConfigs.cs" />

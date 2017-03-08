@@ -16,7 +16,6 @@ namespace TerrainView
         public static GameControl Instance { get; private set; }
 
         public Canvas UIControl;
-        public Text fileText;
 
         public bool BackgroundMode { get; private set; }
 
@@ -33,23 +32,28 @@ namespace TerrainView
 
         }
 
-        public void SaveToFile()
+        public void SaveToFile(string filename)
         {
-            Stream saveStream = new FileStream(fileText.text, FileMode.Create);
+            Stream saveStream = new FileStream(filename, FileMode.Create);
             IFormatter formatter = new BinaryFormatter();
 
             formatter.Serialize(saveStream, TerrainControl.Instance.heights);
             saveStream.Close();
         }
 
-        public void LoadFromFile()
+        public void LoadFromFile(string filename)
         {
-            Stream loadStream = new FileStream(fileText.text, FileMode.Open);
+            Stream loadStream = new FileStream(filename, FileMode.Open);
             IFormatter formatter = new BinaryFormatter();
 
             float[,] heights = formatter.Deserialize(loadStream) as float[,];
 
             TerrainControl.Instance.LoadHeights(heights);
+        }
+
+        public void LoadFromHeightMap(string filename)
+        {
+            TerrainControl.Instance.LoadHeightmap(filename);
         }
 
         public void LoadSmoothConfigs(SmoothSimConfigs configs)

@@ -2,6 +2,7 @@
 using Utility.TerrainAlgorithm;
 using UnityEngine;
 using UnityEngine.UI;
+using System.IO;
 
 namespace TerrainView
 {
@@ -46,17 +47,21 @@ namespace TerrainView
         {
             // http://damienclassen.blogspot.com.br/2014/02/loading-terrain-heightmap-data-via-c.html
 
+            byte[] image = File.ReadAllBytes(filename);
+
             // Load heightmap.
-            Texture2D heightmap = (Texture2D)Resources.Load("HeightMaps/" + filename);
+            Texture2D heightmap = new Texture2D(2,2);
+            heightmap.LoadImage(image);
 
             // Acquire an array of colour values.
             Color[] values = heightmap.GetPixels();
+            heights = new float[heightmap.height, heightmap.width];
 
             // Run through array and read height values.
             int index = 0;
-            for (int z = 0; z < zResolution && z < heightmap.height; z++)
+            for (int z = 0; z < heightmap.height; z++)
             {
-                for (int x = 0; x < xResolution && x < heightmap.width; x++)
+                for (int x = 0; x < heightmap.width; x++)
                 {
                     heights[z, x] = values[index].r;
                     index++;
@@ -64,6 +69,7 @@ namespace TerrainView
             }
 
             // Now set terrain heights.
+            myTerrain.terrainData.heightmapResolution = heightmap.height;
             myTerrain.terrainData.SetHeights(0, 0, heights);
         }
 

@@ -6,10 +6,11 @@ namespace TerrainView
     public class CameraControl : MonoBehaviour
     {
 
+        public float panRate = 10.0f;
         private Vector3 panOrigin;
         private bool panning = false;
 
-        public float rotateSpeed = 50.0f;
+        public float rotateRate = 50.0f;
         private Vector3 rotateOrigin;
         private Vector3 rotateMousePos;
         private bool rotating = false;
@@ -27,13 +28,13 @@ namespace TerrainView
         {
             if (!GameControl.Instance.BackgroundMode)
             {
-                DoPan();
-                DoRotate();
-                DoZoom();
+                if (!DoMousePan()) DoKeyPan();
+                if (!DoMouseRotate()) DoKeyRotate();
+                if (!DoMouseZoom()) DoKeyZoom();
             }
         }
 
-        void DoPan()
+        bool DoMousePan()
         {
             if (Input.GetMouseButtonDown(1))
             {
@@ -60,9 +61,40 @@ namespace TerrainView
                     transform.Translate(move, Space.World);
                 }
             }
+
+            return panning;
         }
 
-        void DoRotate()
+        void DoKeyPan()
+        {
+            Vector3 move = new Vector3();
+
+            if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A))
+            {
+                move.x -= panRate;
+            }
+            if (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D))
+            {
+                move.x += panRate;
+            }
+            if (Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.W))
+            {
+                move.z += panRate;
+            }
+            if (Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.S))
+            {
+                move.z -= panRate;
+            }
+
+            if (move != Vector3.zero)
+            {
+                float angle = -transform.eulerAngles.x;
+                var moveVector = Quaternion.Euler(new Vector3(angle, 0, 0)) * new Vector3(move.x, 0, move.z);
+                transform.Translate(moveVector, Space.Self);
+            }
+        }
+
+        bool DoMouseRotate()
         {
             if (Input.GetMouseButtonDown(2))
             {
@@ -84,17 +116,66 @@ namespace TerrainView
             {
                 Vector3 pos = Camera.main.ScreenToViewportPoint(Input.mousePosition - rotateMousePos);
 
-                transform.Translate(new Vector3(pos.x * rotateSpeed, pos.y * rotateSpeed, 0));
+                transform.Translate(new Vector3(pos.x * rotateRate, pos.y * rotateRate, 0));
+                transform.LookAt(rotateOrigin);
+            }
+
+            return rotating;
+        }
+
+        void DoKeyRotate()
+        {
+            if (!CameraHitTest(out rotateOrigin))
+                return;
+
+            Vector3 pos = new Vector3();
+            float keyRotateRate = rotateRate / 10;
+
+            if (Input.GetKey(KeyCode.Q))
+            {
+                pos.x -= keyRotateRate;
+            }
+            if (Input.GetKey(KeyCode.E))
+            {
+                pos.x += keyRotateRate;
+            }
+            if (Input.GetKey(KeyCode.R))
+            {
+                pos.y += keyRotateRate;
+            }
+            if (Input.GetKey(KeyCode.F))
+            {
+                pos.y -= keyRotateRate;
+            }
+
+            if (pos != Vector3.zero)
+            {
+                transform.Translate(new Vector3(pos.x, pos.y, 0));
                 transform.LookAt(rotateOrigin);
             }
         }
 
-        void DoZoom()
+        bool DoMouseZoom()
         {
             float scroll = Input.GetAxis("Mouse ScrollWheel");
             if (scroll != 0)
             {
                 Camera.main.fieldOfView -= scroll * zoomSpeed;
+                return true;
+            }
+
+            return false;
+        }
+
+        void DoKeyZoom()
+        {
+            if (Input.GetKey(KeyCode.Equals))
+            {
+                Camera.main.fieldOfView -= zoomSpeed / 10;
+            }
+            if (Input.GetKey(KeyCode.Minus))
+            {
+                Camera.main.fieldOfView += zoomSpeed / 10;
             }
         }
 
