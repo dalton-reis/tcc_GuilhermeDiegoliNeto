@@ -25,7 +25,7 @@ namespace SimulationConfigs
             UIControl.Instance.UpdateAllData();
 
             TerrainView.GameControl.Instance.LoadSmoothConfigs(UIControl.SmoothConfigs);
-            TerrainView.GameControl.Instance.LoadOneSideConfigs(UIControl.OneSideConfigs);
+            TerrainView.GameControl.Instance.LoadWindDecayConfigs(UIControl.WindDecayConfigs);
 
             TerrainView.GameControl.Instance.SetBackgroundMode(false);
             SceneManager.UnloadSceneAsync("SimulationConfigs");

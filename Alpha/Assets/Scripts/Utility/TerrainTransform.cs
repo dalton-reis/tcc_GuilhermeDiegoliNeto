@@ -16,12 +16,7 @@ namespace Utility.TerrainAlgorithm
          *  Escavação unilateral (média pra baixo de um lado da matriz de transformação)
         */
 
-        public bool active { get; set; }
-
-        protected TerrainTransform()
-        {
-            active = false;
-        }
+        public abstract bool IsActive();
 
         // Deve ser implementado com o algoritmo de transformação
         public abstract void ApplyTransform(ref float[,] heights);

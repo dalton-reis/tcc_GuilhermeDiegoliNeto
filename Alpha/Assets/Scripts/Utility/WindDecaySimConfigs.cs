@@ -5,11 +5,12 @@ using System.Text;
 
 namespace Utility.TerrainAlgorithm
 {
-    public class OneSideSimConfigs
+    public class WindDecaySimConfigs
     {
         public bool Active { get; set; }
 
         public int Range { get; set; }
         public float Factor { get; set; }
+        public Directions WindDirection { get; set; }
     }
 }

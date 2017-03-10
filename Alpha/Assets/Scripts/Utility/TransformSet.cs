@@ -8,7 +8,7 @@ namespace Utility.TerrainAlgorithm
     public enum TransformIndex
     {
         Smooth = 0,
-        OneSideDig,
+        WindDecayDig,
         Deposit,
 
         IndexCount,
@@ -28,7 +28,7 @@ namespace Utility.TerrainAlgorithm
             transformSet = new TerrainTransform[(int)TransformIndex.IndexCount];
 
             transformSet[(int)TransformIndex.Smooth]     = new SmoothTransform();
-            transformSet[(int)TransformIndex.OneSideDig] = new OneSideDigTransform();
+            transformSet[(int)TransformIndex.WindDecayDig] = new WindDecayDigTransform();
             transformSet[(int)TransformIndex.Deposit]    = new DepositTransform();
         }
     }

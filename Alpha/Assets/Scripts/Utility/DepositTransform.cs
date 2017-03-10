@@ -7,6 +7,11 @@ namespace Utility.TerrainAlgorithm
 {
     public class DepositTransform : TerrainTransform
     {
+        public override bool IsActive()
+        {
+            return false;
+        }
+
         public override void ApplyTransform(ref float[,] heights)
         {
             int topX = heights.GetLength(0);

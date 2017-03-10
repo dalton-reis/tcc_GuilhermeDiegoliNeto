@@ -15,7 +15,7 @@ namespace TerrainView
         private Vector3 rotateMousePos;
         private bool rotating = false;
 
-        public float zoomSpeed = 10.0f;
+        public float zoomSpeed = 40.0f;
 
         private Plane hitPlane;
 
@@ -160,7 +160,7 @@ namespace TerrainView
             float scroll = Input.GetAxis("Mouse ScrollWheel");
             if (scroll != 0)
             {
-                Camera.main.fieldOfView -= scroll * zoomSpeed;
+                transform.Translate(new Vector3(0, 0, scroll * zoomSpeed), Space.Self);
                 return true;
             }
 
@@ -171,11 +171,11 @@ namespace TerrainView
         {
             if (Input.GetKey(KeyCode.Equals))
             {
-                Camera.main.fieldOfView -= zoomSpeed / 10;
+                transform.Translate(new Vector3(0, 0, zoomSpeed), Space.Self);
             }
             if (Input.GetKey(KeyCode.Minus))
             {
-                Camera.main.fieldOfView += zoomSpeed / 10;
+                transform.Translate(new Vector3(0, 0, -zoomSpeed), Space.Self);
             }
         }
 

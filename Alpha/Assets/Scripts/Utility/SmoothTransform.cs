@@ -9,20 +9,21 @@ namespace Utility.TerrainAlgorithm
 {
     public class SmoothTransform : TerrainTransform
     {
-        public int range { get; set; }
-        public float factor { get; set; }
+        public SmoothSimConfigs Configs { get; set; }
 
         public SmoothTransform()
         {
-            range = 1;
-            factor = 1.0f;
+            Configs = new SmoothSimConfigs()
+            {
+                Active = false,
+                Range = 1,
+                Factor = 1.0f,
+            };
         }
 
-        public void LoadConfigs(SmoothSimConfigs configs)
+        public override bool IsActive()
         {
-            active = configs.Active;
-            range = configs.Range;
-            factor = configs.Factor;
+            return Configs.Active;
         }
 
         public override void ApplyTransform(ref float[,] heights)
@@ -40,13 +41,13 @@ namespace Utility.TerrainAlgorithm
                     float sumHeights = 0.0f;
                     int countHeights = 0;
 
-                    for (int relX = -range; relX <= range; relX++)
+                    for (int relX = -Configs.Range; relX <= Configs.Range; relX++)
                     {
                         int absX = x + relX;
                         if (absX < 0 || absX >= topX)
                             break;
 
-                        for (int relY = -range; relY <= range; relY++)
+                        for (int relY = -Configs.Range; relY <= Configs.Range; relY++)
                         {
                             int absY = y + relY;
                             if (absY < 0 || absY >= topY)
@@ -60,7 +61,7 @@ namespace Utility.TerrainAlgorithm
                     if (countHeights > 0)
                     {
                         float diff = (sumHeights / countHeights) - heights[x, y];
-                        heights[x, y] += diff * factor;
+                        heights[x, y] += diff * Configs.Factor;
                     }
                 }
             }

@@ -10,10 +10,10 @@ namespace SimulationConfigs
         // Singleton
         public static UIControl Instance { get; private set; }
         public static SmoothSimConfigs SmoothConfigs { get; set; }
-        public static OneSideSimConfigs OneSideConfigs { get; set; }
+        public static WindDecaySimConfigs WindDecayConfigs { get; set; }
 
         public SmoothConfigsControl smoothControl;
-        public OneSideConfigsControl oneSideControl;
+        public WindDecayConfigsControl WindDecayControl;
 
         // Use this for initialization
         void Start()
@@ -27,19 +27,19 @@ namespace SimulationConfigs
         public void LoadData()
         {
             smoothControl.LoadData(SmoothConfigs);
-            oneSideControl.LoadData(OneSideConfigs);
+            WindDecayControl.LoadData(WindDecayConfigs);
         }
 
         public void UpdateAllCounters()
         {
             smoothControl.UpdateCounters();
-            oneSideControl.UpdateCounters();
+            WindDecayControl.UpdateCounters();
         }
 
         public void UpdateAllData()
         {
             smoothControl.UpdateData(SmoothConfigs);
-            oneSideControl.UpdateData(OneSideConfigs);
+            WindDecayControl.UpdateData(WindDecayConfigs);
         }
     }
 }

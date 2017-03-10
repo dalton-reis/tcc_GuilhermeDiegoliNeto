@@ -37,12 +37,6 @@ namespace TerrainView
             transformSet = new TransformSet();
         }
 
-        public void ToggleTransform(int index)
-        {
-            TerrainTransform transform = transformSet.transformSet[index];
-            transform.active = !transform.active;
-        }
-
         public void LoadHeightmap(string filename)
         {
             // http://damienclassen.blogspot.com.br/2014/02/loading-terrain-heightmap-data-via-c.html
@@ -98,7 +92,7 @@ namespace TerrainView
 
             foreach (TerrainTransform transform in transformSet.transformSet)
             {
-                if (transform.active)
+                if (transform.IsActive())
                 {
                     transform.ApplyTransform(ref heights);
                 }

@@ -58,12 +58,12 @@ namespace TerrainView
 
         public void LoadSmoothConfigs(SmoothSimConfigs configs)
         {
-            (TerrainControl.Instance.transformSet.transformSet[0] as SmoothTransform).LoadConfigs(configs);
+            (TerrainControl.Instance.transformSet.transformSet[0] as SmoothTransform).Configs = configs;
         }
 
-        public void LoadOneSideConfigs(OneSideSimConfigs configs)
+        public void LoadWindDecayConfigs(WindDecaySimConfigs configs)
         {
-            (TerrainControl.Instance.transformSet.transformSet[1] as OneSideDigTransform).LoadConfigs(configs);
+            (TerrainControl.Instance.transformSet.transformSet[1] as WindDecayDigTransform).Configs = configs;
         }
 
         public void SetBackgroundMode(bool mode)

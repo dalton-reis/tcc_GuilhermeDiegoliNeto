@@ -20,18 +20,14 @@ namespace TerrainView
         {
             SmoothSimConfigs smoothConfigs = new SmoothSimConfigs();
             SmoothTransform smooth =  TerrainControl.Instance.transformSet.transformSet[0] as SmoothTransform;
-            smoothConfigs.Active = smooth.active;
-            smoothConfigs.Range = smooth.range;
-            smoothConfigs.Factor = smooth.factor;
+            smoothConfigs = smooth.Configs;
 
-            OneSideSimConfigs oneSideConfigs = new OneSideSimConfigs();
-            OneSideDigTransform oneSide = TerrainControl.Instance.transformSet.transformSet[1] as OneSideDigTransform;
-            oneSideConfigs.Active = oneSide.active;
-            oneSideConfigs.Range = oneSide.range;
-            oneSideConfigs.Factor = oneSide.factor;
+            WindDecaySimConfigs WindDecayConfigs = new WindDecaySimConfigs();
+            WindDecayDigTransform WindDecay = TerrainControl.Instance.transformSet.transformSet[1] as WindDecayDigTransform;
+            WindDecayConfigs = WindDecay.Configs;
 
             SimulationConfigs.UIControl.SmoothConfigs = smoothConfigs;
-            SimulationConfigs.UIControl.OneSideConfigs = oneSideConfigs;
+            SimulationConfigs.UIControl.WindDecayConfigs = WindDecayConfigs;
 
             GameControl.Instance.SetBackgroundMode(true);
             SceneManager.LoadScene("SimulationConfigs", LoadSceneMode.Additive);
