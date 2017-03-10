@@ -12,7 +12,7 @@ namespace Utility
         East,
         Southeast,
         South,
-        SouthWest,
+        Southwest,
         West,
         Northwest,
     }

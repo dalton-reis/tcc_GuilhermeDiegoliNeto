@@ -39,6 +39,9 @@ namespace Utility.TerrainAlgorithm
             int endX = GetEndingX();
             int endY = GetEndingY();
 
+            int incStartY = GetStartingYIncrement();
+            int incEndY = GetEndingYIncrement();
+
             for (int x = 0; x < heights.GetLength(0); x++)
             {
                 for (int y = 0; y < heights.GetLength(1); y++)
@@ -49,13 +52,16 @@ namespace Utility.TerrainAlgorithm
                     float sumHeights = 0.0f;
                     int countHeights = 0;
 
+                    int localStartY = startY;
+                    int localEndY = endY;
+
                     for (int relX = startX; relX <= endX; relX++)
                     {
                         int absX = x + relX;
                         if (absX < 0 || absX >= topX)
                             break;
 
-                        for (int relY = startY; relY <= endY; relY++)
+                        for (int relY = localStartY; relY <= localEndY; relY++)
                         {
                             int absY = y + relY;
                             if (absY < 0 || absY >= topY)
@@ -64,6 +70,9 @@ namespace Utility.TerrainAlgorithm
                             sumHeights += baseHeights[absX, absY];
                             countHeights++;
                         }
+
+                        localStartY += incStartY;
+                        localEndY += incEndY;
                     }
 
                     if (countHeights > 0)
@@ -79,20 +88,30 @@ namespace Utility.TerrainAlgorithm
             }
         }
 
+        // Funções que definem a área da matriz a ser considerada na transformação
+
+        // X[ ]
+        //   Y
+
+        //NW    N    NE
+        //  [ ][+][ ]
+        //W [-][0][+] E
+        //  [ ][-][ ]
+        //SW    S    SE
+
+        // As funções retornam os valores de X e Y iniciais e finais para a operação, assim como a variação necessária para áreas triangulares
         private int GetStartingY()
         {
-            //     N
-            // [ ][+][ ]
-            //W[-][0][+]E
-            // [ ][-][ ]
-            //     S
-
             switch (Configs.WindDirection)
             {
                 case Directions.North: return -Configs.Range;
+                case Directions.Northeast: return -Configs.Range;
                 case Directions.East: return -Configs.Range;
+                case Directions.Southeast: return -Configs.Range;
                 case Directions.South: return -Configs.Range;
+                case Directions.Southwest: return Configs.Range;
                 case Directions.West: return 0;
+                case Directions.Northwest: return -Configs.Range;
             }
 
             return 0;
@@ -103,9 +122,35 @@ namespace Utility.TerrainAlgorithm
             switch (Configs.WindDirection)
             {
                 case Directions.North: return Configs.Range;
+                case Directions.Northeast: return Configs.Range;
                 case Directions.East: return 0;
+                case Directions.Southeast: return -Configs.Range;
                 case Directions.South: return Configs.Range;
+                case Directions.Southwest: return Configs.Range;
                 case Directions.West: return Configs.Range;
+                case Directions.Northwest: return Configs.Range;
+            }
+
+            return 0;
+        }
+
+        private int GetStartingYIncrement()
+        {
+            switch (Configs.WindDirection)
+            {
+                case Directions.Southwest: return -1;
+                case Directions.Northwest: return 1;
+            }
+
+            return 0;
+        }
+
+        private int GetEndingYIncrement()
+        {
+            switch (Configs.WindDirection)
+            {
+                case Directions.Northeast: return -1;
+                case Directions.Southeast: return 1;
             }
 
             return 0;
@@ -116,9 +161,13 @@ namespace Utility.TerrainAlgorithm
             switch (Configs.WindDirection)
             {
                 case Directions.North: return -Configs.Range;
+                case Directions.Northeast: return -Configs.Range;
                 case Directions.East: return -Configs.Range;
+                case Directions.Southeast: return -Configs.Range;
                 case Directions.South: return 0;
+                case Directions.Southwest: return -Configs.Range;
                 case Directions.West: return -Configs.Range;
+                case Directions.Northwest: return -Configs.Range;
             }
 
             return 0;
@@ -129,9 +178,13 @@ namespace Utility.TerrainAlgorithm
             switch (Configs.WindDirection)
             {
                 case Directions.North: return 0;
+                case Directions.Northeast: return Configs.Range;
                 case Directions.East: return Configs.Range;
+                case Directions.Southeast: return Configs.Range;
                 case Directions.South: return Configs.Range;
+                case Directions.Southwest: return Configs.Range;
                 case Directions.West: return Configs.Range;
+                case Directions.Northwest: return Configs.Range;
             }
 
             return 0;

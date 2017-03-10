@@ -17,8 +17,6 @@ namespace TerrainView
 
         public Terrain myTerrain;
 
-        public int xResolution { get; private set; }
-        public int zResolution { get; private set; }
         public float[,] heights;
 
         public TransformSet transformSet { get; private set; }
@@ -30,9 +28,9 @@ namespace TerrainView
         {
             Instance = this;
 
-            xResolution = myTerrain.terrainData.heightmapWidth;
-            zResolution = myTerrain.terrainData.heightmapHeight;
-            heights = myTerrain.terrainData.GetHeights(0, 0, xResolution, zResolution);
+            int x = myTerrain.terrainData.heightmapWidth;
+            int z = myTerrain.terrainData.heightmapHeight;
+            heights = myTerrain.terrainData.GetHeights(0, 0, x, z);
 
             transformSet = new TransformSet();
         }
@@ -69,9 +67,8 @@ namespace TerrainView
 
         public void LoadHeights(float[,] newHeights)
         {
-            xResolution = newHeights.GetLength(0);
-            zResolution = newHeights.GetLength(1);
             heights = newHeights;
+            myTerrain.terrainData.heightmapResolution = newHeights.GetLength(0);
             myTerrain.terrainData.SetHeights(0, 0, newHeights);
         }
 
@@ -144,8 +141,8 @@ namespace TerrainView
         {
             // Método para referência https://forum.unity3d.com/threads/edit-terrain-in-real-time.98410/
 
-            int terX = (int)((point.x / myTerrain.terrainData.size.x) * xResolution);
-            int terZ = (int)((point.z / myTerrain.terrainData.size.z) * zResolution);
+            int terX = (int)((point.x / myTerrain.terrainData.size.x) * heights.GetLength(0));
+            int terZ = (int)((point.z / myTerrain.terrainData.size.z) * heights.GetLength(1));
             float y = heights[terX, terZ];
             y += 0.001f;
             float[,] height = new float[1, 1];
@@ -158,8 +155,8 @@ namespace TerrainView
         {
             // Método para referência https://forum.unity3d.com/threads/edit-terrain-in-real-time.98410/
 
-            int terX = (int)((point.x / myTerrain.terrainData.size.x) * xResolution);
-            int terZ = (int)((point.z / myTerrain.terrainData.size.z) * zResolution);
+            int terX = (int)((point.x / myTerrain.terrainData.size.x) * heights.GetLength(0));
+            int terZ = (int)((point.z / myTerrain.terrainData.size.z) * heights.GetLength(1));
             float y = heights[terX, terZ];
             y -= 0.001f;
             float[,] height = new float[1, 1];
