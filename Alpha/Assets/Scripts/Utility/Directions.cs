@@ -16,4 +16,15 @@ namespace Utility
         West,
         Northwest,
     }
+
+    static class DirectionsEx
+    {
+        public static bool IsIntermediate(this Directions direction)
+        {
+            return (direction == Directions.Northeast || 
+                    direction == Directions.Northwest|| 
+                    direction == Directions.Southeast || 
+                    direction == Directions.Southwest);
+        }
+    }
 }

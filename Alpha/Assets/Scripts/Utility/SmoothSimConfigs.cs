@@ -11,5 +11,6 @@ namespace Utility.TerrainAlgorithm
 
         public int Range { get; set; }
         public float Factor { get; set; }
+        public bool UseMoore { get; set; }
     }
 }

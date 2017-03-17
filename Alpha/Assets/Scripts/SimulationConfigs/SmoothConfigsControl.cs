@@ -16,6 +16,8 @@ namespace SimulationConfigs
         public Text textRangeValue;
         public Text textFactorValue;
 
+        public Toggle toggleMoore;
+
         // Use this for initialization
         void Start()
         {
@@ -27,6 +29,7 @@ namespace SimulationConfigs
             toggleActive.isOn = data.Active;
             sliderRange.value = data.Range;
             sliderFactor.value = data.Factor;
+            toggleMoore.isOn = data.UseMoore;
         }
 
         public void UpdateCounters()
@@ -40,6 +43,7 @@ namespace SimulationConfigs
             data.Active = toggleActive.isOn;
             data.Range = (int)sliderRange.value;
             data.Factor = sliderFactor.value;
+            data.UseMoore = toggleMoore.isOn;
         }
     }
 }

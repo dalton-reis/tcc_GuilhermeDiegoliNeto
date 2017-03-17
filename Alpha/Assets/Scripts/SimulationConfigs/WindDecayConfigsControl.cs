@@ -19,6 +19,8 @@ namespace SimulationConfigs
 
         public Dropdown dropDirection;
 
+        public Toggle toggleMoore;
+
         // Use this for initialization
         void Start()
         {
@@ -32,6 +34,8 @@ namespace SimulationConfigs
             sliderFactor.value = data.Factor;
 
             SelectDropDownFromDirection(data.WindDirection);
+
+            toggleMoore.isOn = data.UseMoore;
         }
 
         public void UpdateCounters()
@@ -46,6 +50,7 @@ namespace SimulationConfigs
             data.Range = (int)sliderRange.value;
             data.Factor = sliderFactor.value;
             data.WindDirection = GetDirectionFromDropdown();
+            data.UseMoore = toggleMoore.isOn;
         }
 
         private Directions GetDirectionFromDropdown()

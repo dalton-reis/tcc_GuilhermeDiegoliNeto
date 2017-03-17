@@ -18,6 +18,7 @@ namespace Utility.TerrainAlgorithm
                 Active = false,
                 Range = 1,
                 Factor = 1.0f,
+                UseMoore = false,
                 WindDirection = Directions.North,
             };
         }
@@ -28,6 +29,117 @@ namespace Utility.TerrainAlgorithm
         }
 
         public override void ApplyTransform(ref float[,] heights)
+        {
+            if (Configs.UseMoore)
+            {
+                ApplyMoore(ref heights);
+            }
+            else
+            {
+                ApplyVonNeumann(ref heights);
+            }
+        }
+
+        public void ApplyVonNeumann(ref float[,] heights)
+        {
+            Directions direction = Configs.WindDirection;
+            int topX = heights.GetLength(0);
+            int topY = heights.GetLength(1);
+
+            float[,] baseHeights = heights.Clone() as float[,];
+
+            for (int x = 0; x < heights.GetLength(0); x++)
+            {
+                for (int y = 0; y < heights.GetLength(1); y++)
+                {
+                    float sumHeights = 0.0f;
+                    int countHeights = 0;
+
+                    // Direções horizontais
+                    if (direction == Directions.East || direction == Directions.West)
+                    {
+                        int from = direction == Directions.East ? -Configs.Range : 0;
+                        int to = direction == Directions.East ? 0 : Configs.Range;
+
+                        // Todos os vizinhos verticais
+                        for (int relX = -Configs.Range; relX <= Configs.Range; relX++)
+                        {
+                            int absX = x + relX;
+                            if (absX < 0 || absX >= topX)
+                                continue;
+
+                            sumHeights += baseHeights[absX, y];
+                            countHeights++;
+                        }
+
+                        // Metade dos vizinhos horizontais
+                        for (int relY = from; relY <= to; relY++)
+                        {
+                            int absY = y + relY;
+                            if (absY < 0 || absY >= topY)
+                                continue;
+
+                            sumHeights += baseHeights[x, absY];
+                            countHeights++;
+                        }
+
+                        // Subtrair o valor da célula central que foi somado duas vezes
+                        sumHeights -= baseHeights[x, y];
+                        countHeights--;
+                    }
+                    // Direções verticais
+                    if (direction == Directions.North || direction == Directions.South)
+                    {
+                        int from = direction == Directions.North ? -Configs.Range : 0;
+                        int to = direction == Directions.North ? 0 : Configs.Range;
+
+                        // Metade dos vizinhos verticais
+                        for (int relX = from; relX <= to; relX++)
+                        {
+                            int absX = x + relX;
+                            if (absX < 0 || absX >= topX)
+                                continue;
+
+                            sumHeights += baseHeights[absX, y];
+                            countHeights++;
+                        }
+
+                        // Todos os vizinhos horizontais
+                        for (int relY = -Configs.Range; relY <= Configs.Range; relY++)
+                        {
+                            int absY = y + relY;
+                            if (absY < 0 || absY >= topY)
+                                continue;
+
+                            sumHeights += baseHeights[x, absY];
+                            countHeights++;
+                        }
+
+                        // Subtrair o valor da célula central que foi somado duas vezes
+                        sumHeights -= baseHeights[x, y];
+                        countHeights--;
+                    }
+                    // Direções diagonais
+                    else
+                    {
+                        // TODO
+                    }
+
+                    // Aplicar média
+                    if (countHeights > 0)
+                    {
+                        float avg = sumHeights / countHeights;
+                        if (avg < heights[x, y])
+                        {
+                            float diff = avg - heights[x, y];
+                            heights[x, y] += diff * Configs.Factor;
+                        }
+                    }
+                }
+            }
+        }
+
+        public void ApplyMoore(ref float[,] heights)
         {
             int topX = heights.GetLength(0);
             int topY = heights.GetLength(1);
@@ -59,13 +171,13 @@ namespace Utility.TerrainAlgorithm
                     {
                         int absX = x + relX;
                         if (absX < 0 || absX >= topX)
-                            break;
+                            continue;
 
                         for (int relY = localStartY; relY <= localEndY; relY++)
                         {
                             int absY = y + relY;
                             if (absY < 0 || absY >= topY)
-                                break;
+                                continue;
 
                             sumHeights += baseHeights[absX, absY];
                             countHeights++;
