@@ -122,7 +122,57 @@ namespace Utility.TerrainAlgorithm
                     // Direções diagonais
                     else
                     {
-                        // TODO
+                        int fromX = 0;
+                        int fromY = 0;
+                        int toX = 0;
+                        int toY = 0;
+
+                        // Selecionar valores para representar a diagonal selecionada
+                        switch (direction)
+                        {
+                            case Directions.Northeast:
+                                fromX = -Configs.Range;
+                                fromY = -Configs.Range;
+                                break;
+                            case Directions.Southeast:
+                                toX = Configs.Range;
+                                fromY = -Configs.Range;
+                                break;
+                            case Directions.Southwest:
+                                toX = Configs.Range;
+                                toY = Configs.Range;
+                                break;
+                            case Directions.Northwest:
+                                fromX = -Configs.Range;
+                                toY = Configs.Range;
+                                break;
+                        }
+
+                        // Vizinhos verticais
+                        for (int relX = fromX; relX <= toX; relX++)
+                        {
+                            int absX = x + relX;
+                            if (absX < 0 || absX >= topX)
+                                continue;
+
+                            sumHeights += baseHeights[absX, y];
+                            countHeights++;
+                        }
+
+                        // Vizinhos horizontais
+                        for (int relY = fromY; relY <= toY; relY++)
+                        {
+                            int absY = y + relY;
+                            if (absY < 0 || absY >= topY)
+                                continue;
+
+                            sumHeights += baseHeights[x, absY];
+                            countHeights++;
+                        }
+
+                        // Subtrair o valor da célula central que foi somado duas vezes
+                        sumHeights -= baseHeights[x, y];
+                        countHeights--;
                     }
 
                     // Aplicar média
