@@ -13,11 +13,13 @@
     <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>Unity Subset v3.5</TargetFrameworkProfile>
-    <CompilerResponseFile></CompilerResponseFile>
+    <CompilerResponseFile>
+    </CompilerResponseFile>
     <UnityProjectType>Game:1</UnityProjectType>
     <UnityBuildTarget>StandaloneWindows64:19</UnityBuildTarget>
     <UnityVersion>5.5.2f1</UnityVersion>
-    <RootNamespace></RootNamespace>
+    <RootNamespace>
+    </RootNamespace>
     <LangVersion Condition=" '$(VisualStudioVersion)' != '10.0' ">4</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -85,18 +87,20 @@
     <Compile Include="Assets\Scripts\TerrainView\EventManager.cs" />
     <Compile Include="Assets\Scripts\TerrainView\GameControl.cs" />
     <Compile Include="Assets\Scripts\TerrainView\TerrainControl.cs" />
-    <Compile Include="Assets\Scripts\Utility\DepositTransform.cs" />
+    <Compile Include="Assets\Scripts\Utility\TerrainAlgorithm\DepositTransform.cs" />
     <Compile Include="Assets\Scripts\Utility\Directions.cs" />
-    <Compile Include="Assets\Scripts\Utility\SmoothSimConfigs.cs" />
-    <Compile Include="Assets\Scripts\Utility\SmoothTransform.cs" />
-    <Compile Include="Assets\Scripts\Utility\TerrainTransform.cs" />
-    <Compile Include="Assets\Scripts\Utility\TransformSet.cs" />
-    <Compile Include="Assets\Scripts\Utility\WindDecaySimConfigs.cs" />
-    <Compile Include="Assets\Scripts\Utility\WindDecayTransform.cs" />
+    <Compile Include="Assets\Scripts\Utility\TerrainAlgorithm\DryErosionSimConfigs.cs" />
+    <Compile Include="Assets\Scripts\Utility\TerrainAlgorithm\DryErosionTransform.cs" />
+    <Compile Include="Assets\Scripts\Utility\TerrainAlgorithm\SmoothSimConfigs.cs" />
+    <Compile Include="Assets\Scripts\Utility\TerrainAlgorithm\SmoothTransform.cs" />
+    <Compile Include="Assets\Scripts\Utility\TerrainAlgorithm\TerrainTransform.cs" />
+    <Compile Include="Assets\Scripts\Utility\TerrainAlgorithm\TransformSet.cs" />
+    <Compile Include="Assets\Scripts\Utility\TerrainAlgorithm\WindDecaySimConfigs.cs" />
+    <Compile Include="Assets\Scripts\Utility\TerrainAlgorithm\WindDecayTransform.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Assets\Shaders\TerrBumpAddPass.shader" />
-    <None Include="Assets\Shaders\TerrBumpFirstPass.shader" />
+    <None Include="Assets\Resources\Shaders\TerrBumpAddPass.shader" />
+    <None Include="Assets\Resources\Shaders\TerrBumpFirstPass.shader" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\SyntaxTree\UnityVS\2013\UnityVS.CSharp.targets" />
 </Project>
