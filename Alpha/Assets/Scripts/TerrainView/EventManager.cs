@@ -18,19 +18,40 @@ namespace TerrainView
 
         public void OnSimulationConfigs()
         {
-            SmoothSimConfigs smoothConfigs = new SmoothSimConfigs();
-            SmoothTransform smooth =  TerrainControl.Instance.transformSet.transformSet[0] as SmoothTransform;
-            smoothConfigs = smooth.Configs;
+            if (Input.GetKey(KeyCode.LeftControl) && Input.GetKey(KeyCode.LeftShift))
+            {
+                LoadTestConfigs();
+            }
+            else
+            {
+                LoadSimulationConfigs();
+            }
+        }
 
-            WindDecaySimConfigs WindDecayConfigs = new WindDecaySimConfigs();
-            WindDecayDigTransform WindDecay = TerrainControl.Instance.transformSet.transformSet[1] as WindDecayDigTransform;
-            WindDecayConfigs = WindDecay.Configs;
+        private void LoadSimulationConfigs()
+        {
+            DryErosionTransform dryErosion = TerrainControl.Instance.transformSet.transformSet[3] as DryErosionTransform;
+            DryErosionSimConfigs dryErosionConfigs = dryErosion.Configs;
 
-            SimulationConfigs.UIControl.SmoothConfigs = smoothConfigs;
-            SimulationConfigs.UIControl.WindDecayConfigs = WindDecayConfigs;
+            SimulationConfigs.UIControl.DryErosionConfigs = dryErosionConfigs;
 
             GameControl.Instance.SetBackgroundMode(true);
             SceneManager.LoadScene("SimulationConfigs", LoadSceneMode.Additive);
+        }
+
+        private void LoadTestConfigs()
+        {
+            SmoothTransform smooth = TerrainControl.Instance.transformSet.transformSet[0] as SmoothTransform;
+            SmoothSimConfigs smoothConfigs = smooth.Configs;
+
+            WindDecayDigTransform windDecay = TerrainControl.Instance.transformSet.transformSet[1] as WindDecayDigTransform;
+            WindDecaySimConfigs windDecayConfigs = windDecay.Configs;
+
+            SimulationConfigs.UIControl.SmoothConfigs = smoothConfigs;
+            SimulationConfigs.UIControl.WindDecayConfigs = windDecayConfigs;
+
+            GameControl.Instance.SetBackgroundMode(true);
+            SceneManager.LoadScene("TestConfigs", LoadSceneMode.Additive);
         }
     }
 }

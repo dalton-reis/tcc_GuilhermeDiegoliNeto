@@ -79,6 +79,7 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\LoadSaveScreen\EventManager.cs" />
     <Compile Include="Assets\Scripts\LoadSaveScreen\UIControl.cs" />
+    <Compile Include="Assets\Scripts\SimulationConfigs\DryErosionConfigsControl.cs" />
     <Compile Include="Assets\Scripts\SimulationConfigs\EventManager.cs" />
     <Compile Include="Assets\Scripts\SimulationConfigs\SmoothConfigsControl.cs" />
     <Compile Include="Assets\Scripts\SimulationConfigs\UIControl.cs" />
@@ -87,8 +88,8 @@
     <Compile Include="Assets\Scripts\TerrainView\EventManager.cs" />
     <Compile Include="Assets\Scripts\TerrainView\GameControl.cs" />
     <Compile Include="Assets\Scripts\TerrainView\TerrainControl.cs" />
-    <Compile Include="Assets\Scripts\Utility\TerrainAlgorithm\DepositTransform.cs" />
     <Compile Include="Assets\Scripts\Utility\Directions.cs" />
+    <Compile Include="Assets\Scripts\Utility\TerrainAlgorithm\DepositTransform.cs" />
     <Compile Include="Assets\Scripts\Utility\TerrainAlgorithm\DryErosionSimConfigs.cs" />
     <Compile Include="Assets\Scripts\Utility\TerrainAlgorithm\DryErosionTransform.cs" />
     <Compile Include="Assets\Scripts\Utility\TerrainAlgorithm\SmoothSimConfigs.cs" />

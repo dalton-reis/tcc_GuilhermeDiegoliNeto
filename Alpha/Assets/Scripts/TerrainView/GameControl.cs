@@ -66,6 +66,11 @@ namespace TerrainView
             (TerrainControl.Instance.transformSet.transformSet[1] as WindDecayDigTransform).Configs = configs;
         }
 
+        public void LoadDryErosionConfigs(DryErosionSimConfigs configs)
+        {
+            (TerrainControl.Instance.transformSet.transformSet[3] as DryErosionTransform).Configs = configs;
+        }
+
         public void SetBackgroundMode(bool mode)
         {
             // True para esconder a UI e exibir apenas o terreno (para background ao navegar em telas)

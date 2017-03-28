@@ -18,7 +18,7 @@ namespace Utility.TerrainAlgorithm
         {
             Configs = new DryErosionSimConfigs()
             {
-                Active = true,
+                Active = false,
                 MaxInclination = 4.0 / 256,
                 DistributionFactor = 0.5,
             };
@@ -100,8 +100,9 @@ namespace Utility.TerrainAlgorithm
                             double inclination = baseHeights[x, y] - baseHeights[absX, absY];
                             if (inclination > Configs.MaxInclination)
                             {
-                                heights[absX, absY] = (float)(baseHeights[absX, absY] + (Configs.DistributionFactor * (maxInclination - Configs.MaxInclination) * (inclination / sumInclinations)));
-                                sumMovedMaterial += baseHeights[absX, absY] - heights[absX, absY];
+                                float movedMaterial = baseHeights[absX, absY] - (float)(baseHeights[absX, absY] + (Configs.DistributionFactor * (maxInclination - Configs.MaxInclination) * (inclination / sumInclinations)));
+                                heights[absX, absY] -= movedMaterial;
+                                sumMovedMaterial += movedMaterial;
                             }
                         }
                     }
@@ -181,8 +182,9 @@ namespace Utility.TerrainAlgorithm
                         double inclination = baseHeights[x, y] - baseHeights[absX, y];
                         if (inclination > Configs.MaxInclination)
                         {
-                            heights[absX, y] = (float)(baseHeights[absX, y] + (Configs.DistributionFactor * (maxInclination - Configs.MaxInclination) * (inclination / sumInclinations)));
-                            sumMovedMaterial += baseHeights[absX, y] - heights[absX, y];
+                            float movedMaterial = baseHeights[absX, y] - (float)(baseHeights[absX, y] + (Configs.DistributionFactor * (maxInclination - Configs.MaxInclination) * (inclination / sumInclinations)));
+                            heights[absX, y] -= movedMaterial;
+                            sumMovedMaterial += movedMaterial;
                         }
                     }
 
@@ -196,8 +198,9 @@ namespace Utility.TerrainAlgorithm
                         double inclination = baseHeights[x, y] - baseHeights[x, absY];
                         if (inclination > Configs.MaxInclination)
                         {
-                            heights[x, absY] = (float)(baseHeights[x, absY] + (Configs.DistributionFactor * (maxInclination - Configs.MaxInclination) * (inclination / sumInclinations)));
-                            sumMovedMaterial += baseHeights[x, absY] - heights[x, absY];
+                            float movedMaterial = baseHeights[x, absY] - (float)(baseHeights[x, absY] + (Configs.DistributionFactor * (maxInclination - Configs.MaxInclination) * (inclination / sumInclinations)));
+                            heights[x, absY] -= movedMaterial;
+                            sumMovedMaterial += movedMaterial;
                         }
                     }
 

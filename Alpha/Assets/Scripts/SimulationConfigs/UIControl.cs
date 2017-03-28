@@ -9,11 +9,18 @@ namespace SimulationConfigs
     {
         // Singleton
         public static UIControl Instance { get; private set; }
+
+        // Test Configs
         public static SmoothSimConfigs SmoothConfigs { get; set; }
         public static WindDecaySimConfigs WindDecayConfigs { get; set; }
 
         public SmoothConfigsControl smoothControl;
-        public WindDecayConfigsControl WindDecayControl;
+        public WindDecayConfigsControl windDecayControl;
+
+        // Sim Configs
+        public static DryErosionSimConfigs DryErosionConfigs { get; set; }
+
+        public DryErosionConfigsControl dryErosionControl;
 
         // Use this for initialization
         void Start()
@@ -26,20 +33,26 @@ namespace SimulationConfigs
 
         public void LoadData()
         {
-            smoothControl.LoadData(SmoothConfigs);
-            WindDecayControl.LoadData(WindDecayConfigs);
+            if (smoothControl != null) smoothControl.LoadData(SmoothConfigs);
+            if (windDecayControl != null) windDecayControl.LoadData(WindDecayConfigs);
+
+            if (dryErosionControl != null) dryErosionControl.LoadData(DryErosionConfigs);
         }
 
         public void UpdateAllCounters()
         {
-            smoothControl.UpdateCounters();
-            WindDecayControl.UpdateCounters();
+            if (smoothControl != null) smoothControl.UpdateCounters();
+            if (windDecayControl != null) windDecayControl.UpdateCounters();
+
+            if (dryErosionControl != null) dryErosionControl.UpdateCounters();
         }
 
         public void UpdateAllData()
         {
-            smoothControl.UpdateData(SmoothConfigs);
-            WindDecayControl.UpdateData(WindDecayConfigs);
+            if (smoothControl != null) smoothControl.UpdateData(SmoothConfigs);
+            if (windDecayControl != null) windDecayControl.UpdateData(WindDecayConfigs);
+
+            if (dryErosionControl != null) dryErosionControl.UpdateData(DryErosionConfigs);
         }
     }
 }

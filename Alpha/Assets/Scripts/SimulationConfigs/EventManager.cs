@@ -24,11 +24,21 @@ namespace SimulationConfigs
         {
             UIControl.Instance.UpdateAllData();
 
+            TerrainView.GameControl.Instance.LoadDryErosionConfigs(UIControl.DryErosionConfigs);
+            
+            TerrainView.GameControl.Instance.SetBackgroundMode(false);
+            SceneManager.UnloadSceneAsync("SimulationConfigs");
+        }
+
+        public void OnOKTest()
+        {
+            UIControl.Instance.UpdateAllData();
+
             TerrainView.GameControl.Instance.LoadSmoothConfigs(UIControl.SmoothConfigs);
             TerrainView.GameControl.Instance.LoadWindDecayConfigs(UIControl.WindDecayConfigs);
 
             TerrainView.GameControl.Instance.SetBackgroundMode(false);
-            SceneManager.UnloadSceneAsync("SimulationConfigs");
+            SceneManager.UnloadSceneAsync("TestConfigs");
         }
     }
 }
