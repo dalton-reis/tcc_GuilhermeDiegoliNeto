@@ -58,17 +58,22 @@ namespace TerrainView
 
         public void LoadSmoothConfigs(SmoothSimConfigs configs)
         {
-            (TerrainControl.Instance.transformSet.transformSet[0] as SmoothTransform).Configs = configs;
+            (TerrainControl.Instance.transformSet[TransformIndex.Smooth] as SmoothTransform).Configs = configs;
         }
 
         public void LoadWindDecayConfigs(WindDecaySimConfigs configs)
         {
-            (TerrainControl.Instance.transformSet.transformSet[1] as WindDecayDigTransform).Configs = configs;
+            (TerrainControl.Instance.transformSet[TransformIndex.WindDecayDig] as WindDecayDigTransform).Configs = configs;
         }
 
         public void LoadDryErosionConfigs(DryErosionSimConfigs configs)
         {
-            (TerrainControl.Instance.transformSet.transformSet[3] as DryErosionTransform).Configs = configs;
+            (TerrainControl.Instance.transformSet[TransformIndex.DryErosion] as DryErosionTransform).Configs = configs;
+        }
+
+        public void LoadHydroErosionConfigs(HydroErosionSimConfigs configs)
+        {
+            (TerrainControl.Instance.transformSet[TransformIndex.HydroErosion] as HydroErosionTransform).Configs = configs;
         }
 
         public void SetBackgroundMode(bool mode)

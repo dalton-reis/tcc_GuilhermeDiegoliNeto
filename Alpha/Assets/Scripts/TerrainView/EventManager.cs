@@ -30,10 +30,14 @@ namespace TerrainView
 
         private void LoadSimulationConfigs()
         {
-            DryErosionTransform dryErosion = TerrainControl.Instance.transformSet.transformSet[3] as DryErosionTransform;
+            DryErosionTransform dryErosion = TerrainControl.Instance.transformSet[TransformIndex.DryErosion] as DryErosionTransform;
             DryErosionSimConfigs dryErosionConfigs = dryErosion.Configs;
 
+            HydroErosionTransform hydroErosion = TerrainControl.Instance.transformSet[TransformIndex.HydroErosion] as HydroErosionTransform;
+            HydroErosionSimConfigs hydroErosionConfigs = hydroErosion.Configs;
+
             SimulationConfigs.UIControl.DryErosionConfigs = dryErosionConfigs;
+            SimulationConfigs.UIControl.HydroErosionConfigs = hydroErosionConfigs;
 
             GameControl.Instance.SetBackgroundMode(true);
             SceneManager.LoadScene("SimulationConfigs", LoadSceneMode.Additive);
@@ -41,10 +45,10 @@ namespace TerrainView
 
         private void LoadTestConfigs()
         {
-            SmoothTransform smooth = TerrainControl.Instance.transformSet.transformSet[0] as SmoothTransform;
+            SmoothTransform smooth = TerrainControl.Instance.transformSet[TransformIndex.Smooth] as SmoothTransform;
             SmoothSimConfigs smoothConfigs = smooth.Configs;
 
-            WindDecayDigTransform windDecay = TerrainControl.Instance.transformSet.transformSet[1] as WindDecayDigTransform;
+            WindDecayDigTransform windDecay = TerrainControl.Instance.transformSet[TransformIndex.WindDecayDig] as WindDecayDigTransform;
             WindDecaySimConfigs windDecayConfigs = windDecay.Configs;
 
             SimulationConfigs.UIControl.SmoothConfigs = smoothConfigs;

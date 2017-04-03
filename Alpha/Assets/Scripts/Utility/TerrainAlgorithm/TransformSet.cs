@@ -11,6 +11,7 @@ namespace Utility.TerrainAlgorithm
         WindDecayDig,
         Deposit,
         DryErosion,
+        HydroErosion,
 
         IndexCount,
     }
@@ -32,6 +33,19 @@ namespace Utility.TerrainAlgorithm
             transformSet[(int)TransformIndex.WindDecayDig] = new WindDecayDigTransform();
             transformSet[(int)TransformIndex.Deposit]      = new DepositTransform();
             transformSet[(int)TransformIndex.DryErosion]   = new DryErosionTransform();
+            transformSet[(int)TransformIndex.HydroErosion] = new HydroErosionTransform();
+        }
+
+        public TerrainTransform this[TransformIndex index]
+        {
+            get
+            {
+                return transformSet[(int)index];
+            }
+            private set
+            {
+                transformSet[(int)index] = value;
+            }
         }
     }
 }

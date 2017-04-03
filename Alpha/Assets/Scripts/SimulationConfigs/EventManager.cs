@@ -25,6 +25,7 @@ namespace SimulationConfigs
             UIControl.Instance.UpdateAllData();
 
             TerrainView.GameControl.Instance.LoadDryErosionConfigs(UIControl.DryErosionConfigs);
+            TerrainView.GameControl.Instance.LoadHydroErosionConfigs(UIControl.HydroErosionConfigs);
             
             TerrainView.GameControl.Instance.SetBackgroundMode(false);
             SceneManager.UnloadSceneAsync("SimulationConfigs");

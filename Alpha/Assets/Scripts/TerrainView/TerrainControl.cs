@@ -15,7 +15,8 @@ namespace TerrainView
         // Singleton
         public static TerrainControl Instance { get; private set; }
 
-        public Terrain myTerrain;
+        public Terrain soilLayer;
+        public Terrain waterLayer;
 
         public float[,] heights;
 
@@ -28,9 +29,9 @@ namespace TerrainView
         {
             Instance = this;
 
-            int x = myTerrain.terrainData.heightmapWidth;
-            int z = myTerrain.terrainData.heightmapHeight;
-            heights = myTerrain.terrainData.GetHeights(0, 0, x, z);
+            int x = soilLayer.terrainData.heightmapWidth;
+            int z = soilLayer.terrainData.heightmapHeight;
+            heights = soilLayer.terrainData.GetHeights(0, 0, x, z);
 
             transformSet = new TransformSet();
         }
@@ -61,15 +62,23 @@ namespace TerrainView
             }
 
             // Now set terrain heights.
-            myTerrain.terrainData.heightmapResolution = heightmap.height;
-            myTerrain.terrainData.SetHeights(0, 0, heights);
+            soilLayer.terrainData.heightmapResolution = heightmap.height;
+            soilLayer.terrainData.SetHeights(0, 0, heights);
+
+            waterLayer.terrainData.heightmapResolution = heightmap.height;
+
+            ResetAllTransforms();
         }
 
         public void LoadHeights(float[,] newHeights)
         {
             heights = newHeights;
-            myTerrain.terrainData.heightmapResolution = newHeights.GetLength(0);
-            myTerrain.terrainData.SetHeights(0, 0, newHeights);
+            soilLayer.terrainData.heightmapResolution = newHeights.GetLength(0);
+            soilLayer.terrainData.SetHeights(0, 0, newHeights);
+
+            waterLayer.terrainData.heightmapResolution = newHeights.GetLength(0);
+
+            ResetAllTransforms();
         }
 
         void Update()
@@ -79,7 +88,7 @@ namespace TerrainView
 
         void FixedUpdate()
         {
-            myTerrain.ApplyDelayedHeightmapModification();
+            soilLayer.ApplyDelayedHeightmapModification();
         }
 
         private void RunAllTransforms()
@@ -95,9 +104,18 @@ namespace TerrainView
                 }
             }
 
-            myTerrain.terrainData.SetHeightsDelayLOD(0, 0, heights);
+            soilLayer.terrainData.SetHeightsDelayLOD(0, 0, heights);
 
+            UpdateWaterLayer();
             UpdateMass();
+        }
+
+        private void ResetAllTransforms()
+        {
+            foreach (TerrainTransform transform in transformSet.transformSet)
+            {
+                transform.Reset();
+            }
         }
 
         private void UpdateMass()
@@ -111,6 +129,13 @@ namespace TerrainView
                 }
                 textMass.text = sumHeights.ToString();
             }
+        }
+
+        private void UpdateWaterLayer()
+        {
+            HydroErosionTransform hydro = transformSet[TransformIndex.HydroErosion] as HydroErosionTransform;
+            waterLayer.gameObject.SetActive(hydro.Configs.Active);
+            waterLayer.terrainData.SetHeightsDelayLOD(0, 0, hydro.GetWaterMatrix(heights));
         }
 
         private void MouseEditTerrain()
@@ -141,28 +166,28 @@ namespace TerrainView
         {
             // Método para referência https://forum.unity3d.com/threads/edit-terrain-in-real-time.98410/
 
-            int terX = (int)((point.x / myTerrain.terrainData.size.x) * heights.GetLength(0));
-            int terZ = (int)((point.z / myTerrain.terrainData.size.z) * heights.GetLength(1));
+            int terX = (int)((point.x / soilLayer.terrainData.size.x) * heights.GetLength(0));
+            int terZ = (int)((point.z / soilLayer.terrainData.size.z) * heights.GetLength(1));
             float y = heights[terX, terZ];
             y += 0.001f;
             float[,] height = new float[1, 1];
             height[0, 0] = y;
             heights[terX, terZ] = y;
-            myTerrain.terrainData.SetHeights(terX, terZ, height);
+            soilLayer.terrainData.SetHeights(terX, terZ, height);
         }
 
         private void LowerTerrain(Vector3 point)
         {
             // Método para referência https://forum.unity3d.com/threads/edit-terrain-in-real-time.98410/
 
-            int terX = (int)((point.x / myTerrain.terrainData.size.x) * heights.GetLength(0));
-            int terZ = (int)((point.z / myTerrain.terrainData.size.z) * heights.GetLength(1));
+            int terX = (int)((point.x / soilLayer.terrainData.size.x) * heights.GetLength(0));
+            int terZ = (int)((point.z / soilLayer.terrainData.size.z) * heights.GetLength(1));
             float y = heights[terX, terZ];
             y -= 0.001f;
             float[,] height = new float[1, 1];
             height[0, 0] = y;
             heights[terX, terZ] = y;
-            myTerrain.terrainData.SetHeights(terX, terZ, height);
+            soilLayer.terrainData.SetHeights(terX, terZ, height);
         }
     }
 }

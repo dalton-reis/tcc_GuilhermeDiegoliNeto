@@ -19,8 +19,10 @@ namespace SimulationConfigs
 
         // Sim Configs
         public static DryErosionSimConfigs DryErosionConfigs { get; set; }
+        public static HydroErosionSimConfigs HydroErosionConfigs { get; set; }
 
         public DryErosionConfigsControl dryErosionControl;
+        public HydroErosionConfigsControl hydroErosionControl;
 
         // Use this for initialization
         void Start()
@@ -37,6 +39,7 @@ namespace SimulationConfigs
             if (windDecayControl != null) windDecayControl.LoadData(WindDecayConfigs);
 
             if (dryErosionControl != null) dryErosionControl.LoadData(DryErosionConfigs);
+            if (hydroErosionControl != null) hydroErosionControl.LoadData(HydroErosionConfigs);
         }
 
         public void UpdateAllCounters()
@@ -45,6 +48,7 @@ namespace SimulationConfigs
             if (windDecayControl != null) windDecayControl.UpdateCounters();
 
             if (dryErosionControl != null) dryErosionControl.UpdateCounters();
+            if (hydroErosionControl != null) hydroErosionControl.UpdateCounters();
         }
 
         public void UpdateAllData()
@@ -53,6 +57,7 @@ namespace SimulationConfigs
             if (windDecayControl != null) windDecayControl.UpdateData(WindDecayConfigs);
 
             if (dryErosionControl != null) dryErosionControl.UpdateData(DryErosionConfigs);
+            if (hydroErosionControl != null) hydroErosionControl.UpdateData(HydroErosionConfigs);
         }
     }
 }
