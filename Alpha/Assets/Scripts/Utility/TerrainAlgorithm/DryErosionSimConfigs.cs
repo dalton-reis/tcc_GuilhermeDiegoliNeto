@@ -17,10 +17,10 @@ namespace Utility.TerrainAlgorithm
         /// <summary>
         /// Inclinação máximo de estabilidade. A erosão acontecerá em inclinações superiores a este valor.
         /// </summary>
-        public double MaxInclination { get; set; }
+        public float MaxInclination { get; set; }
         /// <summary>
         /// Fator de ajuste de distribuição do material movido durante a erosão.
         /// </summary>
-        public double DistributionFactor { get; set; }
+        public float DistributionFactor { get; set; }
     }
 }

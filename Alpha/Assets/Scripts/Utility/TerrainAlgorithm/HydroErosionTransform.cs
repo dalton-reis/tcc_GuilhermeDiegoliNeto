@@ -39,7 +39,12 @@ namespace Utility.TerrainAlgorithm
             waterHeights = null;
         }
 
-        public override void ApplyTransform(ref float[,] heights)
+        public override void ApplyTransform(float[,] rockHeights, float[,] dirtHeights)
+        {
+
+        }
+
+        public override void ApplyTransform(float[,] heights)
         {
             // Criar matriz de água se não existir
             if (waterHeights == null)
@@ -50,12 +55,12 @@ namespace Utility.TerrainAlgorithm
             // Distribuir água da chuva
             if (DistributeWater())
             {
-                GroundToSediment(ref heights);
+                GroundToSediment(heights);
             }
 
-            TransformVonNeumann(ref heights);
+            TransformVonNeumann(heights);
 
-            EvaporateWater(ref heights);
+            EvaporateWater(heights);
         }
 
         public float[,] GetWaterMatrix(float[,] heights)
@@ -76,7 +81,7 @@ namespace Utility.TerrainAlgorithm
             return matrix;
         }
 
-        private void TransformVonNeumann(ref float[,] heights)
+        private void TransformVonNeumann(float[,] heights)
         {
             // Transformação usando vizinhança Von Neumann
 
@@ -206,7 +211,7 @@ namespace Utility.TerrainAlgorithm
             return false;
         }
 
-        private void GroundToSediment(ref float[,] heights)
+        private void GroundToSediment(float[,] heights)
         {
             for (int x = 0; x < heights.GetLength(0); x++)
             {
@@ -217,7 +222,7 @@ namespace Utility.TerrainAlgorithm
             }
         }
 
-        private void EvaporateWater(ref float[,] heights)
+        private void EvaporateWater(float[,] heights)
         {
             for (int x = 0; x < heights.GetLength(0); x++)
             {

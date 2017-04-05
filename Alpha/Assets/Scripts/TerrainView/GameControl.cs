@@ -37,7 +37,9 @@ namespace TerrainView
             Stream saveStream = new FileStream(filename, FileMode.Create);
             IFormatter formatter = new BinaryFormatter();
 
-            formatter.Serialize(saveStream, TerrainControl.Instance.heights);
+            formatter.Serialize(saveStream, TerrainControl.Instance.RockHeights);
+            formatter.Serialize(saveStream, TerrainControl.Instance.SoilHeights);
+
             saveStream.Close();
         }
 
@@ -46,9 +48,10 @@ namespace TerrainView
             Stream loadStream = new FileStream(filename, FileMode.Open);
             IFormatter formatter = new BinaryFormatter();
 
-            float[,] heights = formatter.Deserialize(loadStream) as float[,];
+            float[,] rockHeights = formatter.Deserialize(loadStream) as float[,];
+            float[,] soilHeights = formatter.Deserialize(loadStream) as float[,];
 
-            TerrainControl.Instance.LoadHeights(heights);
+            TerrainControl.Instance.LoadHeights(soilHeights, rockHeights);
         }
 
         public void LoadFromHeightMap(string filename)

@@ -28,19 +28,24 @@ namespace Utility.TerrainAlgorithm
             return Configs.Active;
         }
 
-        public override void ApplyTransform(ref float[,] heights)
+        public override void ApplyTransform(float[,] rockHeights, float[,] dirtHeights)
+        {
+
+        }
+
+        public override void ApplyTransform(float[,] heights)
         {
             if (Configs.UseMoore)
             {
-                ApplyMoore(ref heights);
+                ApplyMoore(heights);
             }
             else
             {
-                ApplyVonNeumann(ref heights);
+                ApplyVonNeumann(heights);
             }
         }
 
-        public void ApplyVonNeumann(ref float[,] heights)
+        public void ApplyVonNeumann(float[,] heights)
         {
             Directions direction = Configs.WindDirection;
             int topX = heights.GetLength(0);
@@ -189,7 +194,7 @@ namespace Utility.TerrainAlgorithm
             }
         }
 
-        public void ApplyMoore(ref float[,] heights)
+        public void ApplyMoore(float[,] heights)
         {
             int topX = heights.GetLength(0);
             int topY = heights.GetLength(1);

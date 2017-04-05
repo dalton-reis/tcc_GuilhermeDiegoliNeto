@@ -12,7 +12,12 @@ namespace Utility.TerrainAlgorithm
             return false;
         }
 
-        public override void ApplyTransform(ref float[,] heights)
+        public override void ApplyTransform(float[,] rockHeights, float[,] dirtHeights)
+        {
+
+        }
+
+        public override void ApplyTransform(float[,] heights)
         {
             int topX = heights.GetLength(0);
             int topY = heights.GetLength(1);

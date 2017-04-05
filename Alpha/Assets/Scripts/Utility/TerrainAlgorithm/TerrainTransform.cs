@@ -27,6 +27,8 @@ namespace Utility.TerrainAlgorithm
         /// Aplicar uma iteração do algoritmo de transformação.
         /// </summary>
         /// <param name="heights">A matriz de alturas sobre a qual será aplicada a transformação.</param>
-        public abstract void ApplyTransform(ref float[,] heights);
+        public abstract void ApplyTransform(float[,] heights);
+
+        public abstract void ApplyTransform(float[,] rockHeights, float[,] dirtHeights);
     }
 }

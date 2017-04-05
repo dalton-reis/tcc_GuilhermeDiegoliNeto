@@ -27,19 +27,24 @@ namespace Utility.TerrainAlgorithm
             return Configs.Active;
         }
 
-        public override void ApplyTransform(ref float[,] heights)
+        public override void ApplyTransform(float[,] rockHeights, float[,] dirtHeights)
+        {
+
+        }
+
+        public override void ApplyTransform(float[,] heights)
         {
             if (Configs.UseMoore)
             {
-                TransformMoore(ref heights);
+                TransformMoore(heights);
             }
             else
             {
-                TransformVonNeumann(ref heights);
+                TransformVonNeumann(heights);
             }
         }
 
-        private void TransformMoore(ref float[,] heights)
+        private void TransformMoore(float[,] heights)
         {
             // Transformação usando vizinhança Moore
 
@@ -85,7 +90,7 @@ namespace Utility.TerrainAlgorithm
             }
         }
 
-        private void TransformVonNeumann(ref float[,] heights)
+        private void TransformVonNeumann(float[,] heights)
         {
             // Transformação usando vizinhança Von Neumann
 
