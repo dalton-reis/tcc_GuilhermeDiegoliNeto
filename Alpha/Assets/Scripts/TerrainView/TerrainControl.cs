@@ -3,6 +3,7 @@ using Utility.TerrainAlgorithm;
 using UnityEngine;
 using UnityEngine.UI;
 using System.IO;
+using System;
 
 namespace TerrainView
 {
@@ -15,6 +16,7 @@ namespace TerrainView
         // Singleton
         public static TerrainControl Instance { get; private set; }
 
+        // Dados do terreno
         public Terrain rockLayer;
         public Terrain soilLayer;
         public Terrain waterLayer;
@@ -22,7 +24,11 @@ namespace TerrainView
         public float[,] RockHeights { get; set; }
         public float[,] SoilHeights { get; set; }
 
+        // Dados da simulação
         public TransformSet transformSet { get; private set; }
+
+        private int LastSimulationTime { get; set; }
+        public int SimulationInterval { get; set; }
 
         // Parâmetros UI
         public Text textMass = null;
@@ -99,7 +105,13 @@ namespace TerrainView
 
         void Update()
         {
-            RunAllTransforms();
+            int currentTime = Environment.TickCount;
+            if (currentTime - LastSimulationTime >= SimulationInterval)
+            {
+                RunAllTransforms();
+                LastSimulationTime = currentTime;
+            }
+
         }
 
         void FixedUpdate()

@@ -217,17 +217,10 @@ namespace Utility.TerrainAlgorithm
 
         public void TransformVonNeumann(float[,] soilHeights, float[,] rockHeights)
         {
-            // Transformação usando vizinhança Von Neumann
-
-            int topX = soilHeights.GetLength(0);
-            int topY = soilHeights.GetLength(1);
-
-            float[,] baseHeights = soilHeights.Clone() as float[,];
-
             // Loop geral do mapa
-            for (int x = 0; x < baseHeights.GetLength(0); x++)
+            for (int x = 0; x < soilHeights.GetLength(0); x++)
             {
-                for (int y = 0; y < baseHeights.GetLength(1); y++)
+                for (int y = 0; y < soilHeights.GetLength(1); y++)
                 {
                     float localSoilMass = soilHeights[x,y] - rockHeights[x,y];
 
@@ -236,43 +229,21 @@ namespace Utility.TerrainAlgorithm
                     float sumInclinations = 0.0f;
                     float sumMovedMaterial = 0.0f;
 
-                    // Loop horizontal
-                    for (int relX = -1; relX <= 1; relX++)
-                    {
-                        int absX = x + relX;
-                        if (absX < 0 || absX >= topX)
-                            continue;
-
-                        float inclination = baseHeights[x, y] - baseHeights[absX, y];
-                        if (inclination > maxInclination)
+                    VonNeumannTransform(x, y, soilHeights,
+                        (ref float localHeight, ref float nearbyHeight) =>
                         {
-                            maxInclination = inclination;
+                            float inclination = localHeight - nearbyHeight;
+                            if (inclination > maxInclination)
+                            {
+                                maxInclination = inclination;
+                            }
+                            if (inclination > Configs.MaxInclination)
+                            {
+                                sumInclinations += inclination;
+                                sumMovedMaterial += Configs.DistributionFactor * (inclination - Configs.MaxInclination);
+                            }
                         }
-                        if (inclination > Configs.MaxInclination)
-                        {
-                            sumInclinations += inclination;
-                            sumMovedMaterial += Configs.DistributionFactor * (inclination - Configs.MaxInclination);
-                        }
-                    }
-
-                    // Loop vertical
-                    for (int relY = -1; relY <= 1; relY++)
-                    {
-                        int absY = y + relY;
-                        if (absY < 0 || absY >= topY)
-                            continue;
-
-                        float inclination = baseHeights[x, y] - baseHeights[x, absY];
-                        if (inclination > maxInclination)
-                        {
-                            maxInclination = inclination;
-                        }
-                        if (inclination > Configs.MaxInclination)
-                        {
-                            sumInclinations += inclination;
-                            sumMovedMaterial += Configs.DistributionFactor * (inclination - Configs.MaxInclination);
-                        }
-                    }
+                    );
 
                     // Se não houver nada para alterar prosseguir imediatamente
                     if (sumInclinations == 0.0)
@@ -291,39 +262,19 @@ namespace Utility.TerrainAlgorithm
                     // Constante para os próximos cálculos
                     float inclinationDifference = (maxInclination - Configs.MaxInclination);
 
-                    // Loop horizontal
-                    for (int relX = -1; relX <= 1; relX++)
-                    {
-                        int absX = x + relX;
-                        if (absX < 0 || absX >= topX)
-                            continue;
-
-                        float inclination = baseHeights[x, y] - baseHeights[absX, y];
-                        if (inclination > Configs.MaxInclination)
+                    VonNeumannTransform(x, y, soilHeights,
+                        (ref float localHeight, ref float nearbyHeight) =>
                         {
-                            float movedMaterial = Configs.DistributionFactor * inclinationDifference * (inclination / sumInclinations);
-                            movedMaterial *= movementLimitingFactor;
-                            soilHeights[absX, y] += movedMaterial;
-                            sumMovedMaterial += movedMaterial;
+                            float inclination = localHeight - nearbyHeight;
+                            if (inclination > Configs.MaxInclination)
+                            {
+                                float movedMaterial = Configs.DistributionFactor * inclinationDifference * (inclination / sumInclinations);
+                                movedMaterial *= movementLimitingFactor;
+                                nearbyHeight += movedMaterial;
+                                sumMovedMaterial += movedMaterial;
+                            }
                         }
-                    }
-
-                    // Loop vertical
-                    for (int relY = -1; relY <= 1; relY++)
-                    {
-                        int absY = y + relY;
-                        if (absY < 0 || absY >= topY)
-                            continue;
-
-                        float inclination = baseHeights[x, y] - baseHeights[x, absY];
-                        if (inclination > Configs.MaxInclination)
-                        {
-                            float movedMaterial = Configs.DistributionFactor * inclinationDifference * (inclination / sumInclinations);
-                            movedMaterial *= movementLimitingFactor;
-                            soilHeights[x, absY] += movedMaterial;
-                            sumMovedMaterial += movedMaterial;
-                        }
-                    }
+                    );
 
                     soilHeights[x, y] -= sumMovedMaterial;
                 }

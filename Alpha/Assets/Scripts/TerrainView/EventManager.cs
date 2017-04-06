@@ -10,12 +10,20 @@ namespace TerrainView
 {
     public class EventManager : MonoBehaviour
     {
+        public Slider sliderSimSpeed;
+
+        /// <summary>
+        /// Chamar ao clicar no botão "carregar/salvar".
+        /// </summary>
         public void OnLoadSave()
         {
             GameControl.Instance.SetBackgroundMode(true);
             SceneManager.LoadScene("LoadSaveScreen", LoadSceneMode.Additive);
         }
 
+        /// <summary>
+        /// Chamar ao clicar no botão "configurar simulação".
+        /// </summary>
         public void OnSimulationConfigs()
         {
             if (Input.GetKey(KeyCode.LeftControl) && Input.GetKey(KeyCode.LeftShift))
@@ -26,6 +34,11 @@ namespace TerrainView
             {
                 LoadSimulationConfigs();
             }
+        }
+
+        public void OnChangeSimulationSpeed()
+        {
+            TerrainControl.Instance.SimulationInterval = (int)(sliderSimSpeed.value * 10000);
         }
 
         private void LoadSimulationConfigs()

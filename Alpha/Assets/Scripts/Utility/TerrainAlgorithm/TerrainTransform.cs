@@ -30,5 +30,40 @@ namespace Utility.TerrainAlgorithm
         public abstract void ApplyTransform(float[,] heights);
 
         public abstract void ApplyTransform(float[,] rockHeights, float[,] dirtHeights);
+
+        /// <summary>
+        /// Função para ser utilizada em loops de transformação.
+        /// </summary>
+        /// <param name="localHeight">Referência para a altura do ponto central.</param>
+        /// <param name="nearbyHeight">Referência para a altura do ponto vizinho sendo evaluado.</param>
+        protected delegate void LocalTransform(ref float localHeight, ref float nearbyHeight);
+
+        /// <summary>
+        /// Efetuar uma transformação local utilizando vizinhança Von Neumann (4-conexa).
+        /// Mais performática, mas possível custo de qualidade.
+        /// </summary>
+        /// <param name="x">Coordenada X do ponto central.</param>
+        /// <param name="y">Coordenada Y do ponto central.</param>
+        /// <param name="heights">Mapa de alturas a ser transformado.</param>
+        /// <param name="transform">Função de transformação.</param>
+        protected void VonNeumannTransform(int x, int y, float[,] heights, LocalTransform transform)
+        {
+            if (x != 0)
+            {
+                transform(ref heights[x, y], ref heights[x - 1, y]);
+            }
+            if (y != 0)
+            {
+                transform(ref heights[x, y], ref heights[x, y - 1]);
+            }
+            if (x != heights.GetLength(0) - 1)
+            {
+                transform(ref heights[x, y], ref heights[x + 1, y]);
+            }
+            if (y != heights.GetLength(1) - 1)
+            {
+                transform(ref heights[x, y], ref heights[x, y + 1]);
+            }
+        }
     }
 }
