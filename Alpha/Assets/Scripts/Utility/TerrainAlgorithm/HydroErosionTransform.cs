@@ -39,9 +39,23 @@ namespace Utility.TerrainAlgorithm
             waterHeights = null;
         }
 
-        public override void ApplyTransform(float[,] rockHeights, float[,] dirtHeights)
+        public override void ApplyTransform(float[,] rockHeights, float[,] soilHeights)
         {
+            // Criar matriz de água se não existir
+            if (waterHeights == null)
+            {
+                waterHeights = new float[soilHeights.GetLength(0), soilHeights.GetLength(1)];
+            }
 
+            // Distribuir água da chuva
+            if (DistributeWater())
+            {
+                GroundToSediment(soilHeights, rockHeights);
+            }
+
+            DoTransform(soilHeights);
+
+            EvaporateWater(soilHeights);
         }
 
         public override void ApplyTransform(float[,] heights)
@@ -58,7 +72,7 @@ namespace Utility.TerrainAlgorithm
                 GroundToSediment(heights);
             }
 
-            TransformVonNeumann(heights);
+            DoTransform(heights);
 
             EvaporateWater(heights);
         }
@@ -81,108 +95,62 @@ namespace Utility.TerrainAlgorithm
             return matrix;
         }
 
-        private void TransformVonNeumann(float[,] heights)
+        private void DoTransform(float[,] heights)
         {
-            // Transformação usando vizinhança Von Neumann
-
-            int topX = heights.GetLength(0);
-            int topY = heights.GetLength(1);
-
-            float[,] baseHeights = heights.Clone() as float[,];
-
             // Loop geral do mapa
             for (int x = 0; x < heights.GetLength(0); x++)
             {
                 for (int y = 0; y < heights.GetLength(1); y++)
                 {
                     // Altura do terreno + altura da água
-                    float centerHeight = baseHeights[x, y] + waterHeights[x, y];
+                    float localSurfaceHeight = heights[x, y] + waterHeights[x, y];
 
                     // Média das alturas
-                    float avgHeight = 0;
+                    float avgSurfaceHeight = 0;
                     int countHeights = 0;
                     
                     // Soma das diferenças de altura positivas
-                    float totalDiff = 0;
+                    float totalDifference = 0;
 
                     // Loop horizontal
-                    for (int relX = -1; relX <= 1; relX++)
-                    {
-                        int absX = x + relX;
-                        if (absX < 0 || absX >= topX)
-                            continue;
+                    VonNeumannTransform(x, y, heights,
+                        (ref float localHeight, ref float nearbyHeight, int nearbyX, int nearbyY) =>
+                        {
+                            float nearbySurfaceHeight = (nearbyHeight + waterHeights[nearbyX, nearbyY]);
+                            float difference = localSurfaceHeight - nearbySurfaceHeight;
 
-                        float localHeight = (baseHeights[absX, y] + waterHeights[absX, y]);
-                        float localDiff = centerHeight - localHeight;
+                            if (difference < 0) return;
 
-                        if (localDiff < 0) continue;
+                            totalDifference += difference;
+                            avgSurfaceHeight += nearbySurfaceHeight;
+                            countHeights++;
+                        }
+                    );
 
-                        totalDiff += localDiff;
-                        avgHeight += localHeight;
-                        countHeights++;
-                    }
-                    // Loop vertical
-                    for (int relY = -1; relY <= 1; relY++)
-                    {
-                        int absY = y + relY;
-                        if (absY < 0 || absY >= topY)
-                            continue;
+                    // Se não houver diferenças positivas prosseguir
+                    if (totalDifference == 0) continue;
 
-                        float localHeight = (baseHeights[x, absY] + waterHeights[x, absY]);
-                        float localDiff = centerHeight - localHeight;
+                    avgSurfaceHeight /= countHeights;
 
-                        if (localDiff < 0) continue;
-
-                        totalDiff += localDiff;
-                        avgHeight += localHeight;
-                        countHeights++;
-                    }
-
-                    // Descontar o centro que foi considerado duas vezes
-                    avgHeight -= centerHeight;
-                    countHeights--;
-                    avgHeight /= countHeights;
-
-                    float deltaHeight = centerHeight - avgHeight;
+                    float deltaSurfaceHeight = localSurfaceHeight - avgSurfaceHeight;
 
                     float totalDeltaWater = 0;
 
                     // Loop horizontal
-                    for (int relX = -1; relX <= 1; relX++)
-                    {
-                        int absX = x + relX;
-                        if (absX < 0 || absX >= topX || absX == x)
-                            continue;
+                    VonNeumannTransform(x, y, heights,
+                        (ref float localHeight, ref float nearbyHeight, int nearbyX, int nearbyY) =>
+                        {
+                            float nearbySurfaceHeight = (nearbyHeight + waterHeights[nearbyX, nearbyY]);
 
-                        float localHeight = (baseHeights[absX, y] + waterHeights[absX, y]);
+                            if (nearbySurfaceHeight >= localSurfaceHeight) return;
 
-                        if (localHeight >= centerHeight)
-                            continue;
+                            float difference = localSurfaceHeight - nearbySurfaceHeight;
+                            float deltaWater = Math.Min(waterHeights[x, y], deltaSurfaceHeight) * (difference / totalDifference);
 
-                        float localDiff = centerHeight - localHeight;
-                        float deltaWater = Math.Min(waterHeights[x, y], deltaHeight) * (localDiff / totalDiff);
-
-                        waterHeights[absX, y] += deltaWater;
-                        totalDeltaWater += deltaWater;
-                    }
-                    // Loop vertical
-                    for (int relY = -1; relY <= 1; relY++)
-                    {
-                        int absY = y + relY;
-                        if (absY < 0 || absY >= topY || absY == y)
-                            continue;
-
-                        float localHeight = (baseHeights[x, absY] + waterHeights[x, absY]);
-
-                        if (localHeight >= centerHeight)
-                            continue;
-
-                        float localDiff = centerHeight - localHeight;
-                        float deltaWater = Math.Min(waterHeights[x, y], deltaHeight) * (localDiff / totalDiff);
-
-                        waterHeights[x, absY] += deltaWater;
-                        totalDeltaWater += deltaWater;
-                    }
+                            waterHeights[nearbyX, nearbyY] += deltaWater;
+                            totalDeltaWater += deltaWater;
+                        }
+                    );
 
                     waterHeights[x, y] -= totalDeltaWater;
                 }
@@ -192,7 +160,7 @@ namespace Utility.TerrainAlgorithm
         private bool DistributeWater()
         {
             rainCounter++;
-            if (rainCounter == Configs.RainInterval)
+            if (rainCounter == Configs.RainInterval && Configs.RainIntensity != 0)
             {
                 rainCounter = 0;
 
@@ -222,15 +190,38 @@ namespace Utility.TerrainAlgorithm
             }
         }
 
+        private void GroundToSediment(float[,] soilHeights, float[,] rockHeights)
+        {
+            if (Configs.TerrainSolubility == 0)
+                return;
+
+            for (int x = 0; x < soilHeights.GetLength(0); x++)
+            {
+                for (int y = 0; y < soilHeights.GetLength(1); y++)
+                {
+                    float amountToRemove = Configs.TerrainSolubility * waterHeights[x, y];
+                    amountToRemove = Math.Min(amountToRemove, soilHeights[x,y] - rockHeights[x,y]);
+                    soilHeights[x, y] -= amountToRemove;
+
+                    // TODO: Talvez a água pudesse converter a camada de rocha para sedimento caso não haja solo suficiente para atingir a saturação geral
+                }
+            }
+        }
+
         private void EvaporateWater(float[,] heights)
         {
+            if (Configs.EvaporationFactor == 0)
+                return;
+
+            float evaporationPercent = (1 - Configs.EvaporationFactor);
+
             for (int x = 0; x < heights.GetLength(0); x++)
             {
                 for (int y = 0; y < heights.GetLength(1); y++)
                 {
-                    float diff = waterHeights[x, y] - (waterHeights[x, y] * (1 - Configs.EvaporationFactor));
+                    float diff = waterHeights[x, y] - (waterHeights[x, y] * evaporationPercent);
                     waterHeights[x, y] -= diff;
-                    heights[x, y] -= Configs.TerrainSolubility * diff;
+                    heights[x, y] += Configs.TerrainSolubility * diff;
                 }
             }
         }

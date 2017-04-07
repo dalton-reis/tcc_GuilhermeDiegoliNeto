@@ -31,47 +31,29 @@ namespace Utility.TerrainAlgorithm
 
         public override void ApplyTransform(float[,] rockHeights, float[,] soilHeights)
         {
-            TransformVonNeumann(soilHeights, rockHeights);
+            DoTransform(soilHeights, rockHeights);
         }
 
         public override void ApplyTransform(float[,] heights)
         {
-            TransformVonNeumann(heights);
+            DoTransform(heights);
         }
 
-        [System.Obsolete("Usar transformações Von Neumann")]
-        public void TransformMoore(float[,] heights)
+        public void DoTransform(float[,] heights)
         {
-            // Transformação usando vizinhança Moore
-
-            int topX = heights.GetLength(0);
-            int topY = heights.GetLength(1);
-
-            float[,] baseHeights = heights.Clone() as float[,];
-
             // Loop geral do mapa
             for (int x = 0; x < heights.GetLength(0); x++)
             {
                 for (int y = 0; y < heights.GetLength(1); y++)
                 {
                     // Obter a maior inclinação e a soma das inclinações superiores à configuração
-                    double maxInclination = 0.0;
-                    double sumInclinations = 0.0;
+                    float maxInclination = 0.0f;
+                    float sumInclinations = 0.0f;
 
-                    // Loop interno dos vizinhos 
-                    for (int relX = -1; relX <= 1; relX++)
-                    {
-                        int absX = x + relX;
-                        if (absX < 0 || absX >= topX)
-                            continue;
-
-                        for (int relY = -1; relY <= 1; relY++)
+                    VonNeumannTransform(x, y, heights,
+                        (ref float localHeight, ref float nearbyHeight) =>
                         {
-                            int absY = y + relY;
-                            if (absY < 0 || absY >= topY)
-                                continue;
-
-                            double inclination = baseHeights[x, y] - baseHeights[absX, absY];
+                            float inclination = localHeight - nearbyHeight;
                             if (inclination > maxInclination)
                             {
                                 maxInclination = inclination;
@@ -81,7 +63,7 @@ namespace Utility.TerrainAlgorithm
                                 sumInclinations += inclination;
                             }
                         }
-                    }
+                    );
 
                     // Se não houver nada para alterar prosseguir imediatamente
                     if (sumInclinations == 0.0)
@@ -90,132 +72,28 @@ namespace Utility.TerrainAlgorithm
                     // Mover material para os vizinhos com inclinações superiores à configuração
                     float sumMovedMaterial = 0.0f;
 
-                    // Loop interno dos vizinhos 
-                    for (int relX = -1; relX <= 1; relX++)
-                    {
-                        int absX = x + relX;
-                        if (absX < 0 || absX >= topX)
-                            continue;
+                    // Constante para os próximos cálculos
+                    float inclinationDifference = (maxInclination - Configs.MaxInclination);
 
-                        for (int relY = -1; relY <= 1; relY++)
+                    VonNeumannTransform(x, y, heights,
+                        (ref float localHeight, ref float nearbyHeight) =>
                         {
-                            int absY = y + relY;
-                            if (absY < 0 || absY >= topY)
-                                continue;
-
-                            double inclination = baseHeights[x, y] - baseHeights[absX, absY];
+                            float inclination = localHeight - nearbyHeight;
                             if (inclination > Configs.MaxInclination)
                             {
-                                float movedMaterial = baseHeights[absX, absY] - (float)(baseHeights[absX, absY] + (Configs.DistributionFactor * (maxInclination - Configs.MaxInclination) * (inclination / sumInclinations)));
-                                heights[absX, absY] -= movedMaterial;
+                                float movedMaterial = (Configs.DistributionFactor * inclinationDifference * (inclination / sumInclinations));
+                                nearbyHeight += movedMaterial;
                                 sumMovedMaterial += movedMaterial;
                             }
                         }
-                    }
-                    heights[x, y] += sumMovedMaterial;
+                    );
+
+                    heights[x, y] -= sumMovedMaterial;
                 }
             }
         }
 
-        public void TransformVonNeumann(float[,] heights)
-        {
-            // Transformação usando vizinhança Von Neumann
-
-            int topX = heights.GetLength(0);
-            int topY = heights.GetLength(1);
-
-            float[,] baseHeights = heights.Clone() as float[,];
-
-            // Loop geral do mapa
-            for (int x = 0; x < heights.GetLength(0); x++)
-            {
-                for (int y = 0; y < heights.GetLength(1); y++)
-                {
-                    // Obter a maior inclinação e a soma das inclinações superiores à configuração
-                    double maxInclination = 0.0;
-                    double sumInclinations = 0.0;
-
-                    // Loop horizontal
-                    for (int relX = -1; relX <= 1; relX++)
-                    {
-                        int absX = x + relX;
-                        if (absX < 0 || absX >= topX)
-                            continue;
-
-                        double inclination = baseHeights[x, y] - baseHeights[absX, y];
-                        if (inclination > maxInclination)
-                        {
-                            maxInclination = inclination;
-                        }
-                        if (inclination > Configs.MaxInclination)
-                        {
-                            sumInclinations += inclination;
-                        }
-                    }
-
-                    // Loop vertical
-                    for (int relY = -1; relY <= 1; relY++)
-                    {
-                        int absY = y + relY;
-                        if (absY < 0 || absY >= topY)
-                            continue;
-
-                        double inclination = baseHeights[x, y] - baseHeights[x, absY];
-                        if (inclination > maxInclination)
-                        {
-                            maxInclination = inclination;
-                        }
-                        if (inclination > Configs.MaxInclination)
-                        {
-                            sumInclinations += inclination;
-                        }
-                    }
-
-                    // Se não houver nada para alterar prosseguir imediatamente
-                    if (sumInclinations == 0.0)
-                        continue;
-
-                    // Mover material para os vizinhos com inclinações superiores à configuração
-                    float sumMovedMaterial = 0.0f;
-
-                    // Loop horizontal
-                    for (int relX = -1; relX <= 1; relX++)
-                    {
-                        int absX = x + relX;
-                        if (absX < 0 || absX >= topX)
-                            continue;
-
-                        double inclination = baseHeights[x, y] - baseHeights[absX, y];
-                        if (inclination > Configs.MaxInclination)
-                        {
-                            float movedMaterial = baseHeights[absX, y] - (float)(baseHeights[absX, y] + (Configs.DistributionFactor * (maxInclination - Configs.MaxInclination) * (inclination / sumInclinations)));
-                            heights[absX, y] -= movedMaterial;
-                            sumMovedMaterial += movedMaterial;
-                        }
-                    }
-
-                    // Loop vertical
-                    for (int relY = -1; relY <= 1; relY++)
-                    {
-                        int absY = y + relY;
-                        if (absY < 0 || absY >= topY)
-                            continue;
-
-                        double inclination = baseHeights[x, y] - baseHeights[x, absY];
-                        if (inclination > Configs.MaxInclination)
-                        {
-                            float movedMaterial = baseHeights[x, absY] - (float)(baseHeights[x, absY] + (Configs.DistributionFactor * (maxInclination - Configs.MaxInclination) * (inclination / sumInclinations)));
-                            heights[x, absY] -= movedMaterial;
-                            sumMovedMaterial += movedMaterial;
-                        }
-                    }
-
-                    heights[x, y] += sumMovedMaterial;
-                }
-            }
-        }
-
-        public void TransformVonNeumann(float[,] soilHeights, float[,] rockHeights)
+        public void DoTransform(float[,] soilHeights, float[,] rockHeights)
         {
             // Loop geral do mapa
             for (int x = 0; x < soilHeights.GetLength(0); x++)
