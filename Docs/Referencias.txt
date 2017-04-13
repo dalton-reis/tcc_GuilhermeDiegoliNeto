@@ -3,7 +3,7 @@ Função LoadHeightmap http://damienclassen.blogspot.com.br/2014/02/loading-terr
 Funções edição de terreno https://forum.unity3d.com/threads/edit-terrain-in-real-time.98410/
 Ferramenta web para obter mapa de altura de locais reais http://terrain.party/
 
-
+Conversa com Prof Pozzobon 03/04
 Suscetibilidade de erosão
 Camada de rocha
 Shalstab
