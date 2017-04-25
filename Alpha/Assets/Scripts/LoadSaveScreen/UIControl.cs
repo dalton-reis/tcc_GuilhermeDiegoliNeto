@@ -14,11 +14,25 @@ namespace LoadSaveScreen
         public InputField loadFileInput;
         public InputField heightMapInput;
 
+        public Dropdown heightMapType;
+
+        public Slider soilDepth;
+        public Text soilDepthValue;
+
         // Use this for initialization
         void Start()
         {
             Instance = this;
         }
 
+        public void UpdateValues()
+        {
+            soilDepthValue.text = soilDepth.value.ToString();
+        }
+
+        public float GetSoilDepth()
+        {
+            return soilDepth.value;
+        }
     }
 }

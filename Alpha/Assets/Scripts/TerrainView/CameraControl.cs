@@ -160,7 +160,7 @@ namespace TerrainView
             float scroll = Input.GetAxis("Mouse ScrollWheel");
             if (scroll != 0)
             {
-                transform.Translate(new Vector3(0, 0, scroll * zoomSpeed), Space.Self);
+                transform.Translate(new Vector3(0, 0, scroll * zoomSpeed * 10), Space.Self);
                 return true;
             }
 

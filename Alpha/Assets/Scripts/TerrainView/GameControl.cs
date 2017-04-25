@@ -54,9 +54,19 @@ namespace TerrainView
             TerrainControl.Instance.LoadHeights(soilHeights, rockHeights);
         }
 
-        public void LoadFromHeightMap(string filename)
+        public void LoadSoilFromHeightMap(string filename, float minDepth)
         {
-            TerrainControl.Instance.LoadHeightmap(filename);
+            TerrainControl.Instance.LoadSoilHeightmap(filename, minDepth);
+        }
+
+        public void LoadRockFromHeightMap(string filename, float minDepth)
+        {
+            TerrainControl.Instance.LoadRockHeightmap(filename, minDepth);
+        }
+
+        public void LoadFromHeightMap(string filename, float minDepth)
+        {
+            TerrainControl.Instance.LoadHeightmap(filename, minDepth);
         }
 
         public void LoadSmoothConfigs(SmoothSimConfigs configs)

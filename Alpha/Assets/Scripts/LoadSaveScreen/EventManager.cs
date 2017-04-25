@@ -27,8 +27,29 @@ namespace LoadSaveScreen
 
         public void OnImportHeightMap()
         {
-            TerrainView.GameControl.Instance.LoadFromHeightMap(UIControl.Instance.heightMapInput.text);
+            float depth = UIControl.Instance.GetSoilDepth();
+
+            switch (UIControl.Instance.heightMapType.value)
+            {
+                case 1:
+                    TerrainView.GameControl.Instance.LoadSoilFromHeightMap(UIControl.Instance.heightMapInput.text, depth);
+                    break;
+                case 2:
+                    TerrainView.GameControl.Instance.LoadRockFromHeightMap(UIControl.Instance.heightMapInput.text, depth);
+                    break;
+                case 3:
+                    TerrainView.GameControl.Instance.LoadFromHeightMap(UIControl.Instance.heightMapInput.text, depth);
+                    break;
+                default:
+                    return;
+            }
+
             OnClose();
+        }
+
+        public void OnUpdateValues()
+        {
+            UIControl.Instance.UpdateValues();
         }
     }
 }

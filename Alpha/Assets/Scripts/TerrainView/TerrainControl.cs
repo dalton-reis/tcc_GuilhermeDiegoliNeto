@@ -50,7 +50,113 @@ namespace TerrainView
             transformSet = new TransformSet();
         }
 
-        public void LoadHeightmap(string filename)
+        public void LoadSoilHeightmap(string filename, float minDepth)
+        {
+            byte[] image = File.ReadAllBytes(filename);
+
+            // Load heightmap.
+            Texture2D heightmap = new Texture2D(2, 2);
+            heightmap.LoadImage(image);
+
+            float[,] OldRockHeights = RockHeights;
+
+            // Acquire an array of colour values.
+            Color[] values = heightmap.GetPixels();
+            SoilHeights = new float[heightmap.height, heightmap.width];
+            RockHeights = new float[heightmap.height, heightmap.width];
+            WaterHeights = new float[heightmap.height, heightmap.width];
+
+            // Run through array and read height values.
+            int index = 0;
+            for (int z = 0; z < heightmap.height; z++)
+            {
+                for (int x = 0; x < heightmap.width; x++)
+                {
+                    SoilHeights[z, x] = values[index].r;
+
+                    if (z < OldRockHeights.GetLength(0) && x < OldRockHeights.GetLength(1))
+                    {
+                        RockHeights[z, x] = OldRockHeights[z, x];
+                        if (RockHeights[z, x] > SoilHeights[z, x] - minDepth)
+                            RockHeights[z, x] = SoilHeights[z, x] - minDepth;
+                    }
+                    else
+                    {
+                        RockHeights[z, x] = 0;
+                    }
+
+                    WaterHeights[z, x] = SoilHeights[z, x];
+                    index++;
+                }
+            }
+
+            rockLayer.terrainData.heightmapResolution = RockHeights.GetLength(0);
+            rockLayer.terrainData.SetHeights(0, 0, RockHeights);
+
+            soilLayer.terrainData.heightmapResolution = heightmap.height;
+            soilLayer.terrainData.SetHeights(0, 0, SoilHeights);
+
+            waterLayer.terrainData.heightmapResolution = heightmap.height;
+            waterLayer.terrainData.SetHeights(0, 0, WaterHeights);
+
+            ResetAllTransforms();
+            UpdateViews();
+        }
+
+        public void LoadRockHeightmap(string filename, float minDepth)
+        {
+            byte[] image = File.ReadAllBytes(filename);
+
+            // Load heightmap.
+            Texture2D heightmap = new Texture2D(2, 2);
+            heightmap.LoadImage(image);
+
+            float[,] OldSoilHeights = SoilHeights;
+
+            // Acquire an array of colour values.
+            Color[] values = heightmap.GetPixels();
+            SoilHeights = new float[heightmap.height, heightmap.width];
+            RockHeights = new float[heightmap.height, heightmap.width];
+            WaterHeights = new float[heightmap.height, heightmap.width];
+
+            // Run through array and read height values.
+            int index = 0;
+            for (int z = 0; z < heightmap.height; z++)
+            {
+                for (int x = 0; x < heightmap.width; x++)
+                {
+                    RockHeights[z, x] = values[index].r;
+
+                    if (z < OldSoilHeights.GetLength(0) && x < OldSoilHeights.GetLength(1))
+                    {
+                        SoilHeights[z, x] = OldSoilHeights[z, x];
+                        if (SoilHeights[z, x] < RockHeights[z, x] + minDepth)
+                            SoilHeights[z, x] = RockHeights[z, x] + minDepth;
+                    }
+                    else
+                    {
+                        SoilHeights[z, x] = RockHeights[z, x] + minDepth;
+                    }
+
+                    WaterHeights[z, x] = SoilHeights[z, x];
+                    index++;
+                }
+            }
+
+            rockLayer.terrainData.heightmapResolution = RockHeights.GetLength(0);
+            rockLayer.terrainData.SetHeights(0, 0, RockHeights);
+
+            soilLayer.terrainData.heightmapResolution = heightmap.height;
+            soilLayer.terrainData.SetHeights(0, 0, SoilHeights);
+
+            waterLayer.terrainData.heightmapResolution = heightmap.height;
+            waterLayer.terrainData.SetHeights(0, 0, WaterHeights);
+
+            ResetAllTransforms();
+            UpdateViews();
+        }
+
+        public void LoadHeightmap(string filename, float minDepth)
         {
             // http://damienclassen.blogspot.com.br/2014/02/loading-terrain-heightmap-data-via-c.html
 
@@ -73,7 +179,7 @@ namespace TerrainView
                 for (int x = 0; x < heightmap.width; x++)
                 {
                     SoilHeights[z, x] = values[index].r;
-                    RockHeights[z, x] = SoilHeights[z, x] - 0.01f;
+                    RockHeights[z, x] = SoilHeights[z, x] - minDepth;
                     WaterHeights[z, x] = SoilHeights[z, x];
                     index++;
                 }
