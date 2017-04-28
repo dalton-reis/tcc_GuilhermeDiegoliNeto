@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Utility.TerrainAlgorithm;
 
-namespace SimulationConfigs
+namespace SimulationConfigsScreen
 {
     public class UIControl : MonoBehaviour
     {

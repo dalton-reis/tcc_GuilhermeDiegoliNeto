@@ -11,6 +11,19 @@ namespace Utility.TerrainAlgorithm
     public abstract class TerrainTransform
     {
         /// <summary>
+        /// Indicador de necessidade de atualizar as texturas do terreno.
+        /// </summary>
+        public bool UpdateTextures { get; set; }
+        /// <summary>
+        /// Indicador de necessidade de atualizar o sombreamento do terreno.
+        /// </summary>
+        public bool UpdateShades { get; set; }
+        /// <summary>
+        /// Indicador de necessidade de atualizar o modelo do terreno.
+        /// </summary>
+        public bool UpdateMeshes { get; set; }
+
+        /// <summary>
         /// Verificar estado da simulação conforme suas configurações.
         /// </summary>
         /// <returns>O estado da simulação. (ativa/inativa)</returns>
@@ -21,6 +34,16 @@ namespace Utility.TerrainAlgorithm
         /// </summary>
         public virtual void Reset()
         {
+        }
+
+        /// <summary>
+        /// Reseta todos os indicadores de atualização para false.
+        /// </summary>
+        public void ResetUpdateStates()
+        {
+            UpdateTextures = false;
+            UpdateShades = false;
+            UpdateMeshes = false;
         }
 
         /// <summary>

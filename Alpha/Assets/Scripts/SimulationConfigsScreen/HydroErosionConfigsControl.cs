@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Utility.TerrainAlgorithm;
 
-namespace SimulationConfigs
+namespace SimulationConfigsScreen
 {
     public class HydroErosionConfigsControl : MonoBehaviour
     {

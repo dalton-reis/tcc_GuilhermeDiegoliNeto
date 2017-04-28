@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Utility.TerrainAlgorithm;
+using Utility;
 
-namespace SimulationConfigs
+namespace SimulationConfigsScreen
 {
-    public class SmoothConfigsControl : MonoBehaviour
+    public class WindDecayConfigsControl : MonoBehaviour
     {
         public Toggle toggleActive;
 
@@ -16,6 +17,8 @@ namespace SimulationConfigs
         public Text textRangeValue;
         public Text textFactorValue;
 
+        public Dropdown dropDirection;
+
         public Toggle toggleMoore;
 
         // Use this for initialization
@@ -24,11 +27,14 @@ namespace SimulationConfigs
 
         }
 
-        public void LoadData(SmoothSimConfigs data)
+        public void LoadData(WindDecaySimConfigs data)
         {
             toggleActive.isOn = data.Active;
             sliderRange.value = data.Range;
             sliderFactor.value = data.Factor;
+
+            SelectDropDownFromDirection(data.WindDirection);
+
             toggleMoore.isOn = data.UseMoore;
         }
 
@@ -38,12 +44,23 @@ namespace SimulationConfigs
             textFactorValue.text = sliderFactor.value.ToString();
         }
 
-        public void UpdateData(SmoothSimConfigs data)
+        public void UpdateData(WindDecaySimConfigs data)
         {
             data.Active = toggleActive.isOn;
             data.Range = (int)sliderRange.value;
             data.Factor = sliderFactor.value;
+            data.WindDirection = GetDirectionFromDropdown();
             data.UseMoore = toggleMoore.isOn;
+        }
+
+        private Directions GetDirectionFromDropdown()
+        {
+            return (Directions)dropDirection.value;
+        }
+
+        private void SelectDropDownFromDirection(Directions direction)
+        {
+            dropDirection.value = (int)direction;
         }
     }
 }

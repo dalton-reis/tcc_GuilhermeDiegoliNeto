@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using SimulationConfigs;
+using SimulationConfigsScreen;
 using Utility.TerrainAlgorithm;
 using UnityEngine.UI;
 
@@ -36,6 +36,17 @@ namespace TerrainView
             }
         }
 
+        /// <summary>
+        /// Chamar ao clicar no botão "editar".
+        /// </summary>
+        public void OnEditConfigs()
+        {
+            EditConfigsScreen.UIControl.EditConfigs = TerrainControl.Instance.EditConfigs;
+
+            GameControl.Instance.SetBackgroundMode(true);
+            SceneManager.LoadScene("EditConfigs", LoadSceneMode.Additive);
+        }
+
         public void OnChangeSimulationSpeed()
         {
             TerrainControl.Instance.SimulationInterval = (int)(sliderSimSpeed.value * 10000);
@@ -49,8 +60,8 @@ namespace TerrainView
             HydroErosionTransform hydroErosion = TerrainControl.Instance.transformSet[TransformIndex.HydroErosion] as HydroErosionTransform;
             HydroErosionSimConfigs hydroErosionConfigs = hydroErosion.Configs;
 
-            SimulationConfigs.UIControl.DryErosionConfigs = dryErosionConfigs;
-            SimulationConfigs.UIControl.HydroErosionConfigs = hydroErosionConfigs;
+            SimulationConfigsScreen.UIControl.DryErosionConfigs = dryErosionConfigs;
+            SimulationConfigsScreen.UIControl.HydroErosionConfigs = hydroErosionConfigs;
 
             GameControl.Instance.SetBackgroundMode(true);
             SceneManager.LoadScene("SimulationConfigs", LoadSceneMode.Additive);
@@ -64,8 +75,8 @@ namespace TerrainView
             WindDecayDigTransform windDecay = TerrainControl.Instance.transformSet[TransformIndex.WindDecayDig] as WindDecayDigTransform;
             WindDecaySimConfigs windDecayConfigs = windDecay.Configs;
 
-            SimulationConfigs.UIControl.SmoothConfigs = smoothConfigs;
-            SimulationConfigs.UIControl.WindDecayConfigs = windDecayConfigs;
+            SimulationConfigsScreen.UIControl.SmoothConfigs = smoothConfigs;
+            SimulationConfigsScreen.UIControl.WindDecayConfigs = windDecayConfigs;
 
             GameControl.Instance.SetBackgroundMode(true);
             SceneManager.LoadScene("TestConfigs", LoadSceneMode.Additive);

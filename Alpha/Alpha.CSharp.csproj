@@ -77,19 +77,22 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\EditConfigsScreen\EventManager.cs" />
+    <Compile Include="Assets\Scripts\EditConfigsScreen\UIControl.cs" />
     <Compile Include="Assets\Scripts\LoadSaveScreen\EventManager.cs" />
     <Compile Include="Assets\Scripts\LoadSaveScreen\UIControl.cs" />
-    <Compile Include="Assets\Scripts\SimulationConfigs\DryErosionConfigsControl.cs" />
-    <Compile Include="Assets\Scripts\SimulationConfigs\EventManager.cs" />
-    <Compile Include="Assets\Scripts\SimulationConfigs\HydroErosionConfigsControl.cs" />
-    <Compile Include="Assets\Scripts\SimulationConfigs\SmoothConfigsControl.cs" />
-    <Compile Include="Assets\Scripts\SimulationConfigs\UIControl.cs" />
-    <Compile Include="Assets\Scripts\SimulationConfigs\WindDecayConfigsControl.cs" />
+    <Compile Include="Assets\Scripts\SimulationConfigsScreen\DryErosionConfigsControl.cs" />
+    <Compile Include="Assets\Scripts\SimulationConfigsScreen\EventManager.cs" />
+    <Compile Include="Assets\Scripts\SimulationConfigsScreen\HydroErosionConfigsControl.cs" />
+    <Compile Include="Assets\Scripts\SimulationConfigsScreen\SmoothConfigsControl.cs" />
+    <Compile Include="Assets\Scripts\SimulationConfigsScreen\UIControl.cs" />
+    <Compile Include="Assets\Scripts\SimulationConfigsScreen\WindDecayConfigsControl.cs" />
     <Compile Include="Assets\Scripts\TerrainView\CameraControl.cs" />
     <Compile Include="Assets\Scripts\TerrainView\EventManager.cs" />
     <Compile Include="Assets\Scripts\TerrainView\GameControl.cs" />
     <Compile Include="Assets\Scripts\TerrainView\TerrainControl.cs" />
     <Compile Include="Assets\Scripts\Utility\Directions.cs" />
+    <Compile Include="Assets\Scripts\Utility\EditConfigs.cs" />
     <Compile Include="Assets\Scripts\Utility\TerrainAlgorithm\DepositTransform.cs" />
     <Compile Include="Assets\Scripts\Utility\TerrainAlgorithm\DryErosionSimConfigs.cs" />
     <Compile Include="Assets\Scripts\Utility\TerrainAlgorithm\DryErosionTransform.cs" />

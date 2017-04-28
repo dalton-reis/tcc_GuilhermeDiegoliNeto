@@ -2,11 +2,12 @@
 using System.Collections;
 using UnityEngine.UI;
 using System.IO;
-using SimulationConfigs;
+using SimulationConfigsScreen;
 using Utility.TerrainAlgorithm;
 using System.Text;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
+using Utility;
 
 namespace TerrainView
 {
@@ -87,6 +88,11 @@ namespace TerrainView
         public void LoadHydroErosionConfigs(HydroErosionSimConfigs configs)
         {
             (TerrainControl.Instance.transformSet[TransformIndex.HydroErosion] as HydroErosionTransform).Configs = configs;
+        }
+
+        public void SetEditConfigs(EditConfigs configs)
+        {
+            TerrainControl.Instance.EditConfigs = configs;
         }
 
         public void SetBackgroundMode(bool mode)

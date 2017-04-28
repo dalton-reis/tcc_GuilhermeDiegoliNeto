@@ -4,7 +4,7 @@ using UnityEngine;
 using TerrainView;
 using UnityEngine.SceneManagement;
 
-namespace SimulationConfigs
+namespace SimulationConfigsScreen
 {
     public class EventManager : MonoBehaviour
     {

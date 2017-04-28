@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using Utility.TerrainAlgorithm;
 using Utility;
 
-namespace SimulationConfigs
+namespace SimulationConfigsScreen
 {
     public class DryErosionConfigsControl : MonoBehaviour
     {

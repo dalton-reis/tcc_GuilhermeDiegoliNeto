@@ -88,7 +88,12 @@ namespace Utility.TerrainAlgorithm
                         }
                     );
 
-                    heights[x, y] -= sumMovedMaterial;
+                    if (sumMovedMaterial > 0)
+                    {
+                        heights[x, y] -= sumMovedMaterial;
+                        UpdateMeshes = true;
+                        UpdateShades = true;
+                    }
                 }
             }
         }
@@ -154,7 +159,12 @@ namespace Utility.TerrainAlgorithm
                         }
                     );
 
-                    soilHeights[x, y] -= sumMovedMaterial;
+                    if (sumMovedMaterial > 0)
+                    {
+                        soilHeights[x, y] -= sumMovedMaterial;
+                        UpdateMeshes = true;
+                        UpdateShades = true;
+                    }
                 }
             }
         }

@@ -152,7 +152,13 @@ namespace Utility.TerrainAlgorithm
                         }
                     );
 
-                    waterHeights[x, y] -= totalDeltaWater;
+                    if (totalDeltaWater > 0)
+                    {
+                        waterHeights[x, y] -= totalDeltaWater;
+
+                        UpdateMeshes = true;
+                        UpdateShades = true;
+                    }
                 }
             }
         }
@@ -206,6 +212,9 @@ namespace Utility.TerrainAlgorithm
                     // TODO: Talvez a água pudesse converter a camada de rocha para sedimento caso não haja solo suficiente para atingir a saturação geral
                 }
             }
+
+            UpdateMeshes = true;
+            UpdateShades = true;
         }
 
         private void EvaporateWater(float[,] heights)
@@ -224,6 +233,9 @@ namespace Utility.TerrainAlgorithm
                     heights[x, y] += Configs.TerrainSolubility * diff;
                 }
             }
+
+            UpdateMeshes = true;
+            UpdateShades = true;
         }
     }
 }
