@@ -104,6 +104,7 @@
     <Compile Include="Assets\Scripts\Utility\TerrainAlgorithm\TransformSet.cs" />
     <Compile Include="Assets\Scripts\Utility\TerrainAlgorithm\WindDecaySimConfigs.cs" />
     <Compile Include="Assets\Scripts\Utility\TerrainAlgorithm\WindDecayTransform.cs" />
+    <Compile Include="Assets\Scripts\Utility\TerrainData\SurfaceTypes.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Resources\Shaders\TerrBumpAddPass.shader" />

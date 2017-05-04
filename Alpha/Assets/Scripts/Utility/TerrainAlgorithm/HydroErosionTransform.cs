@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Utility.TerrainData;
 
 namespace Utility.TerrainAlgorithm
 {
@@ -12,6 +13,10 @@ namespace Utility.TerrainAlgorithm
     /// </summary>
     public class HydroErosionTransform : TerrainTransform
     {
+        // Modificadores de superfície { Solo, Grama, Floresta, Concreto }
+        public float[] SurfaceDrainModifiers = { 1.0f, 0.8f, 0.8f, 0.0f };
+        public float[] SurfacePourModifiers = { 1.0f, 0.8f, 0.4f, 1.0f };
+
         public HydroErosionSimConfigs Configs { get; set; }
 
         private float[,] waterHeights = null;
@@ -39,47 +44,28 @@ namespace Utility.TerrainAlgorithm
             waterHeights = null;
         }
 
-        public override void ApplyTransform(float[,] rockHeights, float[,] soilHeights)
+        public override void ApplyTransform()
         {
             // Criar matriz de água se não existir
             if (waterHeights == null)
             {
-                waterHeights = new float[soilHeights.GetLength(0), soilHeights.GetLength(1)];
+                waterHeights = new float[SoilMap.GetLength(0), SoilMap.GetLength(1)];
             }
 
             // Distribuir água da chuva
-            if (DistributeWater())
+            if (PourWater())
             {
-                GroundToSediment(soilHeights, rockHeights);
+                GroundToSediment();
             }
 
-            DoTransform(soilHeights);
+            DoWaterFlow();
 
-            EvaporateWater(soilHeights);
+            DrainWater();
         }
 
-        public override void ApplyTransform(float[,] heights)
+        public float[,] GetWaterMatrix()
         {
-            // Criar matriz de água se não existir
-            if (waterHeights == null)
-            {
-                waterHeights = new float[heights.GetLength(0), heights.GetLength(1)];
-            }
-
-            // Distribuir água da chuva
-            if (DistributeWater())
-            {
-                GroundToSediment(heights);
-            }
-
-            DoTransform(heights);
-
-            EvaporateWater(heights);
-        }
-
-        public float[,] GetWaterMatrix(float[,] heights)
-        {
-            float[,] matrix = heights.Clone() as float[,];
+            float[,] matrix = SoilMap.Clone() as float[,];
 
             if (waterHeights != null)
             {
@@ -95,15 +81,17 @@ namespace Utility.TerrainAlgorithm
             return matrix;
         }
 
-        private void DoTransform(float[,] heights)
+        private void DoWaterFlow()
         {
+            int soilType = (int)SurfaceType.Soil;
+
             // Loop geral do mapa
-            for (int x = 0; x < heights.GetLength(0); x++)
+            for (int x = 0; x < SoilMap.GetLength(0); x++)
             {
-                for (int y = 0; y < heights.GetLength(1); y++)
+                for (int y = 0; y < SoilMap.GetLength(1); y++)
                 {
                     // Altura do terreno + altura da água
-                    float localSurfaceHeight = heights[x, y] + waterHeights[x, y];
+                    float localSurfaceHeight = SoilMap[x, y] + waterHeights[x, y];
 
                     // Média das alturas
                     float avgSurfaceHeight = 0;
@@ -113,7 +101,7 @@ namespace Utility.TerrainAlgorithm
                     float totalDifference = 0;
 
                     // Loop horizontal
-                    VonNeumannTransform(x, y, heights,
+                    VonNeumannTransform(x, y, SoilMap,
                         (ref float localHeight, ref float nearbyHeight, int nearbyX, int nearbyY) =>
                         {
                             float nearbySurfaceHeight = (nearbyHeight + waterHeights[nearbyX, nearbyY]);
@@ -137,7 +125,7 @@ namespace Utility.TerrainAlgorithm
                     float totalDeltaWater = 0;
 
                     // Loop horizontal
-                    VonNeumannTransform(x, y, heights,
+                    VonNeumannTransform(x, y, SoilMap,
                         (ref float localHeight, ref float nearbyHeight, int nearbyX, int nearbyY) =>
                         {
                             float nearbySurfaceHeight = (nearbyHeight + waterHeights[nearbyX, nearbyY]);
@@ -149,12 +137,17 @@ namespace Utility.TerrainAlgorithm
 
                             waterHeights[nearbyX, nearbyY] += deltaWater;
                             totalDeltaWater += deltaWater;
+
+                            // Quando o nível da água passar de um certo ponto, destruir a superfície local
+                            if (waterHeights[nearbyX, nearbyY] > 0.25f)
+                                SurfaceMap[nearbyX, nearbyY] = soilType;
                         }
                     );
 
                     if (totalDeltaWater > 0)
                     {
                         waterHeights[x, y] -= totalDeltaWater;
+                        if (waterHeights[x, y] < 0) waterHeights[x, y] = 0;
 
                         UpdateMeshes = true;
                         UpdateShades = true;
@@ -163,7 +156,7 @@ namespace Utility.TerrainAlgorithm
             }
         }
 
-        private bool DistributeWater()
+        private bool PourWater()
         {
             rainCounter++;
             if (rainCounter == Configs.RainInterval && Configs.RainIntensity != 0)
@@ -175,7 +168,7 @@ namespace Utility.TerrainAlgorithm
                 {
                     for (int y = 0; y < waterHeights.GetLength(1); y++)
                     {
-                        waterHeights[x, y] += Configs.RainIntensity;
+                        waterHeights[x, y] += Configs.RainIntensity * SurfacePourModifiers[SurfaceMap[x, y]];
                     }
                 }
 
@@ -185,29 +178,18 @@ namespace Utility.TerrainAlgorithm
             return false;
         }
 
-        private void GroundToSediment(float[,] heights)
-        {
-            for (int x = 0; x < heights.GetLength(0); x++)
-            {
-                for (int y = 0; y < heights.GetLength(1); y++)
-                {
-                    heights[x, y] -= Configs.TerrainSolubility * waterHeights[x, y];
-                }
-            }
-        }
-
-        private void GroundToSediment(float[,] soilHeights, float[,] rockHeights)
+        private void GroundToSediment()
         {
             if (Configs.TerrainSolubility == 0)
                 return;
 
-            for (int x = 0; x < soilHeights.GetLength(0); x++)
+            for (int x = 0; x < SoilMap.GetLength(0); x++)
             {
-                for (int y = 0; y < soilHeights.GetLength(1); y++)
+                for (int y = 0; y < SoilMap.GetLength(1); y++)
                 {
                     float amountToRemove = Configs.TerrainSolubility * waterHeights[x, y];
-                    amountToRemove = Math.Min(amountToRemove, soilHeights[x,y] - rockHeights[x,y]);
-                    soilHeights[x, y] -= amountToRemove;
+                    amountToRemove = Math.Min(amountToRemove, SoilMap[x, y] - RockMap[x, y]);
+                    SoilMap[x, y] -= amountToRemove;
 
                     // TODO: Talvez a água pudesse converter a camada de rocha para sedimento caso não haja solo suficiente para atingir a saturação geral
                 }
@@ -217,20 +199,23 @@ namespace Utility.TerrainAlgorithm
             UpdateShades = true;
         }
 
-        private void EvaporateWater(float[,] heights)
+        private void DrainWater()
         {
             if (Configs.EvaporationFactor == 0)
                 return;
 
             float evaporationPercent = (1 - Configs.EvaporationFactor);
 
-            for (int x = 0; x < heights.GetLength(0); x++)
+            for (int x = 0; x < SoilMap.GetLength(0); x++)
             {
-                for (int y = 0; y < heights.GetLength(1); y++)
+                for (int y = 0; y < SoilMap.GetLength(1); y++)
                 {
                     float diff = waterHeights[x, y] - (waterHeights[x, y] * evaporationPercent);
+                    diff *= SurfaceDrainModifiers[SurfaceMap[x, y]];
                     waterHeights[x, y] -= diff;
-                    heights[x, y] += Configs.TerrainSolubility * diff;
+                    SoilMap[x, y] += Configs.TerrainSolubility * diff;
+                    HumidityMap[x, y] += diff;
+                    if (HumidityMap[x, y] > 1.0f) HumidityMap[x, y] = 1.0f;
                 }
             }
 

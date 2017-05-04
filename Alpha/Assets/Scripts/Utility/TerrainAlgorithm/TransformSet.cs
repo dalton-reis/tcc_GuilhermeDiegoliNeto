@@ -36,6 +36,38 @@ namespace Utility.TerrainAlgorithm
             transformSet[(int)TransformIndex.HydroErosion] = new HydroErosionTransform();
         }
 
+        public void SetSoilMap(float [,] map)
+        {
+            foreach (TerrainTransform item in transformSet)
+            {
+                item.SoilMap = map;
+            }
+        }
+
+        public void SetRockMap(float[,] map)
+        {
+            foreach (TerrainTransform item in transformSet)
+            {
+                item.RockMap = map;
+            }
+        }
+
+        public void SetSurfaceMap(int[,] map)
+        {
+            foreach (TerrainTransform item in transformSet)
+            {
+                item.SurfaceMap = map;
+            }
+        }
+
+        public void SetHumidityMap(float[,] map)
+        {
+            foreach (TerrainTransform item in transformSet)
+            {
+                item.HumidityMap = map;
+            }
+        }
+
         public TerrainTransform this[TransformIndex index]
         {
             get

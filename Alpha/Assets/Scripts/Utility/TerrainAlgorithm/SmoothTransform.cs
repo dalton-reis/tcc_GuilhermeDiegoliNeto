@@ -27,36 +27,31 @@ namespace Utility.TerrainAlgorithm
             return Configs.Active;
         }
 
-        public override void ApplyTransform(float[,] rockHeights, float[,] dirtHeights)
-        {
-
-        }
-
-        public override void ApplyTransform(float[,] heights)
+        public override void ApplyTransform()
         {
             if (Configs.UseMoore)
             {
-                TransformMoore(heights);
+                TransformMoore();
             }
             else
             {
-                TransformVonNeumann(heights);
+                TransformVonNeumann();
             }
         }
 
-        private void TransformMoore(float[,] heights)
+        private void TransformMoore()
         {
             // Transformação usando vizinhança Moore
 
-            int topX = heights.GetLength(0);
-            int topY = heights.GetLength(1);
+            int topX = SoilMap.GetLength(0);
+            int topY = SoilMap.GetLength(1);
 
-            float[,] baseHeights = heights.Clone() as float[,];
+            float[,] baseHeights = SoilMap.Clone() as float[,];
 
             // Loop geral do mapa
-            for (int x = 0; x < heights.GetLength(0); x++)
+            for (int x = 0; x < SoilMap.GetLength(0); x++)
             {
-                for (int y = 0; y < heights.GetLength(1); y++)
+                for (int y = 0; y < SoilMap.GetLength(1); y++)
                 {
                     // Fazer a média da altura com base nos vizinhos
                     float sumHeights = 0.0f;
@@ -83,26 +78,26 @@ namespace Utility.TerrainAlgorithm
                     // Aplicar a média dos valores
                     if (countHeights > 0)
                     {
-                        float diff = (sumHeights / countHeights) - heights[x, y];
-                        heights[x, y] += diff * Configs.Factor;
+                        float diff = (sumHeights / countHeights) - SoilMap[x, y];
+                        SoilMap[x, y] += diff * Configs.Factor;
                     }
                 }
             }
         }
 
-        private void TransformVonNeumann(float[,] heights)
+        private void TransformVonNeumann()
         {
             // Transformação usando vizinhança Von Neumann
 
-            int topX = heights.GetLength(0);
-            int topY = heights.GetLength(1);
+            int topX = SoilMap.GetLength(0);
+            int topY = SoilMap.GetLength(1);
 
-            float[,] baseHeights = heights.Clone() as float[,];
+            float[,] baseHeights = SoilMap.Clone() as float[,];
 
             // Loop geral do mapa
-            for (int x = 0; x < heights.GetLength(0); x++)
+            for (int x = 0; x < SoilMap.GetLength(0); x++)
             {
-                for (int y = 0; y < heights.GetLength(1); y++)
+                for (int y = 0; y < SoilMap.GetLength(1); y++)
                 {
                     // Fazer a média da altura com base nos vizinhos
 
@@ -138,8 +133,8 @@ namespace Utility.TerrainAlgorithm
                     // Aplicar a média dos valores
                     if (countHeights > 0)
                     {
-                        float diff = (sumHeights / countHeights) - heights[x, y];
-                        heights[x, y] += diff * Configs.Factor;
+                        float diff = (sumHeights / countHeights) - SoilMap[x, y];
+                        SoilMap[x, y] += diff * Configs.Factor;
                     }
                 }
             }

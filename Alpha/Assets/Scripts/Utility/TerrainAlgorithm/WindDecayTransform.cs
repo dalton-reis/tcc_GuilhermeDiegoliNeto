@@ -28,34 +28,29 @@ namespace Utility.TerrainAlgorithm
             return Configs.Active;
         }
 
-        public override void ApplyTransform(float[,] rockHeights, float[,] dirtHeights)
-        {
-
-        }
-
-        public override void ApplyTransform(float[,] heights)
+        public override void ApplyTransform()
         {
             if (Configs.UseMoore)
             {
-                ApplyMoore(heights);
+                ApplyMoore();
             }
             else
             {
-                ApplyVonNeumann(heights);
+                ApplyVonNeumann();
             }
         }
 
-        public void ApplyVonNeumann(float[,] heights)
+        public void ApplyVonNeumann()
         {
             Directions direction = Configs.WindDirection;
-            int topX = heights.GetLength(0);
-            int topY = heights.GetLength(1);
+            int topX = SoilMap.GetLength(0);
+            int topY = SoilMap.GetLength(1);
 
-            float[,] baseHeights = heights.Clone() as float[,];
+            float[,] baseHeights = SoilMap.Clone() as float[,];
 
-            for (int x = 0; x < heights.GetLength(0); x++)
+            for (int x = 0; x < SoilMap.GetLength(0); x++)
             {
-                for (int y = 0; y < heights.GetLength(1); y++)
+                for (int y = 0; y < SoilMap.GetLength(1); y++)
                 {
                     float sumHeights = 0.0f;
                     int countHeights = 0;
@@ -184,22 +179,22 @@ namespace Utility.TerrainAlgorithm
                     if (countHeights > 0)
                     {
                         float avg = sumHeights / countHeights;
-                        if (avg < heights[x, y])
+                        if (avg < SoilMap[x, y])
                         {
-                            float diff = avg - heights[x, y];
-                            heights[x, y] += diff * Configs.Factor;
+                            float diff = avg - SoilMap[x, y];
+                            SoilMap[x, y] += diff * Configs.Factor;
                         }
                     }
                 }
             }
         }
 
-        public void ApplyMoore(float[,] heights)
+        public void ApplyMoore()
         {
-            int topX = heights.GetLength(0);
-            int topY = heights.GetLength(1);
+            int topX = SoilMap.GetLength(0);
+            int topY = SoilMap.GetLength(1);
 
-            float[,] baseHeights = heights.Clone() as float[,];
+            float[,] baseHeights = SoilMap.Clone() as float[,];
 
             int startX = GetStartingX();
             int startY = GetStartingY();
@@ -209,9 +204,9 @@ namespace Utility.TerrainAlgorithm
             int incStartY = GetStartingYIncrement();
             int incEndY = GetEndingYIncrement();
 
-            for (int x = 0; x < heights.GetLength(0); x++)
+            for (int x = 0; x < SoilMap.GetLength(0); x++)
             {
-                for (int y = 0; y < heights.GetLength(1); y++)
+                for (int y = 0; y < SoilMap.GetLength(1); y++)
                 {
                     // Fazer a média da altura com base nas alturas vizinhas no hemisfério Sul
                     // Apenas considerar alterações para baixo
@@ -245,10 +240,10 @@ namespace Utility.TerrainAlgorithm
                     if (countHeights > 0)
                     {
                         float avg = sumHeights / countHeights;
-                        if (avg < heights[x, y])
+                        if (avg < SoilMap[x, y])
                         {
-                            float diff = avg - heights[x, y];
-                            heights[x, y] += diff * Configs.Factor;
+                            float diff = avg - SoilMap[x, y];
+                            SoilMap[x, y] += diff * Configs.Factor;
                         }
                     }
                 }

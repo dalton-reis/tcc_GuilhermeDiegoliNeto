@@ -6,6 +6,7 @@ using TerrainView;
 using UnityEngine;
 using UnityEngine.UI;
 using Utility;
+using Utility.TerrainData;
 
 namespace EditConfigsScreen
 {

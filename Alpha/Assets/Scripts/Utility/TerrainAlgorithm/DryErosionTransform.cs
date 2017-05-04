@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using TerrainView;
+using Utility.TerrainData;
 
 namespace Utility.TerrainAlgorithm
 {
@@ -12,6 +14,9 @@ namespace Utility.TerrainAlgorithm
     /// </summary>
     public class DryErosionTransform : TerrainTransform
     {
+        // Multiplicadores de inclinação { Solo, Grama, Floresta, Concreto }
+        private static float[] SurfaceInclinationModifiers = { 1.0f, 1.1f, 1.2f, 2.0f };
+
         public DryErosionSimConfigs Configs { get; set; }
 
         public DryErosionTransform()
@@ -29,90 +34,34 @@ namespace Utility.TerrainAlgorithm
             return Configs.Active;
         }
 
-        public override void ApplyTransform(float[,] rockHeights, float[,] soilHeights)
+        public override void ApplyTransform()
         {
-            DoTransform(soilHeights, rockHeights);
+            DoTransform();
         }
 
-        public override void ApplyTransform(float[,] heights)
-        {
-            DoTransform(heights);
-        }
-
-        public void DoTransform(float[,] heights)
+        public void DoTransform()
         {
             // Loop geral do mapa
-            for (int x = 0; x < heights.GetLength(0); x++)
+            for (int x = 0; x < SoilMap.GetLength(0); x++)
             {
-                for (int y = 0; y < heights.GetLength(1); y++)
+                for (int y = 0; y < SoilMap.GetLength(1); y++)
                 {
-                    // Obter a maior inclinação e a soma das inclinações superiores à configuração
-                    float maxInclination = 0.0f;
-                    float sumInclinations = 0.0f;
-
-                    VonNeumannTransform(x, y, heights,
-                        (ref float localHeight, ref float nearbyHeight) =>
-                        {
-                            float inclination = localHeight - nearbyHeight;
-                            if (inclination > maxInclination)
-                            {
-                                maxInclination = inclination;
-                            }
-                            if (inclination > Configs.MaxInclination)
-                            {
-                                sumInclinations += inclination;
-                            }
-                        }
-                    );
-
-                    // Se não houver nada para alterar prosseguir imediatamente
-                    if (sumInclinations == 0.0)
+                    // Concreto não pode sofrer erosão, mas pode ser destruído por queda de materiais.
+                    if (SurfaceMap[x, y] == (int)SurfaceType.Concrete)
                         continue;
 
-                    // Mover material para os vizinhos com inclinações superiores à configuração
-                    float sumMovedMaterial = 0.0f;
-
-                    // Constante para os próximos cálculos
-                    float inclinationDifference = (maxInclination - Configs.MaxInclination);
-
-                    VonNeumannTransform(x, y, heights,
-                        (ref float localHeight, ref float nearbyHeight) =>
-                        {
-                            float inclination = localHeight - nearbyHeight;
-                            if (inclination > Configs.MaxInclination)
-                            {
-                                float movedMaterial = (Configs.DistributionFactor * inclinationDifference * (inclination / sumInclinations));
-                                nearbyHeight += movedMaterial;
-                                sumMovedMaterial += movedMaterial;
-                            }
-                        }
-                    );
-
-                    if (sumMovedMaterial > 0)
-                    {
-                        heights[x, y] -= sumMovedMaterial;
-                        UpdateMeshes = true;
-                        UpdateShades = true;
-                    }
-                }
-            }
-        }
-
-        public void DoTransform(float[,] soilHeights, float[,] rockHeights)
-        {
-            // Loop geral do mapa
-            for (int x = 0; x < soilHeights.GetLength(0); x++)
-            {
-                for (int y = 0; y < soilHeights.GetLength(1); y++)
-                {
-                    float localSoilMass = soilHeights[x,y] - rockHeights[x,y];
+                    float localSoilMass = SoilMap[x,y] - RockMap[x,y];
 
                     // Obter a maior inclinação, a soma das inclinações superiores à configuração e a quantidade esperada de material movido
                     float maxInclination = 0.0f;
                     float sumInclinations = 0.0f;
                     float sumMovedMaterial = 0.0f;
 
-                    VonNeumannTransform(x, y, soilHeights,
+                    float thresholdInclination = Configs.MaxInclination * SurfaceInclinationModifiers[SurfaceMap[x, y]];
+                    // Inclinação máxima reduzida até a metade de acordo com a umidade do local
+                    thresholdInclination -= (HumidityMap[x, y] * thresholdInclination) / 2;
+
+                    VonNeumannTransform(x, y, SoilMap,
                         (ref float localHeight, ref float nearbyHeight) =>
                         {
                             float inclination = localHeight - nearbyHeight;
@@ -120,10 +69,10 @@ namespace Utility.TerrainAlgorithm
                             {
                                 maxInclination = inclination;
                             }
-                            if (inclination > Configs.MaxInclination)
+                            if (inclination > thresholdInclination)
                             {
                                 sumInclinations += inclination;
-                                sumMovedMaterial += Configs.DistributionFactor * (inclination - Configs.MaxInclination);
+                                sumMovedMaterial += Configs.DistributionFactor * (inclination - thresholdInclination);
                             }
                         }
                     );
@@ -143,27 +92,42 @@ namespace Utility.TerrainAlgorithm
                     sumMovedMaterial = 0.0f;
 
                     // Constante para os próximos cálculos
-                    float inclinationDifference = (maxInclination - Configs.MaxInclination);
+                    float inclinationDifference = (maxInclination - thresholdInclination);
 
-                    VonNeumannTransform(x, y, soilHeights,
-                        (ref float localHeight, ref float nearbyHeight) =>
+                    int soilIndex = (int)SurfaceType.Soil;
+
+                    VonNeumannTransform(x, y, SoilMap,
+                        (ref float localHeight, ref float nearbyHeight, int nearbyX, int nearbyY) =>
                         {
                             float inclination = localHeight - nearbyHeight;
-                            if (inclination > Configs.MaxInclination)
+                            if (inclination > thresholdInclination)
                             {
                                 float movedMaterial = Configs.DistributionFactor * inclinationDifference * (inclination / sumInclinations);
                                 movedMaterial *= movementLimitingFactor;
                                 nearbyHeight += movedMaterial;
                                 sumMovedMaterial += movedMaterial;
+
+                                if (SurfaceMap[nearbyX, nearbyY] != soilIndex)
+                                {
+                                    // Locais que recebem queda de material têm sua superfície destruída
+                                    SurfaceMap[nearbyX, nearbyY] = soilIndex;
+                                    UpdateTextures = true;
+                                }
                             }
                         }
                     );
 
                     if (sumMovedMaterial > 0)
                     {
-                        soilHeights[x, y] -= sumMovedMaterial;
+                        SoilMap[x, y] -= sumMovedMaterial;
                         UpdateMeshes = true;
                         UpdateShades = true;
+
+                        if (SurfaceMap[x, y] != soilIndex)
+                        {
+                            SurfaceMap[x, y] = soilIndex;
+                            UpdateTextures = true;
+                        }
                     }
                 }
             }

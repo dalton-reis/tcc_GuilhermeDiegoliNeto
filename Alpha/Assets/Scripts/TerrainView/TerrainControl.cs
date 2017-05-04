@@ -5,18 +5,10 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.IO;
 using System;
+using Utility.TerrainData;
 
 namespace TerrainView
 {
-    public enum SurfaceType
-    {
-        Soil = 0,
-        Grass,
-        Plants,
-        Concrete,
-        Shade,
-    }
-
     public class TerrainControl : MonoBehaviour
     {
         /*
@@ -31,11 +23,14 @@ namespace TerrainView
         public Terrain soilLayer;
         public Terrain waterLayer;
 
-        public float[,] RockHeights { get; set; }
-        public float[,] SoilHeights { get; set; }
-        public float[,] WaterHeights { get; set; }
+        // Mapas de altura
+        public float[,] RockMap { get; set; }
+        public float[,] SoilMap { get; set; }
+        public float[,] WaterMap { get; set; }
 
-        public int[,] SoilTypes { get; set; }
+        // Mapas auxiliares
+        public int[,] SurfaceMap { get; set; }
+        public float[,] HumidityMap { get; set; }
 
         // Dados da simulação
         public TransformSet transformSet { get; private set; }
@@ -67,18 +62,20 @@ namespace TerrainView
             int x = soilLayer.terrainData.heightmapWidth;
             int z = soilLayer.terrainData.heightmapHeight;
 
-            RockHeights = rockLayer.terrainData.GetHeights(0, 0, x, z);
-            SoilHeights = soilLayer.terrainData.GetHeights(0, 0, x, z);
-            WaterHeights = waterLayer.terrainData.GetHeights(0, 0, x, z);
+            RockMap = rockLayer.terrainData.GetHeights(0, 0, x, z);
+            SoilMap = soilLayer.terrainData.GetHeights(0, 0, x, z);
+            WaterMap = waterLayer.terrainData.GetHeights(0, 0, x, z);
 
-            SoilTypes = new int[SoilHeights.GetLength(0), SoilHeights.GetLength(1)];
+            SurfaceMap = new int[SoilMap.GetLength(0), SoilMap.GetLength(1)];
+            HumidityMap = new float[SoilMap.GetLength(0), SoilMap.GetLength(1)];
 
             SimulationInterval = 5000;
             EditConfigs = new EditConfigs();
 
             transformSet = new TransformSet();
 
-            UpdateViews(true);
+            UpdateTransformMaps();
+            UpdateView(true);
         }
 
         public void LoadSoilHeightmap(string filename, float minDepth)
@@ -89,15 +86,13 @@ namespace TerrainView
             Texture2D heightmap = new Texture2D(2, 2);
             heightmap.LoadImage(image);
 
-            float[,] OldRockHeights = RockHeights;
+            float[,] OldRockMap = RockMap;
 
             // Acquire an array of colour values.
             Color[] values = heightmap.GetPixels();
-            SoilHeights = new float[heightmap.height, heightmap.width];
-            RockHeights = new float[heightmap.height, heightmap.width];
-            WaterHeights = new float[heightmap.height, heightmap.width];
-
-            SoilTypes = new int[SoilHeights.GetLength(0), SoilHeights.GetLength(1)];
+            SoilMap = new float[heightmap.height, heightmap.width];
+            RockMap = new float[heightmap.height, heightmap.width];
+            WaterMap = new float[heightmap.height, heightmap.width];
 
             // Run through array and read height values.
             int index = 0;
@@ -105,35 +100,25 @@ namespace TerrainView
             {
                 for (int x = 0; x < heightmap.width; x++)
                 {
-                    SoilHeights[z, x] = values[index].r;
+                    SoilMap[z, x] = values[index].r;
 
-                    if (z < OldRockHeights.GetLength(0) && x < OldRockHeights.GetLength(1))
+                    if (z < OldRockMap.GetLength(0) && x < OldRockMap.GetLength(1))
                     {
-                        RockHeights[z, x] = OldRockHeights[z, x];
-                        if (RockHeights[z, x] > SoilHeights[z, x] - minDepth)
-                            RockHeights[z, x] = SoilHeights[z, x] - minDepth;
+                        RockMap[z, x] = OldRockMap[z, x];
+                        if (RockMap[z, x] > SoilMap[z, x] - minDepth)
+                            RockMap[z, x] = SoilMap[z, x] - minDepth;
                     }
                     else
                     {
-                        RockHeights[z, x] = 0;
+                        RockMap[z, x] = 0;
                     }
 
-                    WaterHeights[z, x] = SoilHeights[z, x];
+                    WaterMap[z, x] = SoilMap[z, x];
                     index++;
                 }
             }
 
-            rockLayer.terrainData.heightmapResolution = RockHeights.GetLength(0);
-            rockLayer.terrainData.SetHeights(0, 0, RockHeights);
-
-            soilLayer.terrainData.heightmapResolution = heightmap.height;
-            soilLayer.terrainData.SetHeights(0, 0, SoilHeights);
-
-            waterLayer.terrainData.heightmapResolution = heightmap.height;
-            waterLayer.terrainData.SetHeights(0, 0, WaterHeights);
-
-            ResetAllTransforms();
-            UpdateViews(true);
+            LoadMaps();
         }
 
         public void LoadRockHeightmap(string filename, float minDepth)
@@ -144,15 +129,13 @@ namespace TerrainView
             Texture2D heightmap = new Texture2D(2, 2);
             heightmap.LoadImage(image);
 
-            float[,] OldSoilHeights = SoilHeights;
+            float[,] OldSoilMap = SoilMap;
 
             // Acquire an array of colour values.
             Color[] values = heightmap.GetPixels();
-            SoilHeights = new float[heightmap.height, heightmap.width];
-            RockHeights = new float[heightmap.height, heightmap.width];
-            WaterHeights = new float[heightmap.height, heightmap.width];
-
-            SoilTypes = new int[SoilHeights.GetLength(0), SoilHeights.GetLength(1)];
+            SoilMap = new float[heightmap.height, heightmap.width];
+            RockMap = new float[heightmap.height, heightmap.width];
+            WaterMap = new float[heightmap.height, heightmap.width];
 
             // Run through array and read height values.
             int index = 0;
@@ -160,35 +143,25 @@ namespace TerrainView
             {
                 for (int x = 0; x < heightmap.width; x++)
                 {
-                    RockHeights[z, x] = values[index].r;
+                    RockMap[z, x] = values[index].r;
 
-                    if (z < OldSoilHeights.GetLength(0) && x < OldSoilHeights.GetLength(1))
+                    if (z < OldSoilMap.GetLength(0) && x < OldSoilMap.GetLength(1))
                     {
-                        SoilHeights[z, x] = OldSoilHeights[z, x];
-                        if (SoilHeights[z, x] < RockHeights[z, x] + minDepth)
-                            SoilHeights[z, x] = RockHeights[z, x] + minDepth;
+                        SoilMap[z, x] = OldSoilMap[z, x];
+                        if (SoilMap[z, x] < RockMap[z, x] + minDepth)
+                            SoilMap[z, x] = RockMap[z, x] + minDepth;
                     }
                     else
                     {
-                        SoilHeights[z, x] = RockHeights[z, x] + minDepth;
+                        SoilMap[z, x] = RockMap[z, x] + minDepth;
                     }
 
-                    WaterHeights[z, x] = SoilHeights[z, x];
+                    WaterMap[z, x] = SoilMap[z, x];
                     index++;
                 }
             }
 
-            rockLayer.terrainData.heightmapResolution = RockHeights.GetLength(0);
-            rockLayer.terrainData.SetHeights(0, 0, RockHeights);
-
-            soilLayer.terrainData.heightmapResolution = heightmap.height;
-            soilLayer.terrainData.SetHeights(0, 0, SoilHeights);
-
-            waterLayer.terrainData.heightmapResolution = heightmap.height;
-            waterLayer.terrainData.SetHeights(0, 0, WaterHeights);
-
-            ResetAllTransforms();
-            UpdateViews(true);
+            LoadMaps();
         }
 
         public void LoadHeightmap(string filename, float minDepth)
@@ -203,11 +176,9 @@ namespace TerrainView
 
             // Acquire an array of colour values.
             Color[] values = heightmap.GetPixels();
-            SoilHeights = new float[heightmap.height, heightmap.width];
-            RockHeights = new float[heightmap.height, heightmap.width];
-            WaterHeights = new float[heightmap.height, heightmap.width];
-
-            SoilTypes = new int[SoilHeights.GetLength(0), SoilHeights.GetLength(1)];
+            SoilMap = new float[heightmap.height, heightmap.width];
+            RockMap = new float[heightmap.height, heightmap.width];
+            WaterMap = new float[heightmap.height, heightmap.width];
 
             // Run through array and read height values.
             int index = 0;
@@ -215,44 +186,45 @@ namespace TerrainView
             {
                 for (int x = 0; x < heightmap.width; x++)
                 {
-                    SoilHeights[z, x] = values[index].r;
-                    RockHeights[z, x] = SoilHeights[z, x] - minDepth;
-                    WaterHeights[z, x] = SoilHeights[z, x];
+                    SoilMap[z, x] = values[index].r;
+                    RockMap[z, x] = SoilMap[z, x] - minDepth;
+                    WaterMap[z, x] = SoilMap[z, x];
                     index++;
                 }
             }
 
-            rockLayer.terrainData.heightmapResolution = RockHeights.GetLength(0);
-            rockLayer.terrainData.SetHeights(0, 0, RockHeights);
-
-            soilLayer.terrainData.heightmapResolution = heightmap.height;
-            soilLayer.terrainData.SetHeights(0, 0, SoilHeights);
-
-            waterLayer.terrainData.heightmapResolution = heightmap.height;
-            waterLayer.terrainData.SetHeights(0, 0, WaterHeights);
-
-            ResetAllTransforms();
-            UpdateViews(true);
+            LoadMaps();
         }
 
         public void LoadHeights(float[,] soil, float[,]rock)
         {
-            SoilHeights = soil;
-            RockHeights = rock;
+            SoilMap = soil;
+            RockMap = rock;
+            WaterMap = new float[SoilMap.GetLength(0), SoilMap.GetLength(1)];
+
             // TODO: Salvar e carregar camada de água
 
-            SoilTypes = new int[SoilHeights.GetLength(0), SoilHeights.GetLength(1)];
+            LoadMaps();
+        }
 
-            rockLayer.terrainData.heightmapResolution = RockHeights.GetLength(0);
-            rockLayer.terrainData.SetHeights(0, 0, RockHeights);
+        private void LoadMaps()
+        {
+            SurfaceMap = new int[SoilMap.GetLength(0), SoilMap.GetLength(1)];
+            HumidityMap = new float[SoilMap.GetLength(0), SoilMap.GetLength(1)];
 
-            soilLayer.terrainData.heightmapResolution = SoilHeights.GetLength(0);
-            soilLayer.terrainData.SetHeights(0, 0, SoilHeights);
+            rockLayer.terrainData.heightmapResolution = RockMap.GetLength(0);
+            rockLayer.terrainData.SetHeights(0, 0, RockMap);
 
-            waterLayer.terrainData.heightmapResolution = SoilHeights.GetLength(0);
+            soilLayer.terrainData.heightmapResolution = SoilMap.GetLength(0);
+            soilLayer.terrainData.alphamapResolution = SoilMap.GetLength(0);
+            soilLayer.terrainData.SetHeights(0, 0, SoilMap);
+
+            waterLayer.terrainData.heightmapResolution = SoilMap.GetLength(0);
+            waterLayer.terrainData.alphamapResolution = SoilMap.GetLength(0);
+            waterLayer.terrainData.SetHeights(0, 0, WaterMap);
 
             ResetAllTransforms();
-            UpdateViews(true);
+            UpdateView(true);
         }
 
         // ----------------
@@ -266,7 +238,7 @@ namespace TerrainView
                 LastSimulationTime = currentTime;
             }
 
-            UpdateViews();
+            UpdateView();
         }
 
         void FixedUpdate()
@@ -286,7 +258,7 @@ namespace TerrainView
             {
                 if (transform.IsActive())
                 {
-                    transform.ApplyTransform(RockHeights, SoilHeights);
+                    transform.ApplyTransform();
                     UpdateMeshes = transform.UpdateMeshes;
                     UpdateShades = transform.UpdateShades;
                     UpdateTextures = transform.UpdateTextures;
@@ -296,8 +268,16 @@ namespace TerrainView
 
             if (UpdateMeshes)
             {
-                soilLayer.terrainData.SetHeightsDelayLOD(0, 0, SoilHeights);
+                soilLayer.terrainData.SetHeightsDelayLOD(0, 0, SoilMap);
             }
+        }
+
+        private void UpdateTransformMaps()
+        {
+            transformSet.SetSoilMap(SoilMap);
+            transformSet.SetRockMap(RockMap);
+            transformSet.SetSurfaceMap(SurfaceMap);
+            transformSet.SetHumidityMap(HumidityMap);
         }
 
         private void ResetAllTransforms()
@@ -306,9 +286,11 @@ namespace TerrainView
             {
                 transform.Reset();
             }
+
+            UpdateTransformMaps();
         }
 
-        void UpdateViews(bool forceUpdate = false)
+        void UpdateView(bool forceUpdate = false)
         {
             if (forceUpdate)
                 SetAllUpdates(true);
@@ -326,11 +308,11 @@ namespace TerrainView
             if (textMass != null)
             {
                 float sumHeights = 0.0f;
-                for (int x = 0; x < SoilHeights.GetLength(0); x++)
+                for (int x = 0; x < SoilMap.GetLength(0); x++)
                 {
-                    for (int y = 0; y < SoilHeights.GetLength(1); y++)
+                    for (int y = 0; y < SoilMap.GetLength(1); y++)
                     {
-                        sumHeights += (SoilHeights[x,y] - RockHeights[x, y]);
+                        sumHeights += (SoilMap[x,y] - RockMap[x, y]);
                     }
                 }
 
@@ -345,8 +327,8 @@ namespace TerrainView
                 HydroErosionTransform hydro = transformSet[TransformIndex.HydroErosion] as HydroErosionTransform;
                 waterLayer.gameObject.SetActive(hydro.Configs.Active);
 
-                WaterHeights = hydro.GetWaterMatrix(SoilHeights);
-                waterLayer.terrainData.SetHeightsDelayLOD(0, 0, WaterHeights);
+                WaterMap = hydro.GetWaterMatrix();
+                waterLayer.terrainData.SetHeightsDelayLOD(0, 0, WaterMap);
             }
         }
 
@@ -367,13 +349,13 @@ namespace TerrainView
                             {
                                 float value = 0;
 
-                                if (z == SoilTypes[x, y])
+                                if (z == SurfaceMap[x, y])
                                 {
                                     value = 1.0f;
                                 }
                                 else if (z == shadeIndex)
                                 {
-                                    value = 1.0f - ((SoilHeights[x, y] - RockHeights[x, y]) * 10);
+                                    value = 1.0f - HumidityMap[x, y];
                                 }
 
                                 alphaMap[x, y, z] = value;
@@ -381,7 +363,7 @@ namespace TerrainView
                         }
                         else
                         {
-                            alphaMap[x, y, shadeIndex] = 1.0f - ((SoilHeights[x, y] - RockHeights[x, y]) * 10);
+                            alphaMap[x, y, shadeIndex] = 1.0f - HumidityMap[x, y];
                         }
                     }
                 }
@@ -400,7 +382,7 @@ namespace TerrainView
                 {
                     for (int y = 0; y < alphaMap.GetLength(1); y++)
                     {
-                        float waterMass = WaterHeights[x, y] - SoilHeights[x, y];
+                        float waterMass = WaterMap[x, y] - SoilMap[x, y];
                         alphaMap[x, y, 1] = 1.0f - (waterMass * 10);
                     }
                 }
@@ -427,8 +409,8 @@ namespace TerrainView
 
         private void SetSoilType(Vector3 point)
         {
-            int maxX = SoilHeights.GetLength(0);
-            int maxZ = SoilHeights.GetLength(1);
+            int maxX = SoilMap.GetLength(0);
+            int maxZ = SoilMap.GetLength(1);
 
             int begX = (int)((point.x / soilLayer.terrainData.size.x) * maxX);
             int begZ = (int)((point.z / soilLayer.terrainData.size.z) * maxZ);
@@ -452,7 +434,7 @@ namespace TerrainView
                     if (curZ < 0 || curZ >= maxZ)
                         continue;
 
-                    SoilTypes[curZ, curX] = type;
+                    SurfaceMap[curZ, curX] = type;
                 }
             }
         }
@@ -487,13 +469,13 @@ namespace TerrainView
         {
             // Método para referência https://forum.unity3d.com/threads/edit-terrain-in-real-time.98410/
 
-            int terX = (int)((point.x / soilLayer.terrainData.size.x) * SoilHeights.GetLength(0));
-            int terZ = (int)((point.z / soilLayer.terrainData.size.z) * SoilHeights.GetLength(1));
-            float y = SoilHeights[terX, terZ];
+            int terX = (int)((point.x / soilLayer.terrainData.size.x) * SoilMap.GetLength(0));
+            int terZ = (int)((point.z / soilLayer.terrainData.size.z) * SoilMap.GetLength(1));
+            float y = SoilMap[terX, terZ];
             y += 0.001f;
             float[,] height = new float[1, 1];
             height[0, 0] = y;
-            SoilHeights[terX, terZ] = y;
+            SoilMap[terX, terZ] = y;
             soilLayer.terrainData.SetHeights(terX, terZ, height);
         }
 
@@ -501,13 +483,13 @@ namespace TerrainView
         {
             // Método para referência https://forum.unity3d.com/threads/edit-terrain-in-real-time.98410/
 
-            int terX = (int)((point.x / soilLayer.terrainData.size.x) * SoilHeights.GetLength(0));
-            int terZ = (int)((point.z / soilLayer.terrainData.size.z) * SoilHeights.GetLength(1));
-            float y = SoilHeights[terX, terZ];
+            int terX = (int)((point.x / soilLayer.terrainData.size.x) * SoilMap.GetLength(0));
+            int terZ = (int)((point.z / soilLayer.terrainData.size.z) * SoilMap.GetLength(1));
+            float y = SoilMap[terX, terZ];
             y -= 0.001f;
             float[,] height = new float[1, 1];
             height[0, 0] = y;
-            SoilHeights[terX, terZ] = y;
+            SoilMap[terX, terZ] = y;
             soilLayer.terrainData.SetHeights(terX, terZ, height);
         }
     }

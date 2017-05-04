@@ -23,6 +23,11 @@ namespace Utility.TerrainAlgorithm
         /// </summary>
         public bool UpdateMeshes { get; set; }
 
+        public float[,] SoilMap { get; set; }
+        public float[,] RockMap { get; set; }
+        public int[,] SurfaceMap { get; set; }
+        public float[,] HumidityMap { get; set; }
+
         /// <summary>
         /// Verificar estado da simulação conforme suas configurações.
         /// </summary>
@@ -49,10 +54,7 @@ namespace Utility.TerrainAlgorithm
         /// <summary>
         /// Aplicar uma iteração do algoritmo de transformação.
         /// </summary>
-        /// <param name="heights">A matriz de alturas sobre a qual será aplicada a transformação.</param>
-        public abstract void ApplyTransform(float[,] heights);
-
-        public abstract void ApplyTransform(float[,] rockHeights, float[,] dirtHeights);
+        public abstract void ApplyTransform();
 
         /// <summary>
         /// Função para ser utilizada em loops de transformação.

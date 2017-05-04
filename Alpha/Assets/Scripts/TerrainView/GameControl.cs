@@ -38,8 +38,8 @@ namespace TerrainView
             Stream saveStream = new FileStream(filename, FileMode.Create);
             IFormatter formatter = new BinaryFormatter();
 
-            formatter.Serialize(saveStream, TerrainControl.Instance.RockHeights);
-            formatter.Serialize(saveStream, TerrainControl.Instance.SoilHeights);
+            formatter.Serialize(saveStream, TerrainControl.Instance.RockMap);
+            formatter.Serialize(saveStream, TerrainControl.Instance.SoilMap);
 
             saveStream.Close();
         }
