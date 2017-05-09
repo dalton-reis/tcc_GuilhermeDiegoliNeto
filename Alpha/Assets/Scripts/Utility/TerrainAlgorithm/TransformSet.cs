@@ -52,6 +52,14 @@ namespace Utility.TerrainAlgorithm
             }
         }
 
+        public void SetWaterMap(float[,] map)
+        {
+            foreach (TerrainTransform item in transformSet)
+            {
+                item.WaterMap = map;
+            }
+        }
+
         public void SetSurfaceMap(int[,] map)
         {
             foreach (TerrainTransform item in transformSet)

@@ -59,20 +59,19 @@ namespace TerrainView
         {
             Instance = this;
 
-            int x = soilLayer.terrainData.heightmapWidth;
-            int z = soilLayer.terrainData.heightmapHeight;
+            transformSet = new TransformSet();
 
-            RockMap = rockLayer.terrainData.GetHeights(0, 0, x, z);
-            SoilMap = soilLayer.terrainData.GetHeights(0, 0, x, z);
-            WaterMap = waterLayer.terrainData.GetHeights(0, 0, x, z);
+            int res = 513;
+            RockMap = new float[res, res];
+            SoilMap = new float[res, res];
+            WaterMap = new float[res, res];
+            SurfaceMap = new int[res, res];
+            HumidityMap = new float[res, res];
 
-            SurfaceMap = new int[SoilMap.GetLength(0), SoilMap.GetLength(1)];
-            HumidityMap = new float[SoilMap.GetLength(0), SoilMap.GetLength(1)];
+            LoadMaps();
 
             SimulationInterval = 5000;
             EditConfigs = new EditConfigs();
-
-            transformSet = new TransformSet();
 
             UpdateTransformMaps();
             UpdateView(true);
@@ -196,22 +195,8 @@ namespace TerrainView
             LoadMaps();
         }
 
-        public void LoadHeights(float[,] soil, float[,]rock)
+        public void LoadMaps()
         {
-            SoilMap = soil;
-            RockMap = rock;
-            WaterMap = new float[SoilMap.GetLength(0), SoilMap.GetLength(1)];
-
-            // TODO: Salvar e carregar camada de água
-
-            LoadMaps();
-        }
-
-        private void LoadMaps()
-        {
-            SurfaceMap = new int[SoilMap.GetLength(0), SoilMap.GetLength(1)];
-            HumidityMap = new float[SoilMap.GetLength(0), SoilMap.GetLength(1)];
-
             rockLayer.terrainData.heightmapResolution = RockMap.GetLength(0);
             rockLayer.terrainData.SetHeights(0, 0, RockMap);
 
@@ -269,6 +254,7 @@ namespace TerrainView
             if (UpdateMeshes)
             {
                 soilLayer.terrainData.SetHeightsDelayLOD(0, 0, SoilMap);
+                waterLayer.terrainData.SetHeightsDelayLOD(0, 0, WaterMap);
             }
         }
 
@@ -276,6 +262,7 @@ namespace TerrainView
         {
             transformSet.SetSoilMap(SoilMap);
             transformSet.SetRockMap(RockMap);
+            transformSet.SetWaterMap(WaterMap);
             transformSet.SetSurfaceMap(SurfaceMap);
             transformSet.SetHumidityMap(HumidityMap);
         }
@@ -295,7 +282,6 @@ namespace TerrainView
             if (forceUpdate)
                 SetAllUpdates(true);
 
-            UpdateWaterLayer();
             UpdateMass();
             UpdateSoilTexture();
             UpdateWaterShade();
@@ -317,18 +303,6 @@ namespace TerrainView
                 }
 
                 textMass.text = sumHeights.ToString();
-            }
-        }
-
-        private void UpdateWaterLayer()
-        {
-            if (UpdateMeshes)
-            {
-                HydroErosionTransform hydro = transformSet[TransformIndex.HydroErosion] as HydroErosionTransform;
-                waterLayer.gameObject.SetActive(hydro.Configs.Active);
-
-                WaterMap = hydro.GetWaterMatrix();
-                waterLayer.terrainData.SetHeightsDelayLOD(0, 0, WaterMap);
             }
         }
 
@@ -395,6 +369,9 @@ namespace TerrainView
 
         private void MouseSetSoilType()
         {
+            if (GameControl.Instance.BackgroundMode)
+                return;
+
             if (EditConfigs.SurfacePaintMode != null && Input.GetMouseButton(0))
             {
                 RaycastHit hit;

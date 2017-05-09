@@ -23,6 +23,7 @@ namespace Utility.TerrainAlgorithm
         /// </summary>
         public bool UpdateMeshes { get; set; }
 
+        public float[,] WaterMap { get; set; }
         public float[,] SoilMap { get; set; }
         public float[,] RockMap { get; set; }
         public int[,] SurfaceMap { get; set; }

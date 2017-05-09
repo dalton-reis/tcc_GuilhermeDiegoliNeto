@@ -19,7 +19,6 @@ namespace Utility.TerrainAlgorithm
 
         public HydroErosionSimConfigs Configs { get; set; }
 
-        private float[,] waterHeights = null;
         private int rainCounter = 0;
 
         public HydroErosionTransform()
@@ -39,19 +38,8 @@ namespace Utility.TerrainAlgorithm
             return Configs.Active;
         }
 
-        public override void Reset()
-        {
-            waterHeights = null;
-        }
-
         public override void ApplyTransform()
         {
-            // Criar matriz de água se não existir
-            if (waterHeights == null)
-            {
-                waterHeights = new float[SoilMap.GetLength(0), SoilMap.GetLength(1)];
-            }
-
             // Distribuir água da chuva
             if (PourWater())
             {
@@ -61,24 +49,6 @@ namespace Utility.TerrainAlgorithm
             DoWaterFlow();
 
             DrainWater();
-        }
-
-        public float[,] GetWaterMatrix()
-        {
-            float[,] matrix = SoilMap.Clone() as float[,];
-
-            if (waterHeights != null)
-            {
-                for (int x = 0; x < matrix.GetLength(0); x++)
-                {
-                    for (int y = 0; y < matrix.GetLength(1); y++)
-                    {
-                        matrix[x, y] += waterHeights[x, y];
-                    }
-                }
-            }
-
-            return matrix;
         }
 
         private void DoWaterFlow()
@@ -91,7 +61,11 @@ namespace Utility.TerrainAlgorithm
                 for (int y = 0; y < SoilMap.GetLength(1); y++)
                 {
                     // Altura do terreno + altura da água
-                    float localSurfaceHeight = SoilMap[x, y] + waterHeights[x, y];
+                    float localSurfaceHeight = WaterMap[x, y];
+                    float localWaterVolume = localSurfaceHeight - SoilMap[x, y];
+
+                    if (localWaterVolume <= 0)
+                        continue;
 
                     // Média das alturas
                     float avgSurfaceHeight = 0;
@@ -104,7 +78,7 @@ namespace Utility.TerrainAlgorithm
                     VonNeumannTransform(x, y, SoilMap,
                         (ref float localHeight, ref float nearbyHeight, int nearbyX, int nearbyY) =>
                         {
-                            float nearbySurfaceHeight = (nearbyHeight + waterHeights[nearbyX, nearbyY]);
+                            float nearbySurfaceHeight = WaterMap[nearbyX, nearbyY];
                             float difference = localSurfaceHeight - nearbySurfaceHeight;
 
                             if (difference < 0) return;
@@ -128,26 +102,26 @@ namespace Utility.TerrainAlgorithm
                     VonNeumannTransform(x, y, SoilMap,
                         (ref float localHeight, ref float nearbyHeight, int nearbyX, int nearbyY) =>
                         {
-                            float nearbySurfaceHeight = (nearbyHeight + waterHeights[nearbyX, nearbyY]);
+                            float nearbySurfaceHeight = WaterMap[nearbyX, nearbyY];
 
                             if (nearbySurfaceHeight >= localSurfaceHeight) return;
 
                             float difference = localSurfaceHeight - nearbySurfaceHeight;
-                            float deltaWater = Math.Min(waterHeights[x, y], deltaSurfaceHeight) * (difference / totalDifference);
+                            float deltaWater = Math.Min(localWaterVolume, deltaSurfaceHeight) * (difference / totalDifference);
 
-                            waterHeights[nearbyX, nearbyY] += deltaWater;
+                            WaterMap[nearbyX, nearbyY] += deltaWater;
                             totalDeltaWater += deltaWater;
 
                             // Quando o nível da água passar de um certo ponto, destruir a superfície local
-                            if (waterHeights[nearbyX, nearbyY] > 0.25f)
+                            if (WaterMap[nearbyX, nearbyY] - SoilMap[nearbyX, nearbyY] > 0.25f)
                                 SurfaceMap[nearbyX, nearbyY] = soilType;
                         }
                     );
 
                     if (totalDeltaWater > 0)
                     {
-                        waterHeights[x, y] -= totalDeltaWater;
-                        if (waterHeights[x, y] < 0) waterHeights[x, y] = 0;
+                        WaterMap[x, y] -= totalDeltaWater;
+                        if (WaterMap[x, y] < SoilMap[x, y]) WaterMap[x, y] = SoilMap[x, y];
 
                         UpdateMeshes = true;
                         UpdateShades = true;
@@ -164,11 +138,11 @@ namespace Utility.TerrainAlgorithm
                 rainCounter = 0;
 
                 // Loop geral do mapa
-                for (int x = 0; x < waterHeights.GetLength(0); x++)
+                for (int x = 0; x < WaterMap.GetLength(0); x++)
                 {
-                    for (int y = 0; y < waterHeights.GetLength(1); y++)
+                    for (int y = 0; y < WaterMap.GetLength(1); y++)
                     {
-                        waterHeights[x, y] += Configs.RainIntensity * SurfacePourModifiers[SurfaceMap[x, y]];
+                        WaterMap[x, y] += Configs.RainIntensity * SurfacePourModifiers[SurfaceMap[x, y]];
                     }
                 }
 
@@ -187,7 +161,10 @@ namespace Utility.TerrainAlgorithm
             {
                 for (int y = 0; y < SoilMap.GetLength(1); y++)
                 {
-                    float amountToRemove = Configs.TerrainSolubility * waterHeights[x, y];
+                    float waterVolume = WaterMap[x, y] - SoilMap[x, y];
+                    if (waterVolume <= 0) continue;
+
+                    float amountToRemove = Configs.TerrainSolubility * waterVolume;
                     amountToRemove = Math.Min(amountToRemove, SoilMap[x, y] - RockMap[x, y]);
                     SoilMap[x, y] -= amountToRemove;
 
@@ -210,9 +187,12 @@ namespace Utility.TerrainAlgorithm
             {
                 for (int y = 0; y < SoilMap.GetLength(1); y++)
                 {
-                    float diff = waterHeights[x, y] - (waterHeights[x, y] * evaporationPercent);
+                    float waterVolume = WaterMap[x, y] - SoilMap[x, y];
+                    if (waterVolume <= 0) continue;
+
+                    float diff = waterVolume - (waterVolume * evaporationPercent);
                     diff *= SurfaceDrainModifiers[SurfaceMap[x, y]];
-                    waterHeights[x, y] -= diff;
+                    WaterMap[x, y] -= diff;
                     SoilMap[x, y] += Configs.TerrainSolubility * diff;
                     HumidityMap[x, y] += diff;
                     if (HumidityMap[x, y] > 1.0f) HumidityMap[x, y] = 1.0f;
