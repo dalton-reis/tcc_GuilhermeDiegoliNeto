@@ -11,6 +11,8 @@ namespace Utility.TerrainData
         Grass,
         Plants,
         Concrete,
-        Shade,
+
+        Count,
+        Shade = Count,
     }
 }

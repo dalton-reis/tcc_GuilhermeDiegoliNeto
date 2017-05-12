@@ -62,9 +62,9 @@ namespace Utility.TerrainAlgorithm
                     thresholdInclination -= (HumidityMap[x, y] * thresholdInclination) / 2;
 
                     VonNeumannTransform(x, y, SoilMap,
-                        (ref float localHeight, ref float nearbyHeight) =>
+                        (ref float localHeight, ref float nearbyHeight, int nearbyX, int nearbyY) =>
                         {
-                            float inclination = localHeight - nearbyHeight;
+                            float inclination = localHeight - SoilMap[nearbyX, nearbyY];
                             if (inclination > maxInclination)
                             {
                                 maxInclination = inclination;
@@ -99,12 +99,13 @@ namespace Utility.TerrainAlgorithm
                     VonNeumannTransform(x, y, SoilMap,
                         (ref float localHeight, ref float nearbyHeight, int nearbyX, int nearbyY) =>
                         {
-                            float inclination = localHeight - nearbyHeight;
+                            float inclination = localHeight - SoilMap[nearbyX, nearbyY];
                             if (inclination > thresholdInclination)
                             {
                                 float movedMaterial = Configs.DistributionFactor * inclinationDifference * (inclination / sumInclinations);
                                 movedMaterial *= movementLimitingFactor;
-                                nearbyHeight += movedMaterial;
+                                SoilMap[nearbyX, nearbyY] += movedMaterial;
+                                WaterMap[nearbyX, nearbyY] += movedMaterial;
                                 sumMovedMaterial += movedMaterial;
 
                                 if (SurfaceMap[nearbyX, nearbyY] != soilIndex)
@@ -120,6 +121,7 @@ namespace Utility.TerrainAlgorithm
                     if (sumMovedMaterial > 0)
                     {
                         SoilMap[x, y] -= sumMovedMaterial;
+                        WaterMap[x, y] -= sumMovedMaterial;
                         UpdateMeshes = true;
                         UpdateShades = true;
 

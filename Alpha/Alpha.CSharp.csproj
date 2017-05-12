@@ -87,6 +87,9 @@
     <Compile Include="Assets\Scripts\SimulationConfigsScreen\SmoothConfigsControl.cs" />
     <Compile Include="Assets\Scripts\SimulationConfigsScreen\UIControl.cs" />
     <Compile Include="Assets\Scripts\SimulationConfigsScreen\WindDecayConfigsControl.cs" />
+    <Compile Include="Assets\Scripts\StatsScreen\StatCollector.cs" />
+    <Compile Include="Assets\Scripts\StatsScreen\Stats.cs" />
+    <Compile Include="Assets\Scripts\StatsScreen\UIControl.cs" />
     <Compile Include="Assets\Scripts\TerrainView\CameraControl.cs" />
     <Compile Include="Assets\Scripts\TerrainView\EventManager.cs" />
     <Compile Include="Assets\Scripts\TerrainView\GameControl.cs" />
@@ -110,5 +113,6 @@
     <None Include="Assets\Resources\Shaders\TerrBumpAddPass.shader" />
     <None Include="Assets\Resources\Shaders\TerrBumpFirstPass.shader" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath)\SyntaxTree\UnityVS\2013\UnityVS.CSharp.targets" />
 </Project>

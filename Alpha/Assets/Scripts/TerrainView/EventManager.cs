@@ -47,6 +47,18 @@ namespace TerrainView
             SceneManager.LoadScene("EditConfigs", LoadSceneMode.Additive);
         }
 
+        public void OnStats()
+        {
+            StatsScreen.UIControl.WaterMap = TerrainControl.Instance.WaterMap;
+            StatsScreen.UIControl.SoilMap = TerrainControl.Instance.SoilMap;
+            StatsScreen.UIControl.RockMap = TerrainControl.Instance.RockMap;
+            StatsScreen.UIControl.HumidityMap = TerrainControl.Instance.HumidityMap;
+            StatsScreen.UIControl.SurfaceMap = TerrainControl.Instance.SurfaceMap;
+
+            GameControl.Instance.SetBackgroundMode(true);
+            SceneManager.LoadScene("StatsScreen", LoadSceneMode.Additive);
+        }
+
         public void OnChangeSimulationSpeed()
         {
             TerrainControl.Instance.SimulationInterval = (int)(sliderSimSpeed.value * 10000);
