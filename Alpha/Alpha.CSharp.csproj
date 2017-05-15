@@ -96,6 +96,8 @@
     <Compile Include="Assets\Scripts\TerrainView\TerrainControl.cs" />
     <Compile Include="Assets\Scripts\Utility\Directions.cs" />
     <Compile Include="Assets\Scripts\Utility\EditConfigs.cs" />
+    <Compile Include="Assets\Scripts\Utility\HeatAlgorithm\HeatCalculator.cs" />
+    <Compile Include="Assets\Scripts\Utility\HeatAlgorithm\HeatTypes.cs" />
     <Compile Include="Assets\Scripts\Utility\TerrainAlgorithm\DepositTransform.cs" />
     <Compile Include="Assets\Scripts\Utility\TerrainAlgorithm\DryErosionSimConfigs.cs" />
     <Compile Include="Assets\Scripts\Utility\TerrainAlgorithm\DryErosionTransform.cs" />

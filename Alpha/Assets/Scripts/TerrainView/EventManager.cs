@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 using SimulationConfigsScreen;
 using Utility.TerrainAlgorithm;
 using UnityEngine.UI;
+using Utility.HeatAlgorithm;
 
 namespace TerrainView
 {
@@ -57,6 +58,11 @@ namespace TerrainView
 
             GameControl.Instance.SetBackgroundMode(true);
             SceneManager.LoadScene("StatsScreen", LoadSceneMode.Additive);
+        }
+
+        public void OnViewHeat()
+        {
+            GameControl.Instance.SetHeatMode(HeatTypes.Inclination);
         }
 
         public void OnChangeSimulationSpeed()

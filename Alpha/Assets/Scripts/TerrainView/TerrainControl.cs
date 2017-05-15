@@ -6,6 +6,7 @@ using UnityEngine.UI;
 using System.IO;
 using System;
 using Utility.TerrainData;
+using Utility.HeatAlgorithm;
 
 namespace TerrainView
 {
@@ -22,6 +23,7 @@ namespace TerrainView
         public Terrain rockLayer;
         public Terrain soilLayer;
         public Terrain waterLayer;
+        public Terrain heatLayer;
 
         // Mapas de altura
         public float[,] RockMap { get; set; }
@@ -40,8 +42,8 @@ namespace TerrainView
 
         public EditConfigs EditConfigs { get; set; }
 
-        // Parâmetros UI
-        public Text textMass = null;
+        // Mapa de calor
+        public HeatCalculator HeatCalculator { get; set; }
 
         // Estado da simulação
         bool UpdateTextures { get; set; }
@@ -60,6 +62,7 @@ namespace TerrainView
             Instance = this;
 
             transformSet = new TransformSet();
+            HeatCalculator = new HeatCalculator() { Type = HeatTypes.None };
 
             int res = 513;
             RockMap = new float[res, res];
@@ -74,6 +77,7 @@ namespace TerrainView
             EditConfigs = new EditConfigs();
 
             UpdateTransformMaps();
+            UpdateHeatCalculatorMaps();
             UpdateView(true);
         }
 
@@ -208,6 +212,10 @@ namespace TerrainView
             waterLayer.terrainData.alphamapResolution = SoilMap.GetLength(0);
             waterLayer.terrainData.SetHeights(0, 0, WaterMap);
 
+            heatLayer.terrainData.heightmapResolution = SoilMap.GetLength(0);
+            heatLayer.terrainData.alphamapResolution = SoilMap.GetLength(0);
+            heatLayer.terrainData.SetHeights(0, 0, SoilMap);
+
             ResetAllTransforms();
             UpdateView(true);
         }
@@ -216,10 +224,14 @@ namespace TerrainView
 
         void Update()
         {
+            if (GameControl.Instance.BackgroundMode)
+                return;
+
             int currentTime = Environment.TickCount;
             if (currentTime - LastSimulationTime >= SimulationInterval)
             {
                 RunAllTransforms();
+                RunHeatCalculation();
                 LastSimulationTime = currentTime;
             }
 
@@ -232,13 +244,11 @@ namespace TerrainView
 
             soilLayer.ApplyDelayedHeightmapModification();
             waterLayer.ApplyDelayedHeightmapModification();
+            heatLayer.ApplyDelayedHeightmapModification();
         }
 
         private void RunAllTransforms()
         {
-            if (GameControl.Instance.BackgroundMode)
-                return;
-
             foreach (TerrainTransform transform in transformSet.transformSet)
             {
                 if (transform.IsActive())
@@ -253,8 +263,23 @@ namespace TerrainView
 
             if (UpdateMeshes)
             {
-                soilLayer.terrainData.SetHeightsDelayLOD(0, 0, SoilMap);
-                waterLayer.terrainData.SetHeightsDelayLOD(0, 0, WaterMap);
+                if (GameControl.Instance.HeatMode == HeatTypes.None)
+                {
+                    soilLayer.terrainData.SetHeightsDelayLOD(0, 0, SoilMap);
+                    waterLayer.terrainData.SetHeightsDelayLOD(0, 0, WaterMap);
+                }
+                else
+                {
+                    heatLayer.terrainData.SetHeightsDelayLOD(0, 0, SoilMap);
+                }
+            }
+        }
+
+        private void RunHeatCalculation()
+        {
+            if (HeatCalculator.Type != HeatTypes.None)
+            {
+                HeatCalculator.CalculateHeat();
             }
         }
 
@@ -267,6 +292,15 @@ namespace TerrainView
             transformSet.SetHumidityMap(HumidityMap);
         }
 
+        private void UpdateHeatCalculatorMaps()
+        {
+            HeatCalculator.SoilMap = SoilMap;
+            HeatCalculator.RockMap = RockMap;
+            HeatCalculator.WaterMap = WaterMap;
+            HeatCalculator.SurfaceMap = SurfaceMap;
+            HeatCalculator.HumidityMap = HumidityMap;
+        }
+
         private void ResetAllTransforms()
         {
             foreach (TerrainTransform transform in transformSet.transformSet)
@@ -275,6 +309,7 @@ namespace TerrainView
             }
 
             UpdateTransformMaps();
+            UpdateHeatCalculatorMaps();
         }
 
         void UpdateView(bool forceUpdate = false)
@@ -282,28 +317,33 @@ namespace TerrainView
             if (forceUpdate)
                 SetAllUpdates(true);
 
-            UpdateMass();
-            UpdateSoilTexture();
-            UpdateWaterShade();
+            if (HeatCalculator.Type == HeatTypes.None)
+            {
+                UpdateSoilTexture();
+                UpdateWaterShade();
+            }
+            else
+            {
+                UpdateHeatMap();
+            }
 
             SetAllUpdates(false);
         }
 
-        private void UpdateMass()
+        public void SetHeatMode(HeatTypes mode)
         {
-            if (textMass != null)
-            {
-                float sumHeights = 0.0f;
-                for (int x = 0; x < SoilMap.GetLength(0); x++)
-                {
-                    for (int y = 0; y < SoilMap.GetLength(1); y++)
-                    {
-                        sumHeights += (SoilMap[x,y] - RockMap[x, y]);
-                    }
-                }
+            bool active = mode != HeatTypes.None;
 
-                textMass.text = sumHeights.ToString();
-            }
+            HeatCalculator.Type = mode;
+
+            waterLayer.gameObject.SetActive(!active);
+            soilLayer.gameObject.SetActive(!active);
+            rockLayer.gameObject.SetActive(!active);
+
+            heatLayer.gameObject.SetActive(active);
+
+            RunHeatCalculation();
+            UpdateView(true);
         }
 
         private void UpdateSoilTexture()
@@ -362,6 +402,26 @@ namespace TerrainView
                 }
 
                 waterLayer.terrainData.SetAlphamaps(0, 0, alphaMap);
+            }
+        }
+
+        private void UpdateHeatMap()
+        {
+            if (UpdateShades || UpdateMeshes || UpdateTextures)
+            {
+                float[,] map = HeatCalculator.HeatMap;
+                float[, ,] alphaMap = heatLayer.terrainData.GetAlphamaps(0, 0, heatLayer.terrainData.alphamapWidth, heatLayer.terrainData.alphamapHeight);
+
+                for (int x = 0; x < map.GetLength(0); x++)
+                {
+                    for (int y = 0; y < map.GetLength(1); y++)
+                    {
+                        alphaMap[x, y, 0] = 1.0f - map[x, y];
+                        alphaMap[x, y, 1] = map[x, y];
+                    }
+                }
+
+                heatLayer.terrainData.SetAlphamaps(0, 0, alphaMap);
             }
         }
 
