@@ -58,12 +58,32 @@ namespace Utility.HeatAlgorithm
 
         private void CalculateWaterDepth()
         {
+            for (int x = 0; x < SoilMap.GetLength(0); x++)
+            {
+                for (int y = 0; y < SoilMap.GetLength(1); y++)
+                {
+                    float value = (WaterMap[x, y] - SoilMap[x, y]) * 10;
+                    if (value < 0) value = 0;
+                    else if (value > 1.0f) value = 1.0f;
 
+                    HeatMap[x, y] = value;
+                }
+            }
         }
 
         private void CalculateSoilHumidity()
         {
+            for (int x = 0; x < SoilMap.GetLength(0); x++)
+            {
+                for (int y = 0; y < SoilMap.GetLength(1); y++)
+                {
+                    float value = HumidityMap[x, y] * 10;
+                    if (value < 0) value = 0;
+                    else if (value > 1.0f) value = 1.0f;
 
+                    HeatMap[x, y] = value;
+                }
+            }
         }
 
         private void CalculateInclination()

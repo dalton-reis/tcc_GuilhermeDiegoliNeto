@@ -62,7 +62,10 @@ namespace TerrainView
 
         public void OnViewHeat()
         {
-            GameControl.Instance.SetHeatMode(HeatTypes.Inclination);
+            ViewScreen.UIControl.ViewMode = GameControl.Instance.HeatMode;
+
+            GameControl.Instance.SetBackgroundMode(true);
+            SceneManager.LoadScene("ViewScreen", LoadSceneMode.Additive);
         }
 
         public void OnChangeSimulationSpeed()

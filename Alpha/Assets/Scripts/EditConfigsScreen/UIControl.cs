@@ -15,8 +15,8 @@ namespace EditConfigsScreen
         public static UIControl Instance { get; private set; }
         public static EditConfigs EditConfigs { get; set; }
 
-        public Dropdown dropdownSurface;
-        public Slider sliderBrushSize;
+        public Dropdown dropdownSurface = null;
+        public Slider sliderBrushSize = null;
 
         // Use this for initialization
         void Start()

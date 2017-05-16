@@ -20,7 +20,7 @@ namespace StatsScreen
         public static int[,] SurfaceMap { private get; set; }
         public static float[,] HumidityMap { private get; set; }
 
-        public Text[] textValues;
+        public Text[] textValues = null;
 
         void Start()
         {

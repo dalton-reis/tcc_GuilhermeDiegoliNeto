@@ -133,7 +133,7 @@ namespace Utility.TerrainAlgorithm
         private bool PourWater()
         {
             rainCounter++;
-            if (rainCounter == Configs.RainInterval && Configs.RainIntensity != 0)
+            if (rainCounter >= Configs.RainInterval && Configs.RainIntensity != 0)
             {
                 rainCounter = 0;
 
