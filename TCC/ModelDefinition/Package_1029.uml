@@ -1,0 +1,680 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm4="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm5="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/LogicalClassDesigner"
+  dslVersion="1.0.0.0"
+  Id="a53a7000-383d-4e6b-86c3-9f745200a3b1"
+  name="Utility"
+  visibility="Private" xmlns="http://schemas.microsoft.com/dsltools/ModelStore">
+  <referencesInternal>
+    <reference
+      Id="b2d724d0-1434-4865-afd4-33e5b6d28aaa"
+      handle="viewcode://./CodeSchema_Namespace?Namespace%3DUtility"
+      tag="ViewCode" />
+  </referencesInternal>
+  <profileInstances>
+    <packageHasProfileInstances
+      Id="ebc5a747-117b-4791-a788-ac75e4dbd4db">
+      <profileInstance
+        Id="a8907f0d-fa5b-4752-866e-c18054ca2c54"
+        name="CSharpProfile" />
+    </packageHasProfileInstances>
+  </profileInstances>
+  <packagedElements>
+    <packageHasNamedElement>
+      <packageMoniker
+        Id="9ff188a3-8b1b-4d40-944f-9e1fe2f940f6"
+        LastKnownName="TerrainAlgorithm"
+        LastKnownLocation="Package1_1029.uml" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <enumeration
+        Id="60514542-7baa-4e6e-8091-e33aa5261aba"
+        name="Directions"
+        isAbstract="false"
+        isLeaf="false">
+        <referencesInternal>
+          <reference
+            Id="b623279d-99e7-4726-9241-f48b0fb67ae9"
+            handle="viewcode://./CodeSchema_Enum?Assembly%3Dfile:%2F%2F%2FC:%2FUsers%2FAvell%2FDocuments%2FFURB%2FTCC%2FRepositorio%2FAlpha%2FTemp%2FUnityVS_bin%2FDebug%2FAssembly-CSharp.dll Namespace%3DUtility Type%3DDirections"
+            tag="ViewCode" />
+        </referencesInternal>
+        <appliedStereotypesInternal>
+          <stereotypeInstance
+            Id="2c306582-ebd7-495d-b29e-1e58abab5236"
+            name="enum"
+            profile="CSharpProfile">
+            <propertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="b156a5f7-5317-4d28-b331-d873b309edb3">
+                <propertyInstance
+                  Id="5444ca50-2f98-4cc2-8473-1bba723e0176"
+                  name="ClrAttributes" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="3868d862-0d5f-4e77-9ce4-435b601290e1">
+                <propertyInstance
+                  Id="543eda3b-ba66-4223-9ae2-99c2958eb467"
+                  name="BaseType"
+                  value="int" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="68268540-aef5-458e-8f32-c4f965d5b27a">
+                <propertyInstance
+                  Id="af478a28-048c-4999-a7b8-6935cd420eb2"
+                  name="PackageVisibility"
+                  value="internal" />
+              </stereotypeInstanceHasPropertyInstances>
+            </propertyInstances>
+          </stereotypeInstance>
+        </appliedStereotypesInternal>
+        <ownedLiterals>
+          <enumerationLiteral
+            Id="964746a8-ef08-453c-98b4-4d6a5fe7a343"
+            name="Northeast">
+            <referencesInternal>
+              <reference
+                Id="cc67531c-5924-4a7e-9004-e39f7ad05266"
+                handle="viewcode://./CodeSchema_Field?Assembly%3Dfile:%2F%2F%2FC:%2FUsers%2FAvell%2FDocuments%2FFURB%2FTCC%2FRepositorio%2FAlpha%2FTemp%2FUnityVS_bin%2FDebug%2FAssembly-CSharp.dll Namespace%3DUtility Type%3DDirections Member%3DNortheast"
+                tag="ViewCode" />
+            </referencesInternal>
+          </enumerationLiteral>
+          <enumerationLiteral
+            Id="8691db5c-6dd5-4b56-bcdd-f4fc8bf6826e"
+            name="Northwest">
+            <referencesInternal>
+              <reference
+                Id="4b601fd5-0427-4690-add8-a88e9f933f64"
+                handle="viewcode://./CodeSchema_Field?Assembly%3Dfile:%2F%2F%2FC:%2FUsers%2FAvell%2FDocuments%2FFURB%2FTCC%2FRepositorio%2FAlpha%2FTemp%2FUnityVS_bin%2FDebug%2FAssembly-CSharp.dll Namespace%3DUtility Type%3DDirections Member%3DNorthwest"
+                tag="ViewCode" />
+            </referencesInternal>
+          </enumerationLiteral>
+          <enumerationLiteral
+            Id="73651fdf-0331-438e-a137-b3285fcd0957"
+            name="Southeast">
+            <referencesInternal>
+              <reference
+                Id="1f084b44-a017-4088-9511-5a091cb1fe22"
+                handle="viewcode://./CodeSchema_Field?Assembly%3Dfile:%2F%2F%2FC:%2FUsers%2FAvell%2FDocuments%2FFURB%2FTCC%2FRepositorio%2FAlpha%2FTemp%2FUnityVS_bin%2FDebug%2FAssembly-CSharp.dll Namespace%3DUtility Type%3DDirections Member%3DSoutheast"
+                tag="ViewCode" />
+            </referencesInternal>
+          </enumerationLiteral>
+          <enumerationLiteral
+            Id="d579e333-ebe9-45a1-ab5f-e0ce395df768"
+            name="Southwest">
+            <referencesInternal>
+              <reference
+                Id="48fe89fa-937c-4cec-a29f-41ce20b9f7a5"
+                handle="viewcode://./CodeSchema_Field?Assembly%3Dfile:%2F%2F%2FC:%2FUsers%2FAvell%2FDocuments%2FFURB%2FTCC%2FRepositorio%2FAlpha%2FTemp%2FUnityVS_bin%2FDebug%2FAssembly-CSharp.dll Namespace%3DUtility Type%3DDirections Member%3DSouthwest"
+                tag="ViewCode" />
+            </referencesInternal>
+          </enumerationLiteral>
+          <enumerationLiteral
+            Id="a717d074-684f-4a34-8a5a-839704372c8d"
+            name="North">
+            <referencesInternal>
+              <reference
+                Id="102fb6b8-4c45-4209-b4b6-ded71c6f04a8"
+                handle="viewcode://./CodeSchema_Field?Assembly%3Dfile:%2F%2F%2FC:%2FUsers%2FAvell%2FDocuments%2FFURB%2FTCC%2FRepositorio%2FAlpha%2FTemp%2FUnityVS_bin%2FDebug%2FAssembly-CSharp.dll Namespace%3DUtility Type%3DDirections Member%3DNorth"
+                tag="ViewCode" />
+            </referencesInternal>
+          </enumerationLiteral>
+          <enumerationLiteral
+            Id="227bb6e3-e491-45f8-bc82-27b53a04ce1e"
+            name="East">
+            <referencesInternal>
+              <reference
+                Id="2f41b92b-353e-4a63-ad88-cb4e06ec19ab"
+                handle="viewcode://./CodeSchema_Field?Assembly%3Dfile:%2F%2F%2FC:%2FUsers%2FAvell%2FDocuments%2FFURB%2FTCC%2FRepositorio%2FAlpha%2FTemp%2FUnityVS_bin%2FDebug%2FAssembly-CSharp.dll Namespace%3DUtility Type%3DDirections Member%3DEast"
+                tag="ViewCode" />
+            </referencesInternal>
+          </enumerationLiteral>
+          <enumerationLiteral
+            Id="3bb07f27-414b-40e2-8317-b109d1e87931"
+            name="South">
+            <referencesInternal>
+              <reference
+                Id="fd3801cc-d4d3-4de7-a8c2-555ab7368561"
+                handle="viewcode://./CodeSchema_Field?Assembly%3Dfile:%2F%2F%2FC:%2FUsers%2FAvell%2FDocuments%2FFURB%2FTCC%2FRepositorio%2FAlpha%2FTemp%2FUnityVS_bin%2FDebug%2FAssembly-CSharp.dll Namespace%3DUtility Type%3DDirections Member%3DSouth"
+                tag="ViewCode" />
+            </referencesInternal>
+          </enumerationLiteral>
+          <enumerationLiteral
+            Id="44d87bb5-87c2-4dcb-8e4b-c4f4a046b4b1"
+            name="West">
+            <referencesInternal>
+              <reference
+                Id="917c102d-eaeb-4d88-a3d2-85611eb4c3ff"
+                handle="viewcode://./CodeSchema_Field?Assembly%3Dfile:%2F%2F%2FC:%2FUsers%2FAvell%2FDocuments%2FFURB%2FTCC%2FRepositorio%2FAlpha%2FTemp%2FUnityVS_bin%2FDebug%2FAssembly-CSharp.dll Namespace%3DUtility Type%3DDirections Member%3DWest"
+                tag="ViewCode" />
+            </referencesInternal>
+          </enumerationLiteral>
+        </ownedLiterals>
+      </enumeration>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="a4a623c8-b27c-4cde-bc3d-b4615fa4f5c7"
+        name="EditConfigs"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <referencesInternal>
+          <reference
+            Id="2f9c800e-e704-4423-969e-99822dafa4b9"
+            handle="viewcode://./CodeSchema_Class?Assembly%3Dfile:%2F%2F%2FC:%2FUsers%2FAvell%2FDocuments%2FFURB%2FTCC%2FRepositorio%2FAlpha%2FTemp%2FUnityVS_bin%2FDebug%2FAssembly-CSharp.dll Namespace%3DUtility Type%3DEditConfigs"
+            tag="ViewCode" />
+        </referencesInternal>
+        <appliedStereotypesInternal>
+          <stereotypeInstance
+            Id="2a456bc2-3eb5-4352-bee3-7e6779efcf98"
+            name="class"
+            profile="CSharpProfile">
+            <propertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="610836ee-0d34-4e08-9299-1924d663014c">
+                <propertyInstance
+                  Id="e948875f-a12e-4631-b01a-faf3c88be73f"
+                  name="ClrAttributes" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="c253f760-4fff-4636-8728-b154afb29174">
+                <propertyInstance
+                  Id="a1005fb2-9d19-4f4c-a77b-169882e1f3cd"
+                  name="IsPartial"
+                  value="false" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="5b8afee0-f3c1-439c-b2f1-fdf9eb953474">
+                <propertyInstance
+                  Id="b3fce586-ad31-4a82-8250-42d5c64ad694"
+                  name="IsStatic"
+                  value="False" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="76a7c5df-8373-4e3e-8046-ddd6e8f3a0fa">
+                <propertyInstance
+                  Id="250fa299-20cd-47c6-938d-7a8201e0f1f9"
+                  name="IsUnsafe"
+                  value="false" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="9613102e-928f-4c6b-a8c4-76daa3c88641">
+                <propertyInstance
+                  Id="2bae494c-b92b-49ff-a68c-3207ae7d3c36"
+                  name="PackageVisibility"
+                  value="internal" />
+              </stereotypeInstanceHasPropertyInstances>
+            </propertyInstances>
+          </stereotypeInstance>
+        </appliedStereotypesInternal>
+        <targetEnds>
+          <association
+            Id="6d4d7efb-08fb-4f85-ba48-cb26cb40d5f6"
+            isDerived="false"
+            sourceEndRoleName="EditConfigs"
+            targetEndRoleName="SurfacePaintMode"
+            isLeaf="false"
+            isAbstract="false">
+            <classMoniker
+              Id="47bdbdc5-9226-4760-b1d5-d034339ad793"
+              LastKnownName="Nullable&lt;SurfaceType‎&gt;"
+              LastKnownLocation="Package2_1029.uml" />
+            <description>Property SurfacePaintMode references type Nullable&lt;SurfaceType‎&gt;.</description>
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="0e559b41-9fc3-41a6-a34d-69f027fbe28f"
+                  name="EditConfigs"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false">
+                  <lowerValueInternal>
+                    <literalString
+                      Id="eb612449-6112-4e0c-8ce9-1ce6bd60ada2"
+                      name="Lower"
+                      value="*" />
+                  </lowerValueInternal>
+                  <upperValueInternal>
+                    <literalString
+                      Id="7a7ad7f3-4b1d-455b-a97f-1883fa38e6e4"
+                      name="Upper"
+                      value="*" />
+                  </upperValueInternal>
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="14386791-c7cf-41b2-9fe6-bd6a528e2ea6"
+                  name="SurfacePaintMode"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false">
+                  <lowerValueInternal>
+                    <literalString
+                      Id="ffff3e9a-02e9-452a-b2c0-2b375f7ba1ff"
+                      name="Lower"
+                      value="1" />
+                  </lowerValueInternal>
+                  <upperValueInternal>
+                    <literalString
+                      Id="35ef1748-ef4e-4855-8b3d-ab3c147794a3"
+                      name="Upper"
+                      value="1" />
+                  </upperValueInternal>
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+        </targetEnds>
+        <ownedAttributesInternal>
+          <property
+            Id="aca06184-110a-4afe-bc43-21ba535cdb6d"
+            name="SurfacePaintMode"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <referencesInternal>
+              <reference
+                Id="7c6f9fcd-117d-45f3-a014-2a8f497b89fa"
+                handle="viewcode://./CodeSchema_Property?Assembly%3Dfile:%2F%2F%2FC:%2FUsers%2FAvell%2FDocuments%2FFURB%2FTCC%2FRepositorio%2FAlpha%2FTemp%2FUnityVS_bin%2FDebug%2FAssembly-CSharp.dll Namespace%3DUtility Type%3DEditConfigs Member%3DSurfacePaintMode"
+                tag="ViewCode" />
+            </referencesInternal>
+            <appliedStereotypesInternal>
+              <stereotypeInstance
+                Id="60df74f4-8c74-4707-82f2-c74075ebf75b"
+                name="property"
+                profile="CSharpProfile">
+                <propertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="fa167c96-db9a-466a-ab53-53e7118d3006">
+                    <propertyInstance
+                      Id="3d82751d-4c63-4fa3-b57d-4f3d14679542"
+                      name="ClrAttributes" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="714398a4-8009-48a4-83b9-56610f19b3f8">
+                    <propertyInstance
+                      Id="f102bbc3-6368-4fcc-a8f1-3923ff75e719"
+                      name="Get"
+                      value="public" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="1dde767f-a864-4254-be79-acecc67763b8">
+                    <propertyInstance
+                      Id="6770b914-7bc1-4346-916b-4817109df505"
+                      name="HasBody"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="9e8eae34-1f6d-49b8-b52f-eef5134483f4">
+                    <propertyInstance
+                      Id="d94e1e27-0f16-4557-bd5b-04d07511689f"
+                      name="IsUnsafe"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="338d42dc-f7e6-4b88-954f-be104eddb3ef">
+                    <propertyInstance
+                      Id="996aad79-2a53-4f90-9af2-934690b0165e"
+                      name="Inheritance"
+                      value="none" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="aa01a045-ddfa-40c7-a20a-ff2baaf49577">
+                    <propertyInstance
+                      Id="05d4e732-f9c2-4cfc-9153-4df68197a45b"
+                      name="PackageVisibility"
+                      value="internal" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="348ef2ca-da29-48ca-9d82-32a73f696d2c">
+                    <propertyInstance
+                      Id="ad6931e2-ab17-47ba-aae7-0215f5e291fa"
+                      name="Set"
+                      value="public" />
+                  </stereotypeInstanceHasPropertyInstances>
+                </propertyInstances>
+              </stereotypeInstance>
+            </appliedStereotypesInternal>
+            <type_NamedElement>
+              <classMoniker
+                Id="47bdbdc5-9226-4760-b1d5-d034339ad793"
+                LastKnownName="Nullable&lt;SurfaceType‎&gt;"
+                LastKnownLocation="Package2_1029.uml" />
+            </type_NamedElement>
+          </property>
+          <property
+            Id="6322d1a3-f15a-4026-89d6-cbb4662ebbc7"
+            name="BrushSize"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <referencesInternal>
+              <reference
+                Id="9d8806c1-f97c-4a58-9479-82d908edac6d"
+                handle="viewcode://./CodeSchema_Property?Assembly%3Dfile:%2F%2F%2FC:%2FUsers%2FAvell%2FDocuments%2FFURB%2FTCC%2FRepositorio%2FAlpha%2FTemp%2FUnityVS_bin%2FDebug%2FAssembly-CSharp.dll Namespace%3DUtility Type%3DEditConfigs Member%3DBrushSize"
+                tag="ViewCode" />
+            </referencesInternal>
+            <appliedStereotypesInternal>
+              <stereotypeInstance
+                Id="a170804f-a0c9-46e3-9821-384cb683cc3d"
+                name="property"
+                profile="CSharpProfile">
+                <propertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="a2c7c04d-7ecb-48b8-9db6-3e30e4d08bb4">
+                    <propertyInstance
+                      Id="d827eb4f-5eea-4a85-aa19-5b9dda1ea9ed"
+                      name="ClrAttributes" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="8356d1a3-c5b0-4f8c-82eb-48fea0235c6c">
+                    <propertyInstance
+                      Id="feb29a17-8e7b-4846-aca5-d8407db54855"
+                      name="Get"
+                      value="public" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="77a2ca53-ad64-4314-9bd7-693aeb81b6cd">
+                    <propertyInstance
+                      Id="d61e94df-4932-4979-8b75-74550bdf9e55"
+                      name="HasBody"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="b2e3aa3a-de61-455e-9ad9-d55172aea4ec">
+                    <propertyInstance
+                      Id="8210e6e3-a525-44df-b5f8-399541c9acea"
+                      name="IsUnsafe"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="5662a21c-d771-4469-b591-660c578f1bad">
+                    <propertyInstance
+                      Id="77bc005c-03b8-4a53-98a4-b0394aac69cb"
+                      name="Inheritance"
+                      value="none" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="d035795a-f5e8-47b4-9571-d71f896bbef5">
+                    <propertyInstance
+                      Id="627b7c06-e419-4dfd-800f-7e80b020ce89"
+                      name="PackageVisibility"
+                      value="internal" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="6507c3cf-e5c5-4a40-b2fb-3247b099d875">
+                    <propertyInstance
+                      Id="e3a28dfb-6095-4ac6-9c76-cceb3ef53ff0"
+                      name="Set"
+                      value="public" />
+                  </stereotypeInstanceHasPropertyInstances>
+                </propertyInstances>
+              </stereotypeInstance>
+            </appliedStereotypesInternal>
+            <type_NamedElement>
+              <primitiveTypeMoniker
+                Id="220a3521-e091-4221-bae9-3ef9018e845c"
+                LastKnownName="Integer"
+                LastKnownLocation="TCC.uml" />
+            </type_NamedElement>
+          </property>
+        </ownedAttributesInternal>
+        <ownedOperationsInternal>
+          <operation
+            Id="433dd874-3fd6-4e52-bfe0-f8d64b8c6789"
+            name="EditConfigs"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <referencesInternal>
+              <reference
+                Id="f777c4bb-4092-4b84-9380-4bb62db19108"
+                handle="viewcode://./CodeSchema_Method?Assembly%3Dfile:%2F%2F%2FC:%2FUsers%2FAvell%2FDocuments%2FFURB%2FTCC%2FRepositorio%2FAlpha%2FTemp%2FUnityVS_bin%2FDebug%2FAssembly-CSharp.dll Namespace%3DUtility Type%3DEditConfigs Member%3D.ctor"
+                tag="ViewCode" />
+            </referencesInternal>
+            <appliedStereotypesInternal>
+              <stereotypeInstance
+                Id="69d87bff-804f-4f87-a7ff-34374dff220d"
+                name="method"
+                profile="CSharpProfile">
+                <propertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="d5d339db-900a-4c90-bb2d-91a0417f3f36">
+                    <propertyInstance
+                      Id="47be6450-922a-4f58-9cc0-392163b9075d"
+                      name="ClrAttributes" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="b93c3d1c-a68d-4a47-bb7f-e6712a40b143">
+                    <propertyInstance
+                      Id="a4af1cdf-6ad4-4c69-acfb-cfe2e2d539a2"
+                      name="IsPartial"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="2a4afd22-ea3c-4a37-ad4f-164b938e0ebc">
+                    <propertyInstance
+                      Id="d4d0a4c0-edbe-4893-a836-a01022fd590a"
+                      name="IsUnsafe"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="44aa9fdc-1522-4529-b8b7-419b1c4785e6">
+                    <propertyInstance
+                      Id="7d824825-a503-4d58-ac0c-437a2831480c"
+                      name="Inheritance"
+                      value="none" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="d2dc2d76-cf13-4df0-b4c0-7ba25933a3a9">
+                    <propertyInstance
+                      Id="ee4c969d-59f6-4d0d-9335-1c58f36f8a8f"
+                      name="PackageVisibility"
+                      value="internal" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="856c8544-2d7e-49c2-aa76-1c048ad0a9de">
+                    <propertyInstance
+                      Id="7134f405-70a8-4d6a-8377-fe6aeedf4ccc"
+                      name="params"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                </propertyInstances>
+              </stereotypeInstance>
+            </appliedStereotypesInternal>
+          </operation>
+        </ownedOperationsInternal>
+      </class>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <packageMoniker
+        Id="66feb10c-3a1f-4f87-904f-28f50f22169a"
+        LastKnownName="HeatAlgorithm"
+        LastKnownLocation="Package3_1048.uml" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <packageMoniker
+        Id="5832c529-d253-470f-85c0-bfe6012a5602"
+        LastKnownName="TerrainData"
+        LastKnownLocation="Package_1042.uml" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="ee833a15-5c59-4983-8572-a678ebd44a57"
+        name="DirectionsEx"
+        visibility="Package"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <referencesInternal>
+          <reference
+            Id="a610e17a-673f-4e24-ad7e-86a64fcbbdc4"
+            handle="viewcode://./CodeSchema_Class?Assembly%3Dfile:%2F%2F%2FC:%2FUsers%2FAvell%2FDocuments%2FFURB%2FTCC%2FRepositorio%2FAlpha%2FTemp%2FUnityVS_bin%2FDebug%2FAssembly-CSharp.dll Namespace%3DUtility Type%3DDirectionsEx"
+            tag="ViewCode" />
+        </referencesInternal>
+        <appliedStereotypesInternal>
+          <stereotypeInstance
+            Id="95f6be54-296c-4f1b-a0b5-252eb75b37a7"
+            name="class"
+            profile="CSharpProfile">
+            <propertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="20db4382-1c72-4f5a-b47c-67d283cf744b">
+                <propertyInstance
+                  Id="d8ead645-f240-41b6-b77e-5dac58e78593"
+                  name="ClrAttributes" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="05b8cf18-b848-4aac-910b-fae6af0b1b05">
+                <propertyInstance
+                  Id="6b3ffa5b-f4c7-4b4e-b696-c20db8995563"
+                  name="IsPartial"
+                  value="false" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="03551271-2416-4122-baec-adddab2f392c">
+                <propertyInstance
+                  Id="d14c26ce-0f70-4e8b-801d-bcbe5751c94a"
+                  name="IsStatic"
+                  value="True" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="09627caf-9cd3-4137-a9d2-ee20d6a1fc9e">
+                <propertyInstance
+                  Id="72bd0f6f-4c19-4354-a2c1-d6a4b7500a13"
+                  name="IsUnsafe"
+                  value="false" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="f7441c3e-78d3-413b-975e-d96b9506f009">
+                <propertyInstance
+                  Id="bff18de1-d744-438c-b5f8-cecaa04b39f3"
+                  name="PackageVisibility"
+                  value="internal" />
+              </stereotypeInstanceHasPropertyInstances>
+            </propertyInstances>
+          </stereotypeInstance>
+        </appliedStereotypesInternal>
+        <ownedOperationsInternal>
+          <operation
+            Id="72337233-50f1-43b1-a546-7d49e30c3c88"
+            name="IsIntermediate"
+            isLeaf="false"
+            isStatic="true"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <referencesInternal>
+              <reference
+                Id="69c76183-bd3a-4b21-ba92-96c52f823ad5"
+                handle="viewcode://./CodeSchema_Method?Assembly%3Dfile:%2F%2F%2FC:%2FUsers%2FAvell%2FDocuments%2FFURB%2FTCC%2FRepositorio%2FAlpha%2FTemp%2FUnityVS_bin%2FDebug%2FAssembly-CSharp.dll Namespace%3DUtility Type%3DDirectionsEx Member%3D(Name%3DIsIntermediate OverloadingParameters%3D[(Assembly%3Dfile:%2F%2F%2FC:%2FUsers%2FAvell%2FDocuments%2FFURB%2FTCC%2FRepositorio%2FAlpha%2FTemp%2FUnityVS_bin%2FDebug%2FAssembly-CSharp.dll Namespace%3DUtility Type%3DDirections)])"
+                tag="ViewCode" />
+            </referencesInternal>
+            <appliedStereotypesInternal>
+              <stereotypeInstance
+                Id="bbc97a12-3d05-45c8-be55-8c5d83fc1260"
+                name="method"
+                profile="CSharpProfile">
+                <propertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="8d9dacbc-bb59-4e7b-87ee-7fb01f2258b1">
+                    <propertyInstance
+                      Id="541e841b-f950-4ca4-bbdc-7c3fb5df5bbd"
+                      name="ClrAttributes" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="bb41ec36-415d-489b-908c-df6c8f62d0bb">
+                    <propertyInstance
+                      Id="ed32f029-6686-4b95-8294-b20efd682b6c"
+                      name="IsPartial"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="91ababc1-e17a-47d3-8e45-298a41eeeda1">
+                    <propertyInstance
+                      Id="96200fe2-420c-48c8-a48b-60af721b61dd"
+                      name="IsUnsafe"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="7efa3a2a-ac72-4a54-a8eb-ed810e7e5707">
+                    <propertyInstance
+                      Id="b339aed9-a8a3-4d69-bc68-63387a6aa6f0"
+                      name="Inheritance"
+                      value="none" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="bedb2fe6-75fe-4780-8bd6-96000dc83051">
+                    <propertyInstance
+                      Id="a430f1a1-be4a-4a52-9c4d-962159d8ed9a"
+                      name="PackageVisibility"
+                      value="internal" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="5e3f99a5-356d-42ee-a5d2-0175d9a005e5">
+                    <propertyInstance
+                      Id="7341be11-fb2e-4e8e-9a62-58b8c04d0917"
+                      name="params"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                </propertyInstances>
+              </stereotypeInstance>
+            </appliedStereotypesInternal>
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="82cc4b6b-627e-40bf-94ef-c8bbb758a967"
+                  direction="Return">
+                  <type_NamedElement>
+                    <primitiveTypeMoniker
+                      Id="8943dc84-709e-4f62-b15a-a3273aa6f165"
+                      LastKnownName="Boolean"
+                      LastKnownLocation="TCC.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="e0224fd5-0007-4fb1-9c61-c66afc0e488c"
+                  name="direction"
+                  direction="In">
+                  <referencesInternal>
+                    <reference
+                      Id="cf7cb913-c6ab-4442-a983-f33205bd2da8"
+                      handle="viewcode://./CodeSchema_Parameter?Assembly%3Dfile:%2F%2F%2FC:%2FUsers%2FAvell%2FDocuments%2FFURB%2FTCC%2FRepositorio%2FAlpha%2FTemp%2FUnityVS_bin%2FDebug%2FAssembly-CSharp.dll Namespace%3DUtility Type%3DDirectionsEx Member%3D(Name%3DIsIntermediate OverloadingParameters%3D[(Assembly%3Dfile:%2F%2F%2FC:%2FUsers%2FAvell%2FDocuments%2FFURB%2FTCC%2FRepositorio%2FAlpha%2FTemp%2FUnityVS_bin%2FDebug%2FAssembly-CSharp.dll Namespace%3DUtility Type%3DDirections)]) ParameterIdentifier%3Ddirection"
+                      tag="ViewCode" />
+                  </referencesInternal>
+                  <type_NamedElement>
+                    <enumerationMoniker
+                      Id="60514542-7baa-4e6e-8091-e33aa5261aba"
+                      LastKnownName="Directions"
+                      LastKnownLocation="Package_1029.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+        </ownedOperationsInternal>
+      </class>
+    </packageHasNamedElement>
+  </packagedElements>
+</package>

@@ -1,0 +1,306 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm4="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm5="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/LogicalClassDesigner"
+  dslVersion="1.0.0.0"
+  Id="2d49a952-f22a-4447-afd1-85d1cfa64fed"
+  name="UI"
+  visibility="Private" xmlns="http://schemas.microsoft.com/dsltools/ModelStore">
+  <referencesInternal>
+    <reference
+      Id="d789c5e0-a023-40c7-a7bc-2c411add2801"
+      handle="viewcode://./CodeSchema_Namespace?Namespace%3DUnityEngine.UI"
+      tag="ViewCode" />
+  </referencesInternal>
+  <packagedElements>
+    <packageHasNamedElement>
+      <class
+        Id="f5255d3b-5181-407b-866e-b3aa9e312afa"
+        name="Slider"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <referencesInternal>
+          <reference
+            Id="13d510e4-baf0-4576-b656-f8754452b8d6"
+            handle="viewcode://./CodeSchema_Class?Assembly%3Dfile:%2F%2F%2FC:%2FUsers%2FAvell%2FDocuments%2FFURB%2FTCC%2FRepositorio%2FAlpha%2FLibrary%2FUnityAssemblies%2FUnityEngine.UI.dll Namespace%3DUnityEngine.UI Type%3DSlider"
+            tag="ViewCode" />
+        </referencesInternal>
+        <appliedStereotypesInternal>
+          <stereotypeInstance
+            Id="1cedfa1e-ba4d-420a-9e5f-3d7c2cd28d2c"
+            name="class"
+            profile="CSharpProfile">
+            <propertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="f43ad9af-82cc-4c3c-8486-d40a7a19d9e4">
+                <propertyInstance
+                  Id="98b289a2-8f8e-4d19-a7a6-76e95ba9586d"
+                  name="ClrAttributes" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="f12eb656-46f8-4b1a-8db9-26f6360b9742">
+                <propertyInstance
+                  Id="075d49ea-806b-4eae-b073-6c22efd5243e"
+                  name="IsPartial"
+                  value="false" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="b41bb6e2-9020-401f-a555-840933678c5d">
+                <propertyInstance
+                  Id="55654726-dd01-494f-8150-ee918648a964"
+                  name="IsStatic"
+                  value="False" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="fc0737de-be28-45cb-8b48-0a6dcee4d0a4">
+                <propertyInstance
+                  Id="2ff896d0-af84-41fe-85e2-8ca31166ed36"
+                  name="IsUnsafe"
+                  value="false" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="b55928d6-e100-46a2-a01b-4c94f57b931f">
+                <propertyInstance
+                  Id="de7ef8d2-3f0b-45a3-9c45-513f88d06b45"
+                  name="PackageVisibility"
+                  value="internal" />
+              </stereotypeInstanceHasPropertyInstances>
+            </propertyInstances>
+          </stereotypeInstance>
+        </appliedStereotypesInternal>
+      </class>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="5798f7b4-9f84-4b7a-8ab8-f051e0e559e0"
+        name="Toggle"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <referencesInternal>
+          <reference
+            Id="23e483ba-fc0d-4a3f-8896-5515588cd733"
+            handle="viewcode://./CodeSchema_Class?Assembly%3Dfile:%2F%2F%2FC:%2FUsers%2FAvell%2FDocuments%2FFURB%2FTCC%2FRepositorio%2FAlpha%2FLibrary%2FUnityAssemblies%2FUnityEngine.UI.dll Namespace%3DUnityEngine.UI Type%3DToggle"
+            tag="ViewCode" />
+        </referencesInternal>
+        <appliedStereotypesInternal>
+          <stereotypeInstance
+            Id="08105e1a-2684-4467-93eb-a0e749a221df"
+            name="class"
+            profile="CSharpProfile">
+            <propertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="35e1ae5f-db8f-43ab-aa44-0a24dd534110">
+                <propertyInstance
+                  Id="ab781e4f-38c2-4539-9e71-8beee4afb9f9"
+                  name="ClrAttributes" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="ab9619ee-300c-4433-a29d-6ef2f0430f56">
+                <propertyInstance
+                  Id="04fe5b39-975a-4209-9935-27085d23b9c1"
+                  name="IsPartial"
+                  value="false" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="b6658289-0099-45e3-a825-f2f5a6eea55c">
+                <propertyInstance
+                  Id="5aad5693-e843-4370-8286-3419d93b98e2"
+                  name="IsStatic"
+                  value="False" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="6b39401b-12b2-4e0d-b6b0-7556debdae1d">
+                <propertyInstance
+                  Id="ea847dfd-1a1c-4f16-8ac3-30cec40aa655"
+                  name="IsUnsafe"
+                  value="false" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="006521fa-1994-4ced-8ec2-c933031ad16e">
+                <propertyInstance
+                  Id="fee75c49-1cc4-47e5-ad46-5aa4fd85f080"
+                  name="PackageVisibility"
+                  value="internal" />
+              </stereotypeInstanceHasPropertyInstances>
+            </propertyInstances>
+          </stereotypeInstance>
+        </appliedStereotypesInternal>
+      </class>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="b16ff77d-e7b0-4bf3-8dcf-7db4955904ff"
+        name="Text"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <referencesInternal>
+          <reference
+            Id="1d324a96-8b6d-4772-8bf5-2379c1fc9780"
+            handle="viewcode://./CodeSchema_Class?Assembly%3Dfile:%2F%2F%2FC:%2FUsers%2FAvell%2FDocuments%2FFURB%2FTCC%2FRepositorio%2FAlpha%2FLibrary%2FUnityAssemblies%2FUnityEngine.UI.dll Namespace%3DUnityEngine.UI Type%3DText"
+            tag="ViewCode" />
+        </referencesInternal>
+        <appliedStereotypesInternal>
+          <stereotypeInstance
+            Id="46598f0a-3d6c-4fe4-97a4-8e46f4ca2e75"
+            name="class"
+            profile="CSharpProfile">
+            <propertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="e1849d4c-3a3f-4c45-a8e5-3373e0a8139e">
+                <propertyInstance
+                  Id="a29187c9-ead7-4031-9685-5745985b80e9"
+                  name="ClrAttributes" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="79c5d592-53f8-4733-a1f4-06713384ab58">
+                <propertyInstance
+                  Id="e3f64348-1197-4a2f-82ad-0e99d2414cd4"
+                  name="IsPartial"
+                  value="false" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="2049c967-cae5-4c48-855e-4bb2bf606f34">
+                <propertyInstance
+                  Id="7cb9bc32-4f36-4201-a8cf-9f52fdad6a5e"
+                  name="IsStatic"
+                  value="False" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="dba8bea2-f308-431b-82e4-b66e317e2db8">
+                <propertyInstance
+                  Id="782bcbbe-13fd-43f0-be27-6cdddb2f34c7"
+                  name="IsUnsafe"
+                  value="false" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="e7da7b16-94b6-4bf1-9e53-3dc72fb392d1">
+                <propertyInstance
+                  Id="9a373eb8-93f2-4492-a6f8-9df0c6e28a50"
+                  name="PackageVisibility"
+                  value="internal" />
+              </stereotypeInstanceHasPropertyInstances>
+            </propertyInstances>
+          </stereotypeInstance>
+        </appliedStereotypesInternal>
+      </class>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="ae8a260f-74b4-4e50-98d9-aad3dd6a633e"
+        name="Dropdown"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <referencesInternal>
+          <reference
+            Id="48ca6780-06d7-4f7a-ab5a-77d5adaaabfa"
+            handle="viewcode://./CodeSchema_Class?Assembly%3Dfile:%2F%2F%2FC:%2FUsers%2FAvell%2FDocuments%2FFURB%2FTCC%2FRepositorio%2FAlpha%2FLibrary%2FUnityAssemblies%2FUnityEngine.UI.dll Namespace%3DUnityEngine.UI Type%3DDropdown"
+            tag="ViewCode" />
+        </referencesInternal>
+        <appliedStereotypesInternal>
+          <stereotypeInstance
+            Id="d68acd47-dc03-4408-b93c-ab61d6f6dd92"
+            name="class"
+            profile="CSharpProfile">
+            <propertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="130e972f-db23-4272-8b39-bff8bbc96e30">
+                <propertyInstance
+                  Id="3bf038ac-32e3-40be-b24f-fcf263f4b385"
+                  name="ClrAttributes" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="57fcf3ea-a44e-47e2-ac7a-aa88b0c8a5ab">
+                <propertyInstance
+                  Id="c44656af-f1ca-4017-86ad-ad3e366eac14"
+                  name="IsPartial"
+                  value="false" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="cecdbc48-041e-4ad7-b3ff-a19b5dc3646e">
+                <propertyInstance
+                  Id="2baf2cf6-8319-4cae-89b9-7ace49ac10fe"
+                  name="IsStatic"
+                  value="False" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="9a0f0b16-cd4e-4462-ab57-58e3fd34f068">
+                <propertyInstance
+                  Id="50193e16-a314-4584-a98c-42516ce299da"
+                  name="IsUnsafe"
+                  value="false" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="06532b7b-94dd-492c-8ee0-b549edf7373f">
+                <propertyInstance
+                  Id="facf6515-07cf-4898-a19a-840ed19d3df8"
+                  name="PackageVisibility"
+                  value="internal" />
+              </stereotypeInstanceHasPropertyInstances>
+            </propertyInstances>
+          </stereotypeInstance>
+        </appliedStereotypesInternal>
+      </class>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="aeaef77c-1ccb-469e-a41e-8339c9fb073e"
+        name="InputField"
+        visibility="Private"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <referencesInternal>
+          <reference
+            Id="b9f43bed-3b93-4b6d-8e48-392d1fc61a7e"
+            handle="viewcode://./CodeSchema_Class?Assembly%3Dfile:%2F%2F%2FC:%2FUsers%2FAvell%2FDocuments%2FFURB%2FTCC%2FRepositorio%2FAlpha%2FLibrary%2FUnityAssemblies%2FUnityEngine.UI.dll Namespace%3DUnityEngine.UI Type%3DInputField"
+            tag="ViewCode" />
+        </referencesInternal>
+        <appliedStereotypesInternal>
+          <stereotypeInstance
+            Id="dcc8d283-a25c-4685-a5d1-4df2ac268425"
+            name="class"
+            profile="CSharpProfile">
+            <propertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="c52096c5-99e8-4e40-9243-fb7304372f8b">
+                <propertyInstance
+                  Id="a8485691-47ba-4330-846c-ebbd3ab3d24a"
+                  name="ClrAttributes" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="81fae567-e284-4798-b7f1-17f880ffba5e">
+                <propertyInstance
+                  Id="8411116f-bd8c-4fb8-a08e-73d1090bbede"
+                  name="IsPartial"
+                  value="false" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="bd11662c-2711-4890-b8d3-e43765307820">
+                <propertyInstance
+                  Id="e227ff10-5c7d-4d69-a15b-637faa7147d7"
+                  name="IsStatic"
+                  value="False" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="a86888b7-f9cf-4d6f-a972-767c2f9f3af7">
+                <propertyInstance
+                  Id="775708c7-4e41-435a-b6a0-e600dbda663f"
+                  name="IsUnsafe"
+                  value="false" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="22696973-b856-4f10-9322-cc5243dbac1d">
+                <propertyInstance
+                  Id="752d9c9d-a33a-4fd1-bf03-871299b53c2b"
+                  name="PackageVisibility"
+                  value="internal" />
+              </stereotypeInstanceHasPropertyInstances>
+            </propertyInstances>
+          </stereotypeInstance>
+        </appliedStereotypesInternal>
+      </class>
+    </packageHasNamedElement>
+  </packagedElements>
+</package>

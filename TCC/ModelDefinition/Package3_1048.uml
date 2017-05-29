@@ -1,0 +1,1725 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm4="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm5="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/LogicalClassDesigner"
+  dslVersion="1.0.0.0"
+  Id="66feb10c-3a1f-4f87-904f-28f50f22169a"
+  name="HeatAlgorithm"
+  visibility="Private" xmlns="http://schemas.microsoft.com/dsltools/ModelStore">
+  <referencesInternal>
+    <reference
+      Id="9bfacf90-335f-4f4f-b883-b09e63d9aaa6"
+      handle="viewcode://./CodeSchema_Namespace?Namespace%3DUtility.HeatAlgorithm"
+      tag="ViewCode" />
+  </referencesInternal>
+  <packagedElements>
+    <packageHasNamedElement>
+      <enumeration
+        Id="a6c3f095-2925-448e-bf52-c81d04203dc0"
+        name="HeatTypes"
+        isAbstract="false"
+        isLeaf="false">
+        <referencesInternal>
+          <reference
+            Id="b2fcb605-0253-4448-90c0-4f8e9e238164"
+            handle="viewcode://./CodeSchema_Enum?Assembly%3Dfile:%2F%2F%2FC:%2FUsers%2FAvell%2FDocuments%2FFURB%2FTCC%2FRepositorio%2FAlpha%2FTemp%2FUnityVS_bin%2FDebug%2FAssembly-CSharp.dll Namespace%3DUtility.HeatAlgorithm Type%3DHeatTypes"
+            tag="ViewCode" />
+        </referencesInternal>
+        <appliedStereotypesInternal>
+          <stereotypeInstance
+            Id="709e9cbe-0a44-4929-8a5e-32f2ad826dc6"
+            name="enum"
+            profile="CSharpProfile">
+            <propertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="12db570c-91de-4cf3-8947-ffbe81450b75">
+                <propertyInstance
+                  Id="2e5e6926-8043-40d9-a03e-1f0fef5da8e5"
+                  name="ClrAttributes" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="8494d571-2291-4707-8743-a838cffd133b">
+                <propertyInstance
+                  Id="ed612ac7-d1e1-4d14-9f5f-93cfcd2ffce7"
+                  name="BaseType"
+                  value="int" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="40612cc7-a1b5-4315-9cb1-a7844d9a4493">
+                <propertyInstance
+                  Id="2aa1c360-16e3-4838-8dad-5ec51f0ff248"
+                  name="PackageVisibility"
+                  value="internal" />
+              </stereotypeInstanceHasPropertyInstances>
+            </propertyInstances>
+          </stereotypeInstance>
+        </appliedStereotypesInternal>
+        <ownedLiterals>
+          <enumerationLiteral
+            Id="2ae7e3cd-ae74-4cc4-8592-82870ba391d7"
+            name="None">
+            <referencesInternal>
+              <reference
+                Id="e6a692e1-bb38-4ef0-8a31-bd3fe750bc16"
+                handle="viewcode://./CodeSchema_Field?Assembly%3Dfile:%2F%2F%2FC:%2FUsers%2FAvell%2FDocuments%2FFURB%2FTCC%2FRepositorio%2FAlpha%2FTemp%2FUnityVS_bin%2FDebug%2FAssembly-CSharp.dll Namespace%3DUtility.HeatAlgorithm Type%3DHeatTypes Member%3DNone"
+                tag="ViewCode" />
+            </referencesInternal>
+          </enumerationLiteral>
+          <enumerationLiteral
+            Id="b8d94b33-4c8f-4b5b-94ed-3e3f6912760a"
+            name="SoilDepth">
+            <referencesInternal>
+              <reference
+                Id="62716b88-bfb2-4e36-b964-aa54e713913e"
+                handle="viewcode://./CodeSchema_Field?Assembly%3Dfile:%2F%2F%2FC:%2FUsers%2FAvell%2FDocuments%2FFURB%2FTCC%2FRepositorio%2FAlpha%2FTemp%2FUnityVS_bin%2FDebug%2FAssembly-CSharp.dll Namespace%3DUtility.HeatAlgorithm Type%3DHeatTypes Member%3DSoilDepth"
+                tag="ViewCode" />
+            </referencesInternal>
+          </enumerationLiteral>
+          <enumerationLiteral
+            Id="c19f2497-c219-40e1-a7ed-3eeacda0eed2"
+            name="WaterDepth">
+            <referencesInternal>
+              <reference
+                Id="c82830f1-693a-4487-8478-2845bff75990"
+                handle="viewcode://./CodeSchema_Field?Assembly%3Dfile:%2F%2F%2FC:%2FUsers%2FAvell%2FDocuments%2FFURB%2FTCC%2FRepositorio%2FAlpha%2FTemp%2FUnityVS_bin%2FDebug%2FAssembly-CSharp.dll Namespace%3DUtility.HeatAlgorithm Type%3DHeatTypes Member%3DWaterDepth"
+                tag="ViewCode" />
+            </referencesInternal>
+          </enumerationLiteral>
+          <enumerationLiteral
+            Id="2e1dfa10-22e5-4b9b-8462-3bde5ec6446c"
+            name="SoilHumidity">
+            <referencesInternal>
+              <reference
+                Id="16aad8c9-935e-4e79-94e2-9ad9575935df"
+                handle="viewcode://./CodeSchema_Field?Assembly%3Dfile:%2F%2F%2FC:%2FUsers%2FAvell%2FDocuments%2FFURB%2FTCC%2FRepositorio%2FAlpha%2FTemp%2FUnityVS_bin%2FDebug%2FAssembly-CSharp.dll Namespace%3DUtility.HeatAlgorithm Type%3DHeatTypes Member%3DSoilHumidity"
+                tag="ViewCode" />
+            </referencesInternal>
+          </enumerationLiteral>
+          <enumerationLiteral
+            Id="dd8f9d3d-c50b-4ae0-8e0b-ca3fa96d5e18"
+            name="Inclination">
+            <referencesInternal>
+              <reference
+                Id="30d80870-afd1-4c3f-8686-e0c2f7e9a62e"
+                handle="viewcode://./CodeSchema_Field?Assembly%3Dfile:%2F%2F%2FC:%2FUsers%2FAvell%2FDocuments%2FFURB%2FTCC%2FRepositorio%2FAlpha%2FTemp%2FUnityVS_bin%2FDebug%2FAssembly-CSharp.dll Namespace%3DUtility.HeatAlgorithm Type%3DHeatTypes Member%3DInclination"
+                tag="ViewCode" />
+            </referencesInternal>
+          </enumerationLiteral>
+        </ownedLiterals>
+      </enumeration>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="4bdb307e-574f-41ba-b9fb-0718bd428be1"
+        name="HeatCalculator"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <referencesInternal>
+          <reference
+            Id="97d396dd-7d68-4f35-a27a-79feee0dab7d"
+            handle="viewcode://./CodeSchema_Class?Assembly%3Dfile:%2F%2F%2FC:%2FUsers%2FAvell%2FDocuments%2FFURB%2FTCC%2FRepositorio%2FAlpha%2FTemp%2FUnityVS_bin%2FDebug%2FAssembly-CSharp.dll Namespace%3DUtility.HeatAlgorithm Type%3DHeatCalculator"
+            tag="ViewCode" />
+        </referencesInternal>
+        <appliedStereotypesInternal>
+          <stereotypeInstance
+            Id="4cf32b5e-1101-480a-a681-7c44be5f5f33"
+            name="class"
+            profile="CSharpProfile">
+            <propertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="dbd48b59-e531-477d-8e57-d7c1f5cc38b8">
+                <propertyInstance
+                  Id="8c6b5383-c72d-470a-8e9e-1dd0cda2d2e0"
+                  name="ClrAttributes" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="0d1b5680-6bdb-4134-b9e8-b152ce33ce5c">
+                <propertyInstance
+                  Id="48acf4ee-94a4-4e6c-b492-3dbddcec91a8"
+                  name="IsPartial"
+                  value="false" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="57067e00-578e-4f7a-82ee-72bb171cfdb6">
+                <propertyInstance
+                  Id="5a15e2b5-c40e-43f9-ad80-9a8efe30b348"
+                  name="IsStatic"
+                  value="False" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="7896d697-a7e6-454a-bc06-ba2a37cf1811">
+                <propertyInstance
+                  Id="b6165268-b7e6-4a6e-b99e-4c499ced2608"
+                  name="IsUnsafe"
+                  value="false" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="ef6f0d66-92d7-43a3-aee8-5184c47420bd">
+                <propertyInstance
+                  Id="47317c2a-ab0e-48b3-92ad-055c759fbba2"
+                  name="PackageVisibility"
+                  value="internal" />
+              </stereotypeInstanceHasPropertyInstances>
+            </propertyInstances>
+          </stereotypeInstance>
+        </appliedStereotypesInternal>
+        <targetEnds>
+          <association
+            Id="2b1efc5a-64e1-410d-be78-e0fa76b4e822"
+            isDerived="false"
+            sourceEndRoleName="HeatCalculator"
+            targetEndRoleName="WaterMap"
+            isLeaf="false"
+            isAbstract="false">
+            <classMoniker
+              Id="8a630388-0416-44f8-b84a-ea3e0a1419a9"
+              LastKnownName="Single"
+              LastKnownLocation="Package2_1029.uml" />
+            <description>Property WaterMap references type Single.</description>
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="591d004a-f03f-44f9-a865-2846d9af194f"
+                  name="HeatCalculator"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false">
+                  <lowerValueInternal>
+                    <literalString
+                      Id="070bae5c-e2de-48bc-8150-5e52e8cc6333"
+                      name="Lower"
+                      value="*" />
+                  </lowerValueInternal>
+                  <upperValueInternal>
+                    <literalString
+                      Id="b048e35d-966b-45d4-a16d-5e8cbab63461"
+                      name="Upper"
+                      value="*" />
+                  </upperValueInternal>
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="b8d114e6-0cc7-4b59-973e-9bbe38a39d1e"
+                  name="WaterMap"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isOrdered="true"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false">
+                  <lowerValueInternal>
+                    <literalString
+                      Id="21efad9b-cf13-4938-bb76-327b1a46cab5"
+                      name="Lower"
+                      value="*" />
+                  </lowerValueInternal>
+                  <upperValueInternal>
+                    <literalString
+                      Id="1ba26355-90ac-4994-ae14-2540f9bef64f"
+                      name="Upper"
+                      value="*" />
+                  </upperValueInternal>
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+          <association
+            Id="5bc98e7e-6d89-426d-8b7b-c17e9a36cbc8"
+            isDerived="false"
+            sourceEndRoleName="HeatCalculator"
+            targetEndRoleName="SoilMap"
+            isLeaf="false"
+            isAbstract="false">
+            <classMoniker
+              Id="8a630388-0416-44f8-b84a-ea3e0a1419a9"
+              LastKnownName="Single"
+              LastKnownLocation="Package2_1029.uml" />
+            <description>Property SoilMap references type Single.</description>
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="8d0e7787-0e53-4ddf-823c-efa9e57c703e"
+                  name="HeatCalculator"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false">
+                  <lowerValueInternal>
+                    <literalString
+                      Id="41f0ee61-14a8-428a-bfd0-65b7509e5539"
+                      name="Lower"
+                      value="*" />
+                  </lowerValueInternal>
+                  <upperValueInternal>
+                    <literalString
+                      Id="009b94a1-6f17-42b3-a15d-cc527831f727"
+                      name="Upper"
+                      value="*" />
+                  </upperValueInternal>
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="2e069ab9-e0f6-4051-ac5c-5027ef09bc18"
+                  name="SoilMap"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isOrdered="true"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false">
+                  <lowerValueInternal>
+                    <literalString
+                      Id="7e4e73a7-0f91-4bd6-9cd7-d401e6c6dc5c"
+                      name="Lower"
+                      value="*" />
+                  </lowerValueInternal>
+                  <upperValueInternal>
+                    <literalString
+                      Id="05489aa1-6172-44f3-a3df-a2b80d906f1e"
+                      name="Upper"
+                      value="*" />
+                  </upperValueInternal>
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+          <association
+            Id="065d79ee-42c8-4f54-b297-1444d24daffd"
+            isDerived="false"
+            sourceEndRoleName="HeatCalculator"
+            targetEndRoleName="RockMap"
+            isLeaf="false"
+            isAbstract="false">
+            <classMoniker
+              Id="8a630388-0416-44f8-b84a-ea3e0a1419a9"
+              LastKnownName="Single"
+              LastKnownLocation="Package2_1029.uml" />
+            <description>Property RockMap references type Single.</description>
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="ff09956f-7b56-4bc8-b852-8fb96cfb37cf"
+                  name="HeatCalculator"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false">
+                  <lowerValueInternal>
+                    <literalString
+                      Id="928405ea-cb34-472c-ae1a-43e4e3579edb"
+                      name="Lower"
+                      value="*" />
+                  </lowerValueInternal>
+                  <upperValueInternal>
+                    <literalString
+                      Id="924349ab-ec58-4095-8061-f4c1a03b7529"
+                      name="Upper"
+                      value="*" />
+                  </upperValueInternal>
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="2516da6a-31ea-4d01-b11d-a93d4f79f2e0"
+                  name="RockMap"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isOrdered="true"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false">
+                  <lowerValueInternal>
+                    <literalString
+                      Id="b4f1ba0b-ac18-483d-9871-07281dedfcbc"
+                      name="Lower"
+                      value="*" />
+                  </lowerValueInternal>
+                  <upperValueInternal>
+                    <literalString
+                      Id="0fd26526-ba4c-4410-9eaf-c4394c70bacf"
+                      name="Upper"
+                      value="*" />
+                  </upperValueInternal>
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+          <association
+            Id="40848965-e681-4dcd-b2b6-7bd9ff7a69d3"
+            isDerived="false"
+            sourceEndRoleName="HeatCalculator"
+            targetEndRoleName="HumidityMap"
+            isLeaf="false"
+            isAbstract="false">
+            <classMoniker
+              Id="8a630388-0416-44f8-b84a-ea3e0a1419a9"
+              LastKnownName="Single"
+              LastKnownLocation="Package2_1029.uml" />
+            <description>Property HumidityMap references type Single.</description>
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="d3ba36ba-9c76-4949-b2cd-15e16b7163b6"
+                  name="HeatCalculator"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false">
+                  <lowerValueInternal>
+                    <literalString
+                      Id="a546da9e-d26e-4bf2-94c1-8d72d52e1ec1"
+                      name="Lower"
+                      value="*" />
+                  </lowerValueInternal>
+                  <upperValueInternal>
+                    <literalString
+                      Id="91e44a0c-0829-4d50-9ec8-80df49e43e11"
+                      name="Upper"
+                      value="*" />
+                  </upperValueInternal>
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="4613da3a-dd74-4a81-8af3-822cf51d9f6c"
+                  name="HumidityMap"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isOrdered="true"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false">
+                  <lowerValueInternal>
+                    <literalString
+                      Id="5f228468-d403-419b-89e4-9e7c0b53332d"
+                      name="Lower"
+                      value="*" />
+                  </lowerValueInternal>
+                  <upperValueInternal>
+                    <literalString
+                      Id="5dcd4309-1033-4124-9c26-27c829184a9c"
+                      name="Upper"
+                      value="*" />
+                  </upperValueInternal>
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+          <association
+            Id="0ff3e7ea-b3de-45ff-b335-bdb88f09646f"
+            isDerived="false"
+            sourceEndRoleName="HeatCalculator"
+            targetEndRoleName="HeatMap"
+            isLeaf="false"
+            isAbstract="false">
+            <classMoniker
+              Id="8a630388-0416-44f8-b84a-ea3e0a1419a9"
+              LastKnownName="Single"
+              LastKnownLocation="Package2_1029.uml" />
+            <description>Property HeatMap references type Single.</description>
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="e3315450-3992-49b2-ac92-276eaca88fc1"
+                  name="HeatCalculator"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false">
+                  <lowerValueInternal>
+                    <literalString
+                      Id="0637a966-c015-42a0-a772-e270ba2f0559"
+                      name="Lower"
+                      value="*" />
+                  </lowerValueInternal>
+                  <upperValueInternal>
+                    <literalString
+                      Id="1ef44059-be8b-4bc9-ba5d-d230890abeeb"
+                      name="Upper"
+                      value="*" />
+                  </upperValueInternal>
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="714dcb9d-7a08-41b2-a79b-7095aed9e4d6"
+                  name="HeatMap"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isOrdered="true"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false">
+                  <lowerValueInternal>
+                    <literalString
+                      Id="851fc88d-d58c-4722-bfd6-b4e69546dbda"
+                      name="Lower"
+                      value="*" />
+                  </lowerValueInternal>
+                  <upperValueInternal>
+                    <literalString
+                      Id="79021be9-29c5-49d1-8b4a-8ae0b9ee1221"
+                      name="Upper"
+                      value="*" />
+                  </upperValueInternal>
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+          <association
+            Id="ccef5cde-fab7-452c-a3d0-1a7ffb2c665e"
+            isDerived="false"
+            sourceEndRoleName="HeatCalculator"
+            targetEndRoleName="Type"
+            isLeaf="false"
+            isAbstract="false">
+            <enumerationMoniker
+              Id="a6c3f095-2925-448e-bf52-c81d04203dc0"
+              LastKnownName="HeatTypes"
+              LastKnownLocation="Package3_1048.uml" />
+            <description>Property Type references type HeatTypes.</description>
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="b92314b1-b277-4364-ab07-24465cf29d62"
+                  name="HeatCalculator"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false">
+                  <lowerValueInternal>
+                    <literalString
+                      Id="b0c69185-9844-4064-b2bc-23b319da0e79"
+                      name="Lower"
+                      value="*" />
+                  </lowerValueInternal>
+                  <upperValueInternal>
+                    <literalString
+                      Id="0b06111f-aa89-4b47-8fbc-70e5052b2194"
+                      name="Upper"
+                      value="*" />
+                  </upperValueInternal>
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="13ec437c-3ead-421c-bafe-197f6052a1ce"
+                  name="Type"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false">
+                  <lowerValueInternal>
+                    <literalString
+                      Id="0dc0cfea-4c6e-4ec7-a838-bb27540e7677"
+                      name="Lower"
+                      value="1" />
+                  </lowerValueInternal>
+                  <upperValueInternal>
+                    <literalString
+                      Id="ec30b518-c30d-467a-94cc-431801232192"
+                      name="Upper"
+                      value="1" />
+                  </upperValueInternal>
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+        </targetEnds>
+        <ownedAttributesInternal>
+          <property
+            Id="dde64818-cc7c-47fc-9386-0936ed0522f2"
+            name="WaterMap"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isOrdered="true"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <referencesInternal>
+              <reference
+                Id="91be6720-0f1c-4f2f-95ff-42dbf72f6ae9"
+                handle="viewcode://./CodeSchema_Property?Assembly%3Dfile:%2F%2F%2FC:%2FUsers%2FAvell%2FDocuments%2FFURB%2FTCC%2FRepositorio%2FAlpha%2FTemp%2FUnityVS_bin%2FDebug%2FAssembly-CSharp.dll Namespace%3DUtility.HeatAlgorithm Type%3DHeatCalculator Member%3DWaterMap"
+                tag="ViewCode" />
+            </referencesInternal>
+            <appliedStereotypesInternal>
+              <stereotypeInstance
+                Id="71ea76d4-4cf2-4fd3-baec-1870fd7f4c95"
+                name="property"
+                profile="CSharpProfile">
+                <propertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="e92f2d8b-6c35-4510-a6ac-fff82ba1dd6e">
+                    <propertyInstance
+                      Id="8d8fd477-8fec-4845-8b6b-871ccfeab629"
+                      name="ClrAttributes" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="5531cfa8-7354-4655-939e-2078c84edb2b">
+                    <propertyInstance
+                      Id="359a7e3c-a12a-4df9-9141-81b99f531b57"
+                      name="Get"
+                      value="public" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="a4ead0c9-db91-4956-a33b-4b959efb1c7a">
+                    <propertyInstance
+                      Id="2297e1ae-047f-4943-9af7-46cf0406e7f0"
+                      name="HasBody"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="6b482a6e-2b81-4194-8fd1-8249c7326f23">
+                    <propertyInstance
+                      Id="2747a513-3a43-42e7-8ab1-8fbb44229325"
+                      name="IsUnsafe"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="cb16ad04-c857-4fc9-aa0e-179599f430fd">
+                    <propertyInstance
+                      Id="a5d61140-a9cd-4b98-a64c-6bf356753ebd"
+                      name="Inheritance"
+                      value="none" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="29002650-2c6b-48b5-84c7-db6a1962dda1">
+                    <propertyInstance
+                      Id="153dd55b-5b80-43d3-8e7c-def6895ed71a"
+                      name="PackageVisibility"
+                      value="internal" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="7d3111ee-8607-408a-a41f-fbb3d9a56b80">
+                    <propertyInstance
+                      Id="0d304d3a-9011-4448-8970-c316bd95c5e1"
+                      name="Set"
+                      value="public" />
+                  </stereotypeInstanceHasPropertyInstances>
+                </propertyInstances>
+              </stereotypeInstance>
+            </appliedStereotypesInternal>
+            <lowerValueInternal>
+              <literalString
+                Id="6e0f078d-60a5-47e3-a7d6-20a923898348"
+                name="Lower"
+                value="*" />
+            </lowerValueInternal>
+            <upperValueInternal>
+              <literalString
+                Id="8bdde7f4-8713-4548-a4cf-bf4898582d84"
+                name="Upper"
+                value="*" />
+            </upperValueInternal>
+            <type_NamedElement>
+              <classMoniker
+                Id="8a630388-0416-44f8-b84a-ea3e0a1419a9"
+                LastKnownName="Single"
+                LastKnownLocation="Package2_1029.uml" />
+            </type_NamedElement>
+          </property>
+          <property
+            Id="b0ed5f86-b947-48e3-8cb0-7f1384cf9923"
+            name="SoilMap"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isOrdered="true"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <referencesInternal>
+              <reference
+                Id="46f98afb-9337-461e-86d9-e9069c45b687"
+                handle="viewcode://./CodeSchema_Property?Assembly%3Dfile:%2F%2F%2FC:%2FUsers%2FAvell%2FDocuments%2FFURB%2FTCC%2FRepositorio%2FAlpha%2FTemp%2FUnityVS_bin%2FDebug%2FAssembly-CSharp.dll Namespace%3DUtility.HeatAlgorithm Type%3DHeatCalculator Member%3DSoilMap"
+                tag="ViewCode" />
+            </referencesInternal>
+            <appliedStereotypesInternal>
+              <stereotypeInstance
+                Id="4e9ffbf6-f6ee-46de-9e35-925877d7a00b"
+                name="property"
+                profile="CSharpProfile">
+                <propertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="e9d2e3a0-ade1-43da-b690-d3fdb832c5ab">
+                    <propertyInstance
+                      Id="cc687147-e6cd-467b-8da2-df11de553a7c"
+                      name="ClrAttributes" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="f4b33272-f18c-49dd-a5c4-e43bb67e987e">
+                    <propertyInstance
+                      Id="4e5dae12-490c-49bf-9889-5f884d8d7c87"
+                      name="Get"
+                      value="public" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="847cf1ba-8b5e-4d1f-b925-e4b130f43c05">
+                    <propertyInstance
+                      Id="c110bdfa-b78a-44e7-8c48-29ac63a25788"
+                      name="HasBody"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="8b3fae4e-3595-45d8-a6ca-d948c87720ef">
+                    <propertyInstance
+                      Id="f723b711-3533-4b99-bb70-82f0d7aa5ba9"
+                      name="IsUnsafe"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="5e3ef728-c09e-4874-a2bb-299cb5b8c962">
+                    <propertyInstance
+                      Id="5e6911cc-307e-4560-98a0-fabe5f9de0df"
+                      name="Inheritance"
+                      value="none" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="04f2024c-281d-4209-9689-0f73b4f8fd44">
+                    <propertyInstance
+                      Id="8a4e8eef-3687-4bd8-84c3-e4bbd38dc407"
+                      name="PackageVisibility"
+                      value="internal" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="0972419e-20fc-4a5b-b212-a23466c59289">
+                    <propertyInstance
+                      Id="20c3f54b-eaf7-44f4-b1ce-052c1975f17e"
+                      name="Set"
+                      value="public" />
+                  </stereotypeInstanceHasPropertyInstances>
+                </propertyInstances>
+              </stereotypeInstance>
+            </appliedStereotypesInternal>
+            <lowerValueInternal>
+              <literalString
+                Id="8487896c-63f0-440a-943f-e9f01ed5d70f"
+                name="Lower"
+                value="*" />
+            </lowerValueInternal>
+            <upperValueInternal>
+              <literalString
+                Id="cdfb00a3-88df-4f8f-90db-5887c1582452"
+                name="Upper"
+                value="*" />
+            </upperValueInternal>
+            <type_NamedElement>
+              <classMoniker
+                Id="8a630388-0416-44f8-b84a-ea3e0a1419a9"
+                LastKnownName="Single"
+                LastKnownLocation="Package2_1029.uml" />
+            </type_NamedElement>
+          </property>
+          <property
+            Id="f5e96a88-c91a-4caf-8b1a-953f14b3678b"
+            name="RockMap"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isOrdered="true"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <referencesInternal>
+              <reference
+                Id="6e81235d-ea44-40c3-a0f5-414d5f8139cb"
+                handle="viewcode://./CodeSchema_Property?Assembly%3Dfile:%2F%2F%2FC:%2FUsers%2FAvell%2FDocuments%2FFURB%2FTCC%2FRepositorio%2FAlpha%2FTemp%2FUnityVS_bin%2FDebug%2FAssembly-CSharp.dll Namespace%3DUtility.HeatAlgorithm Type%3DHeatCalculator Member%3DRockMap"
+                tag="ViewCode" />
+            </referencesInternal>
+            <appliedStereotypesInternal>
+              <stereotypeInstance
+                Id="06a68a83-7846-4b6d-924b-6bc8824b3e01"
+                name="property"
+                profile="CSharpProfile">
+                <propertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="40703628-289c-4601-8604-44d2879438e8">
+                    <propertyInstance
+                      Id="1b7f226e-76f6-4660-af37-930c9609edd5"
+                      name="ClrAttributes" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="3ef013ef-8971-4bba-b1de-f7019e5e0405">
+                    <propertyInstance
+                      Id="d58e8fc7-78ee-43dd-808e-544a63b99de8"
+                      name="Get"
+                      value="public" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="8aa9cbc0-d7ab-44a1-9eaa-5af0a4700e93">
+                    <propertyInstance
+                      Id="917813db-d59a-446e-afae-19a765a3bb33"
+                      name="HasBody"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="9f4ffe35-201c-4ca4-af9c-038d9b57cd08">
+                    <propertyInstance
+                      Id="36428dbd-353a-4f67-84f4-3e7f8e994de0"
+                      name="IsUnsafe"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="9d254dbd-173b-400e-9b03-cfa8273a4b12">
+                    <propertyInstance
+                      Id="13d70805-b5e8-4b2b-bea3-99bfcae6c83f"
+                      name="Inheritance"
+                      value="none" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="58ad9594-b7e8-4fda-b769-db56fa18a50b">
+                    <propertyInstance
+                      Id="a142d355-3474-46ca-bf83-a3b05d2657e8"
+                      name="PackageVisibility"
+                      value="internal" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="5391bd4e-64ee-4a69-84d3-551e48aca8c5">
+                    <propertyInstance
+                      Id="484af6c5-3cfe-4209-8dd2-cc315324c2bb"
+                      name="Set"
+                      value="public" />
+                  </stereotypeInstanceHasPropertyInstances>
+                </propertyInstances>
+              </stereotypeInstance>
+            </appliedStereotypesInternal>
+            <lowerValueInternal>
+              <literalString
+                Id="1c6b2cc4-bb5b-4f98-9fb4-49dadc8f2b4b"
+                name="Lower"
+                value="*" />
+            </lowerValueInternal>
+            <upperValueInternal>
+              <literalString
+                Id="ad381e82-9cbc-466d-af64-73ba211f439a"
+                name="Upper"
+                value="*" />
+            </upperValueInternal>
+            <type_NamedElement>
+              <classMoniker
+                Id="8a630388-0416-44f8-b84a-ea3e0a1419a9"
+                LastKnownName="Single"
+                LastKnownLocation="Package2_1029.uml" />
+            </type_NamedElement>
+          </property>
+          <property
+            Id="294a102c-be47-4f22-83b0-85e1c544b602"
+            name="SurfaceMap"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isOrdered="true"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <referencesInternal>
+              <reference
+                Id="0e3b5766-4058-4590-93a7-c151bcb275cf"
+                handle="viewcode://./CodeSchema_Property?Assembly%3Dfile:%2F%2F%2FC:%2FUsers%2FAvell%2FDocuments%2FFURB%2FTCC%2FRepositorio%2FAlpha%2FTemp%2FUnityVS_bin%2FDebug%2FAssembly-CSharp.dll Namespace%3DUtility.HeatAlgorithm Type%3DHeatCalculator Member%3DSurfaceMap"
+                tag="ViewCode" />
+            </referencesInternal>
+            <appliedStereotypesInternal>
+              <stereotypeInstance
+                Id="8bcb654b-1a2f-4b4d-b50b-94c13385192a"
+                name="property"
+                profile="CSharpProfile">
+                <propertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="f8b6091c-5806-4364-bbfb-5e282748fee9">
+                    <propertyInstance
+                      Id="960206e4-6c12-40e7-b62e-6f59da6f93dd"
+                      name="ClrAttributes" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="2b3a4814-9d12-455f-a978-9c5fbe6902b3">
+                    <propertyInstance
+                      Id="8582b539-b6a7-4f1f-bee0-d465e0e53b89"
+                      name="Get"
+                      value="public" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="5aa2e71b-075f-4fa0-8e28-47b035b49060">
+                    <propertyInstance
+                      Id="2c694bfb-029a-437e-a63b-fc5f1899ac9c"
+                      name="HasBody"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="e87c5986-20c1-4da0-86c1-c5e7187b3550">
+                    <propertyInstance
+                      Id="dd4e9ffd-ed75-4c01-996a-22773bd23659"
+                      name="IsUnsafe"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="b39ac56a-4362-4ee6-a04e-4329b17d65c8">
+                    <propertyInstance
+                      Id="ab5ea6a4-e9e3-4d23-8d5d-3f419ac96ff3"
+                      name="Inheritance"
+                      value="none" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="799411f9-8e4e-499e-a668-b7f999d20292">
+                    <propertyInstance
+                      Id="15c09c15-c2d6-4b70-aaad-1368dd175e84"
+                      name="PackageVisibility"
+                      value="internal" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="86c9c12e-3309-49e9-a680-0028d3bba0e9">
+                    <propertyInstance
+                      Id="7149f131-ca83-4c77-82c8-5fdb96ed1fe7"
+                      name="Set"
+                      value="public" />
+                  </stereotypeInstanceHasPropertyInstances>
+                </propertyInstances>
+              </stereotypeInstance>
+            </appliedStereotypesInternal>
+            <lowerValueInternal>
+              <literalString
+                Id="740fd573-879b-4d3d-8d91-fc5b00e96240"
+                name="Lower"
+                value="*" />
+            </lowerValueInternal>
+            <upperValueInternal>
+              <literalString
+                Id="4108975b-c1c3-4736-8145-1235825178ac"
+                name="Upper"
+                value="*" />
+            </upperValueInternal>
+            <type_NamedElement>
+              <primitiveTypeMoniker
+                Id="220a3521-e091-4221-bae9-3ef9018e845c"
+                LastKnownName="Integer"
+                LastKnownLocation="TCC.uml" />
+            </type_NamedElement>
+          </property>
+          <property
+            Id="98954034-3faa-4bc3-b12d-ca87af1b0e3a"
+            name="HumidityMap"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isOrdered="true"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <referencesInternal>
+              <reference
+                Id="4ec54e4c-9b08-4264-bde5-91dc210be7e3"
+                handle="viewcode://./CodeSchema_Property?Assembly%3Dfile:%2F%2F%2FC:%2FUsers%2FAvell%2FDocuments%2FFURB%2FTCC%2FRepositorio%2FAlpha%2FTemp%2FUnityVS_bin%2FDebug%2FAssembly-CSharp.dll Namespace%3DUtility.HeatAlgorithm Type%3DHeatCalculator Member%3DHumidityMap"
+                tag="ViewCode" />
+            </referencesInternal>
+            <appliedStereotypesInternal>
+              <stereotypeInstance
+                Id="f6c81006-7bfa-484d-926a-86ca0fcc073d"
+                name="property"
+                profile="CSharpProfile">
+                <propertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="32ae3f20-302e-4e6a-b212-155910ed2975">
+                    <propertyInstance
+                      Id="9669879d-ebab-4451-a85a-e707c71b5258"
+                      name="ClrAttributes" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="ed29f3a6-7468-4dd9-983f-925b3d98a972">
+                    <propertyInstance
+                      Id="3812094a-13ea-4198-97ad-d6ad2a1dff21"
+                      name="Get"
+                      value="public" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="07e32a87-f2fa-417c-8b95-d761313f0ed8">
+                    <propertyInstance
+                      Id="be823769-4050-43df-a0d6-aab080936118"
+                      name="HasBody"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="5677f162-4f49-4053-bb24-b3940e6a2c6e">
+                    <propertyInstance
+                      Id="407cf710-1e23-4f4c-a1e0-5156cfc4c469"
+                      name="IsUnsafe"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="0ad616f7-44f5-462f-b3e2-128212b0ac86">
+                    <propertyInstance
+                      Id="13f8b34e-80e6-4d0c-9a07-127e394d288b"
+                      name="Inheritance"
+                      value="none" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="b4fdc979-fc6b-48bf-9f3b-8b1d3a35fc24">
+                    <propertyInstance
+                      Id="c7d0f26d-4ad2-48f6-bc88-2540212c7c21"
+                      name="PackageVisibility"
+                      value="internal" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="cfbe9a24-f837-4ff8-95b5-aad6b970e90f">
+                    <propertyInstance
+                      Id="8cf2de3c-656f-4d98-b17a-968b04e7bcdb"
+                      name="Set"
+                      value="public" />
+                  </stereotypeInstanceHasPropertyInstances>
+                </propertyInstances>
+              </stereotypeInstance>
+            </appliedStereotypesInternal>
+            <lowerValueInternal>
+              <literalString
+                Id="ced6a99a-f098-4597-b070-633a1710f0d5"
+                name="Lower"
+                value="*" />
+            </lowerValueInternal>
+            <upperValueInternal>
+              <literalString
+                Id="05e6417a-ca3c-4bd7-8b40-60d725cb2626"
+                name="Upper"
+                value="*" />
+            </upperValueInternal>
+            <type_NamedElement>
+              <classMoniker
+                Id="8a630388-0416-44f8-b84a-ea3e0a1419a9"
+                LastKnownName="Single"
+                LastKnownLocation="Package2_1029.uml" />
+            </type_NamedElement>
+          </property>
+          <property
+            Id="ed4914a0-098a-442c-a5d9-c9d137da9f68"
+            name="HeatMap"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isOrdered="true"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <referencesInternal>
+              <reference
+                Id="99946051-c7dc-443d-8cb8-95752bc9abbc"
+                handle="viewcode://./CodeSchema_Property?Assembly%3Dfile:%2F%2F%2FC:%2FUsers%2FAvell%2FDocuments%2FFURB%2FTCC%2FRepositorio%2FAlpha%2FTemp%2FUnityVS_bin%2FDebug%2FAssembly-CSharp.dll Namespace%3DUtility.HeatAlgorithm Type%3DHeatCalculator Member%3DHeatMap"
+                tag="ViewCode" />
+            </referencesInternal>
+            <appliedStereotypesInternal>
+              <stereotypeInstance
+                Id="0835b728-d379-405d-985b-af9fcbcfddb6"
+                name="property"
+                profile="CSharpProfile">
+                <propertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="729d52c5-09ca-48c8-97cf-db59d91f2268">
+                    <propertyInstance
+                      Id="9515e183-9307-4a13-a25d-1abf411a4838"
+                      name="ClrAttributes" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="4fff69ec-733b-4f00-923c-9204a4010936">
+                    <propertyInstance
+                      Id="7f54e5a8-d3ca-4983-aee0-49a089f14354"
+                      name="Get"
+                      value="public" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="05c62f90-b931-4533-b8ca-f45a30281414">
+                    <propertyInstance
+                      Id="d72cd443-30a7-4f7f-b22c-87fa03e00daf"
+                      name="HasBody"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="fe106e9a-6d8d-4ceb-876b-abeba3380db8">
+                    <propertyInstance
+                      Id="a9475740-53c0-4823-9e52-d26654d4888b"
+                      name="IsUnsafe"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="1b3f9c73-6fc8-4c87-8531-ab7185a1f0d9">
+                    <propertyInstance
+                      Id="e4bc61ea-b985-4458-8e68-352eedc706a3"
+                      name="Inheritance"
+                      value="none" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="c41da912-1baf-4c48-b5bb-329616648bf4">
+                    <propertyInstance
+                      Id="e765d81f-330e-4eae-b9c0-bd9d20cd2b9f"
+                      name="PackageVisibility"
+                      value="internal" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="ced15cf2-db38-4146-94a2-376b6be6139e">
+                    <propertyInstance
+                      Id="13541414-7aba-4e59-8b81-797fdcbbf4d3"
+                      name="Set"
+                      value="public" />
+                  </stereotypeInstanceHasPropertyInstances>
+                </propertyInstances>
+              </stereotypeInstance>
+            </appliedStereotypesInternal>
+            <lowerValueInternal>
+              <literalString
+                Id="94bebd89-ae41-4498-9060-b17ac821dbe0"
+                name="Lower"
+                value="*" />
+            </lowerValueInternal>
+            <upperValueInternal>
+              <literalString
+                Id="89a72aa2-c24b-4800-aebb-3f1bca9b4f2b"
+                name="Upper"
+                value="*" />
+            </upperValueInternal>
+            <type_NamedElement>
+              <classMoniker
+                Id="8a630388-0416-44f8-b84a-ea3e0a1419a9"
+                LastKnownName="Single"
+                LastKnownLocation="Package2_1029.uml" />
+            </type_NamedElement>
+          </property>
+          <property
+            Id="640ab398-91ff-47de-96c8-57a8a36e217e"
+            name="Type"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <referencesInternal>
+              <reference
+                Id="7e5e7800-5f2c-4c2b-bbe2-eca2aa7cce95"
+                handle="viewcode://./CodeSchema_Property?Assembly%3Dfile:%2F%2F%2FC:%2FUsers%2FAvell%2FDocuments%2FFURB%2FTCC%2FRepositorio%2FAlpha%2FTemp%2FUnityVS_bin%2FDebug%2FAssembly-CSharp.dll Namespace%3DUtility.HeatAlgorithm Type%3DHeatCalculator Member%3DType"
+                tag="ViewCode" />
+            </referencesInternal>
+            <appliedStereotypesInternal>
+              <stereotypeInstance
+                Id="7a983ef5-2b8b-4049-91ce-77e64c23f25c"
+                name="property"
+                profile="CSharpProfile">
+                <propertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="e0b79542-8371-4f9d-864e-1fcc606f5f01">
+                    <propertyInstance
+                      Id="5ec75295-d4f9-45c6-964a-a76ec78e40b9"
+                      name="ClrAttributes" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="232ea7f4-58be-4d8d-84b1-7f984624c49f">
+                    <propertyInstance
+                      Id="24bd6a4a-ecb9-4165-9de8-fddfcb612be2"
+                      name="Get"
+                      value="public" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="b14bcb4a-2930-4b17-9617-2271bd4d80ce">
+                    <propertyInstance
+                      Id="f2c8b925-d033-4ca8-a509-05ad9817d342"
+                      name="HasBody"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="8e514a24-c425-4bb8-9307-19df513a175d">
+                    <propertyInstance
+                      Id="983f22db-e25c-4e55-a52e-e7ed874fadbc"
+                      name="IsUnsafe"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="b603961c-693f-4598-abed-3fa849dd3298">
+                    <propertyInstance
+                      Id="976bf307-4925-4406-8331-28f680cae668"
+                      name="Inheritance"
+                      value="none" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="791d2f98-579a-4ca5-a705-5f08787925dd">
+                    <propertyInstance
+                      Id="62d24094-db44-4241-9a34-0e85c9f84226"
+                      name="PackageVisibility"
+                      value="internal" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="91c06e5e-bd20-4f8f-a059-a2aaca3d853d">
+                    <propertyInstance
+                      Id="935e103f-d806-46cd-8985-6fabfc9a8776"
+                      name="Set"
+                      value="public" />
+                  </stereotypeInstanceHasPropertyInstances>
+                </propertyInstances>
+              </stereotypeInstance>
+            </appliedStereotypesInternal>
+            <type_NamedElement>
+              <enumerationMoniker
+                Id="a6c3f095-2925-448e-bf52-c81d04203dc0"
+                LastKnownName="HeatTypes"
+                LastKnownLocation="Package3_1048.uml" />
+            </type_NamedElement>
+          </property>
+        </ownedAttributesInternal>
+        <ownedOperationsInternal>
+          <operation
+            Id="46d11a27-1304-4712-9a41-2e1f64fdd167"
+            name="CalculateHeat"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <referencesInternal>
+              <reference
+                Id="b2b8754f-047e-45cb-a7d7-6e6d502e3d30"
+                handle="viewcode://./CodeSchema_Method?Assembly%3Dfile:%2F%2F%2FC:%2FUsers%2FAvell%2FDocuments%2FFURB%2FTCC%2FRepositorio%2FAlpha%2FTemp%2FUnityVS_bin%2FDebug%2FAssembly-CSharp.dll Namespace%3DUtility.HeatAlgorithm Type%3DHeatCalculator Member%3DCalculateHeat"
+                tag="ViewCode" />
+            </referencesInternal>
+            <appliedStereotypesInternal>
+              <stereotypeInstance
+                Id="e33b011c-9717-46c5-92f0-78fee3f3b056"
+                name="method"
+                profile="CSharpProfile">
+                <propertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="d14eaa13-fe23-4101-b921-08f2414ce34e">
+                    <propertyInstance
+                      Id="86a65805-7350-4cfc-b6ee-ccd9efd01d6c"
+                      name="ClrAttributes" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="82bdf7c8-6a90-4ebd-bcf5-085305c4a70e">
+                    <propertyInstance
+                      Id="83890af8-b656-4d12-8816-0849f9f78ec6"
+                      name="IsPartial"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="8405d190-0fee-46e3-a03f-e6e9e1ffacb2">
+                    <propertyInstance
+                      Id="755d816d-d0f3-49fb-b2e4-6a4f1fb0c722"
+                      name="IsUnsafe"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="8e2b1060-75b7-41b0-8048-204e5ff23818">
+                    <propertyInstance
+                      Id="797acc5f-3a66-4cb9-9a39-c3216a7e2ead"
+                      name="Inheritance"
+                      value="none" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="fd073f15-8e22-45fb-bc25-4db95fb643f3">
+                    <propertyInstance
+                      Id="f11a0061-1087-48bb-828e-20e29bb93725"
+                      name="PackageVisibility"
+                      value="internal" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="305e7ab4-0069-437f-a4df-dac829b971f6">
+                    <propertyInstance
+                      Id="a36663ac-fe67-4bc4-9980-0be7dea51750"
+                      name="params"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                </propertyInstances>
+              </stereotypeInstance>
+            </appliedStereotypesInternal>
+          </operation>
+          <operation
+            Id="22c5742d-7183-4811-a035-a9029efb72d4"
+            name="CalculateSoilDepth"
+            visibility="Private"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <referencesInternal>
+              <reference
+                Id="6e503856-e862-413a-8b6b-cc14e5f20044"
+                handle="viewcode://./CodeSchema_Method?Assembly%3Dfile:%2F%2F%2FC:%2FUsers%2FAvell%2FDocuments%2FFURB%2FTCC%2FRepositorio%2FAlpha%2FTemp%2FUnityVS_bin%2FDebug%2FAssembly-CSharp.dll Namespace%3DUtility.HeatAlgorithm Type%3DHeatCalculator Member%3DCalculateSoilDepth"
+                tag="ViewCode" />
+            </referencesInternal>
+            <appliedStereotypesInternal>
+              <stereotypeInstance
+                Id="d73dadf0-f055-4720-950f-98738cd930a5"
+                name="method"
+                profile="CSharpProfile">
+                <propertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="85c54dae-9d12-4278-8df5-e7450f746dad">
+                    <propertyInstance
+                      Id="f5fbfb68-3e1d-4f6e-a56c-f7d37d4c495b"
+                      name="ClrAttributes" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="a96685c4-370b-40ac-b396-67d54552f7ef">
+                    <propertyInstance
+                      Id="de5b4efe-9936-49bc-b08f-12ab1828d9ac"
+                      name="IsPartial"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="1f93d014-909f-49ef-b3d6-bb1b4ea7dca3">
+                    <propertyInstance
+                      Id="742ec9bb-9ea1-4fe4-92dc-265a9124be50"
+                      name="IsUnsafe"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="9336be99-1999-4463-9dcb-d606adf641ae">
+                    <propertyInstance
+                      Id="a2f191d7-fe67-4523-ac07-c517703d7e03"
+                      name="Inheritance"
+                      value="none" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="91f9d89b-d988-42c3-b89c-309e493d990b">
+                    <propertyInstance
+                      Id="bf770d7b-0c76-48f7-be86-9ed32ee25bb2"
+                      name="PackageVisibility"
+                      value="internal" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="a0022606-a3be-42bd-b879-fce600ef340c">
+                    <propertyInstance
+                      Id="654b4243-fec9-479a-88b8-6aeefb35fe85"
+                      name="params"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                </propertyInstances>
+              </stereotypeInstance>
+            </appliedStereotypesInternal>
+          </operation>
+          <operation
+            Id="a2b90339-49da-40bd-b59d-f7b2f0d80cd6"
+            name="CalculateWaterDepth"
+            visibility="Private"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <referencesInternal>
+              <reference
+                Id="5fcdc74d-d9e8-48d7-babf-920f34d9bf87"
+                handle="viewcode://./CodeSchema_Method?Assembly%3Dfile:%2F%2F%2FC:%2FUsers%2FAvell%2FDocuments%2FFURB%2FTCC%2FRepositorio%2FAlpha%2FTemp%2FUnityVS_bin%2FDebug%2FAssembly-CSharp.dll Namespace%3DUtility.HeatAlgorithm Type%3DHeatCalculator Member%3DCalculateWaterDepth"
+                tag="ViewCode" />
+            </referencesInternal>
+            <appliedStereotypesInternal>
+              <stereotypeInstance
+                Id="fb06ee00-3a2d-460f-90ca-fc5e599f46d7"
+                name="method"
+                profile="CSharpProfile">
+                <propertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="066c8c0e-ec5d-4390-b10a-760573b757ce">
+                    <propertyInstance
+                      Id="0f211a67-e4a2-408a-bfb4-e3b69419c598"
+                      name="ClrAttributes" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="da39b195-daec-49ad-979b-eedbc7641723">
+                    <propertyInstance
+                      Id="dc667265-2230-4417-bf11-3a8863a56b2d"
+                      name="IsPartial"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="cb97f1d7-3c42-446b-a21f-6a7ba52e2afe">
+                    <propertyInstance
+                      Id="54186831-1964-4b61-8554-649f4bd9b1ed"
+                      name="IsUnsafe"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="706da9ca-6d32-43a7-a26e-4e554e875b24">
+                    <propertyInstance
+                      Id="cce4e787-80fb-4986-b633-17525b94428d"
+                      name="Inheritance"
+                      value="none" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="e34eddcd-f22a-422c-82db-75f849f3c6ca">
+                    <propertyInstance
+                      Id="2d6bf04e-05fb-414a-a753-15e9030b33dc"
+                      name="PackageVisibility"
+                      value="internal" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="e26b98e6-f1f7-4080-b1db-c42c7d8c6975">
+                    <propertyInstance
+                      Id="2b0d14f2-b3b0-4b7c-8b8f-8571f87c7d0d"
+                      name="params"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                </propertyInstances>
+              </stereotypeInstance>
+            </appliedStereotypesInternal>
+          </operation>
+          <operation
+            Id="abe3cf66-6d5f-4fc2-9ae1-e4cb546be71d"
+            name="CalculateSoilHumidity"
+            visibility="Private"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <referencesInternal>
+              <reference
+                Id="0852d0d6-828a-45d9-9ebd-90f1457e1831"
+                handle="viewcode://./CodeSchema_Method?Assembly%3Dfile:%2F%2F%2FC:%2FUsers%2FAvell%2FDocuments%2FFURB%2FTCC%2FRepositorio%2FAlpha%2FTemp%2FUnityVS_bin%2FDebug%2FAssembly-CSharp.dll Namespace%3DUtility.HeatAlgorithm Type%3DHeatCalculator Member%3DCalculateSoilHumidity"
+                tag="ViewCode" />
+            </referencesInternal>
+            <appliedStereotypesInternal>
+              <stereotypeInstance
+                Id="8408ecc1-357d-4345-a8bf-42feec50ca3f"
+                name="method"
+                profile="CSharpProfile">
+                <propertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="0f025bb8-d665-4940-8775-838622947939">
+                    <propertyInstance
+                      Id="d30553a2-dca7-4766-b797-0ecc036d024f"
+                      name="ClrAttributes" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="e2079080-8755-4ea8-80c9-2716417a0884">
+                    <propertyInstance
+                      Id="b79aacea-7229-4b93-89a0-2fe51434553d"
+                      name="IsPartial"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="28ee12db-6258-401e-8b85-5fa70d9c31e1">
+                    <propertyInstance
+                      Id="616a84ac-34e4-4933-88c9-7a75437f05aa"
+                      name="IsUnsafe"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="f5a6904b-3da3-444e-86a5-14cde4d22eeb">
+                    <propertyInstance
+                      Id="1820c061-0149-4b6b-ac61-685d5105cebf"
+                      name="Inheritance"
+                      value="none" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="01ca1351-eecd-4774-b036-0bfc45530b68">
+                    <propertyInstance
+                      Id="7c249e74-89f1-4c3c-a1c6-3739b7b8b282"
+                      name="PackageVisibility"
+                      value="internal" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="2f06eeeb-437c-4d6a-9dd4-7bd8113fa3e5">
+                    <propertyInstance
+                      Id="fbcda0e8-47e2-4054-971d-81feb0f2140b"
+                      name="params"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                </propertyInstances>
+              </stereotypeInstance>
+            </appliedStereotypesInternal>
+          </operation>
+          <operation
+            Id="21d3ec65-1561-498a-98d5-88101ceef793"
+            name="CalculateInclination"
+            visibility="Private"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <referencesInternal>
+              <reference
+                Id="a5b2e9af-c188-48b2-9aa8-084f01e41d59"
+                handle="viewcode://./CodeSchema_Method?Assembly%3Dfile:%2F%2F%2FC:%2FUsers%2FAvell%2FDocuments%2FFURB%2FTCC%2FRepositorio%2FAlpha%2FTemp%2FUnityVS_bin%2FDebug%2FAssembly-CSharp.dll Namespace%3DUtility.HeatAlgorithm Type%3DHeatCalculator Member%3DCalculateInclination"
+                tag="ViewCode" />
+            </referencesInternal>
+            <appliedStereotypesInternal>
+              <stereotypeInstance
+                Id="d39390e3-25d6-4968-b9c0-c1fc8c953759"
+                name="method"
+                profile="CSharpProfile">
+                <propertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="24e4b36b-897e-4aba-99f3-9d4e316aa4b5">
+                    <propertyInstance
+                      Id="f2fd4993-bdfd-4dd1-9f4b-d153989dc1a8"
+                      name="ClrAttributes" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="564f5f2b-65b2-4a5a-8ced-21a137516dbe">
+                    <propertyInstance
+                      Id="7860db91-ee4d-490f-bb66-9d8ce9a7bfce"
+                      name="IsPartial"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="c3d5663d-0749-488a-82f8-5c42137c5a58">
+                    <propertyInstance
+                      Id="111ad2fe-4926-4c56-b05c-1e5f3b616a64"
+                      name="IsUnsafe"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="5fde0069-fe80-49a2-be70-38aa18307063">
+                    <propertyInstance
+                      Id="84e7cb61-b423-4748-b085-3c991baa0fa9"
+                      name="Inheritance"
+                      value="none" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="5d6744a0-8131-42ac-9bce-fdcceaf2e1f4">
+                    <propertyInstance
+                      Id="63a552d8-8366-4d6e-b61b-884c05b80286"
+                      name="PackageVisibility"
+                      value="internal" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="68d7d2f4-f2d6-4076-907c-dc5852d4c727">
+                    <propertyInstance
+                      Id="2be9bf12-d62a-4077-85ea-b34e32d11a80"
+                      name="params"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                </propertyInstances>
+              </stereotypeInstance>
+            </appliedStereotypesInternal>
+          </operation>
+          <operation
+            Id="6b14578b-f320-411e-90b8-93236e7d27d9"
+            name="GetHighestIncline"
+            visibility="Private"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <referencesInternal>
+              <reference
+                Id="9df47eef-07cd-4f91-b762-27ecc6f684dd"
+                handle="viewcode://./CodeSchema_Method?Assembly%3Dfile:%2F%2F%2FC:%2FUsers%2FAvell%2FDocuments%2FFURB%2FTCC%2FRepositorio%2FAlpha%2FTemp%2FUnityVS_bin%2FDebug%2FAssembly-CSharp.dll Namespace%3DUtility.HeatAlgorithm Type%3DHeatCalculator Member%3D(Name%3DGetHighestIncline OverloadingParameters%3D[(Assembly%3D&quot;file:%2F%2F%2FC:%2FProgram Files (x86)%2FReference Assemblies%2FMicrosoft%2FFramework%2F.NETFramework%2Fv3.5%2FProfile%2FUnity Subset v3.5%2Fmscorlib.dll&quot; Namespace%3DSystem Type%3DInt32)%2C(Assembly%3D&quot;file:%2F%2F%2FC:%2FProgram Files (x86)%2FReference Assemblies%2FMicrosoft%2FFramework%2F.NETFramework%2Fv3.5%2FProfile%2FUnity Subset v3.5%2Fmscorlib.dll&quot; Namespace%3DSystem Type%3DInt32)])"
+                tag="ViewCode" />
+            </referencesInternal>
+            <appliedStereotypesInternal>
+              <stereotypeInstance
+                Id="3cacde5d-e300-40ec-87a9-5e7bdc9e89ac"
+                name="method"
+                profile="CSharpProfile">
+                <propertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="2eea57e1-4a24-46f0-bc09-8da0123dc01a">
+                    <propertyInstance
+                      Id="d4890856-5f01-45e8-9735-dc500c068bf4"
+                      name="ClrAttributes" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="26b44340-1eb1-474e-bab2-f727894406db">
+                    <propertyInstance
+                      Id="a3a35aff-9583-4c80-911d-375ed2b0c68c"
+                      name="IsPartial"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="a8c01420-9e3c-42e9-bbd0-b2dbeb5054ba">
+                    <propertyInstance
+                      Id="c24bb27f-93e2-41e0-91f3-324e133a7372"
+                      name="IsUnsafe"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="ed90b628-4910-466b-8d2f-4651bf54c5c1">
+                    <propertyInstance
+                      Id="f4f2247d-a7e5-4bf1-a595-7fb027a91a3d"
+                      name="Inheritance"
+                      value="none" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="35d5f083-02b2-46a1-8d58-dc89a162d90c">
+                    <propertyInstance
+                      Id="40263d18-f67c-4842-bff0-c7c83d6dd4c1"
+                      name="PackageVisibility"
+                      value="internal" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="8d6924d9-60c6-49ee-bcb9-211b6e32f344">
+                    <propertyInstance
+                      Id="ed792743-89fb-4b72-aa7b-dd62e353203b"
+                      name="params"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                </propertyInstances>
+              </stereotypeInstance>
+            </appliedStereotypesInternal>
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="d5ad6b7c-d4f1-4a1b-a442-e6c46ddb1d18"
+                  direction="Return">
+                  <type_NamedElement>
+                    <classMoniker
+                      Id="8a630388-0416-44f8-b84a-ea3e0a1419a9"
+                      LastKnownName="Single"
+                      LastKnownLocation="Package2_1029.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="d279b1e1-6963-4d25-88f5-8182ce695268"
+                  name="x"
+                  direction="In">
+                  <referencesInternal>
+                    <reference
+                      Id="e4508b1d-043d-49d1-9adf-36e54cf4c36a"
+                      handle="viewcode://./CodeSchema_Parameter?Assembly%3Dfile:%2F%2F%2FC:%2FUsers%2FAvell%2FDocuments%2FFURB%2FTCC%2FRepositorio%2FAlpha%2FTemp%2FUnityVS_bin%2FDebug%2FAssembly-CSharp.dll Namespace%3DUtility.HeatAlgorithm Type%3DHeatCalculator Member%3D(Name%3DGetHighestIncline OverloadingParameters%3D[(Assembly%3D&quot;file:%2F%2F%2FC:%2FProgram Files (x86)%2FReference Assemblies%2FMicrosoft%2FFramework%2F.NETFramework%2Fv3.5%2FProfile%2FUnity Subset v3.5%2Fmscorlib.dll&quot; Namespace%3DSystem Type%3DInt32)%2C(Assembly%3D&quot;file:%2F%2F%2FC:%2FProgram Files (x86)%2FReference Assemblies%2FMicrosoft%2FFramework%2F.NETFramework%2Fv3.5%2FProfile%2FUnity Subset v3.5%2Fmscorlib.dll&quot; Namespace%3DSystem Type%3DInt32)]) ParameterIdentifier%3Dx"
+                      tag="ViewCode" />
+                  </referencesInternal>
+                  <type_NamedElement>
+                    <primitiveTypeMoniker
+                      Id="220a3521-e091-4221-bae9-3ef9018e845c"
+                      LastKnownName="Integer"
+                      LastKnownLocation="TCC.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="2f6ab171-29f7-4e1c-a81d-e3a6e38b64b4"
+                  name="y"
+                  direction="In">
+                  <referencesInternal>
+                    <reference
+                      Id="27c585d4-1e2c-4ddc-8ec1-82a30449eb9e"
+                      handle="viewcode://./CodeSchema_Parameter?Assembly%3Dfile:%2F%2F%2FC:%2FUsers%2FAvell%2FDocuments%2FFURB%2FTCC%2FRepositorio%2FAlpha%2FTemp%2FUnityVS_bin%2FDebug%2FAssembly-CSharp.dll Namespace%3DUtility.HeatAlgorithm Type%3DHeatCalculator Member%3D(Name%3DGetHighestIncline OverloadingParameters%3D[(Assembly%3D&quot;file:%2F%2F%2FC:%2FProgram Files (x86)%2FReference Assemblies%2FMicrosoft%2FFramework%2F.NETFramework%2Fv3.5%2FProfile%2FUnity Subset v3.5%2Fmscorlib.dll&quot; Namespace%3DSystem Type%3DInt32)%2C(Assembly%3D&quot;file:%2F%2F%2FC:%2FProgram Files (x86)%2FReference Assemblies%2FMicrosoft%2FFramework%2F.NETFramework%2Fv3.5%2FProfile%2FUnity Subset v3.5%2Fmscorlib.dll&quot; Namespace%3DSystem Type%3DInt32)]) ParameterIdentifier%3Dy"
+                      tag="ViewCode" />
+                  </referencesInternal>
+                  <type_NamedElement>
+                    <primitiveTypeMoniker
+                      Id="220a3521-e091-4221-bae9-3ef9018e845c"
+                      LastKnownName="Integer"
+                      LastKnownLocation="TCC.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation
+            Id="557a76a6-a0fe-4842-bd3f-77bbcae5f817"
+            name="HeatCalculator"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <referencesInternal>
+              <reference
+                Id="300ed1c1-2134-4b97-b20e-a0481fd86c9d"
+                handle="viewcode://./CodeSchema_Method?Assembly%3Dfile:%2F%2F%2FC:%2FUsers%2FAvell%2FDocuments%2FFURB%2FTCC%2FRepositorio%2FAlpha%2FTemp%2FUnityVS_bin%2FDebug%2FAssembly-CSharp.dll Namespace%3DUtility.HeatAlgorithm Type%3DHeatCalculator Member%3D.ctor"
+                tag="ViewCode" />
+            </referencesInternal>
+            <appliedStereotypesInternal>
+              <stereotypeInstance
+                Id="2d489de8-1354-4344-a95c-2ca957260936"
+                name="method"
+                profile="CSharpProfile">
+                <propertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="9c8ac590-1eff-4a71-ae3c-4f5df45ada96">
+                    <propertyInstance
+                      Id="88e27bee-7a39-4512-bfbe-1ed829501d23"
+                      name="ClrAttributes" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="a45c5c12-d408-4efc-9bfa-7340c8c2770f">
+                    <propertyInstance
+                      Id="75f9dab9-244f-408f-8f54-f3a2caf3e92b"
+                      name="IsPartial"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="5506e286-46c8-4da0-bc2a-c7f56760f206">
+                    <propertyInstance
+                      Id="23a47680-7d66-4711-93f9-3e93f5f81dce"
+                      name="IsUnsafe"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="df804c58-8aa1-4322-9775-bffb351f0012">
+                    <propertyInstance
+                      Id="3fb34231-f3c4-4167-a2d4-0228b7ae3a3a"
+                      name="Inheritance"
+                      value="none" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="23b34791-3ec6-4dc7-8ac9-a211105c934a">
+                    <propertyInstance
+                      Id="11610a55-b568-4268-b9e3-a68ff3de7b7e"
+                      name="PackageVisibility"
+                      value="internal" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="45f375d2-938b-4791-8379-3f8a9b6f6398">
+                    <propertyInstance
+                      Id="60360be0-1066-437f-ae5f-700e71b8210f"
+                      name="params"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                </propertyInstances>
+              </stereotypeInstance>
+            </appliedStereotypesInternal>
+          </operation>
+        </ownedOperationsInternal>
+      </class>
+    </packageHasNamedElement>
+  </packagedElements>
+</package>

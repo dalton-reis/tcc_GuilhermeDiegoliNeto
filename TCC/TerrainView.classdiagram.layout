@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<logicalClassDesignerDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 12.125" name="TerrainView">
+  <logicalClassDesignerModelMoniker Id="4d7e1f3b-7f29-4034-a42a-a0a6f8d03fb8" />
+  <nestedChildShapes>
+    <packageShape Id="957898c0-8df9-4c13-b882-e02bb2396e5c" absoluteBounds="0.5, 0.625, 9, 11.25" customColor="255, 249, 230" hideQualifiedName="false">
+      <packageMoniker Id="815a1945-e933-426f-a525-694452f0052f" LastKnownName="TerrainView" />
+      <nestedChildShapes>
+        <classShape Id="be6c1523-3158-477a-8240-b23e3b15666b" absoluteBounds="1.5, 9.125, 3.5, 2.6292418247461313" hideQualifiedName="false" increaseHeight="0.18800345897674561" customColor="181, 193, 223">
+          <classMoniker Id="a81e3fc2-83ac-4d84-a41b-48560042768e" LastKnownName="EventManager" />
+          <nestedChildShapes>
+            <AttributeElementListCompartment Id="65e173b3-657c-4201-844b-66a8ed166619" absoluteBounds="1.515, 9.640335639317831, 3.4699999999999998, 0.36132811258236563" name="AttributesCompartment" titleTextColor="Black" itemTextColor="Black" />
+            <OperationElementListCompartment Id="93564689-cc8a-4538-b3df-e3e6dd18fe22" absoluteBounds="1.515, 10.011663751900196, 3.4699999999999998, 1.6425780728459356" name="OperationsCompartment" titleTextColor="Black" itemTextColor="Black" />
+          </nestedChildShapes>
+        </classShape>
+        <classShape Id="4088580b-21d4-4e8d-ac93-eacfa080fbcb" absoluteBounds="5.5, 5.5, 3.875, 4.2308042750755952" hideQualifiedName="false" increaseHeight="0.18800345897674561" customColor="181, 193, 223">
+          <classMoniker Id="c2f0127e-02ff-4d79-bb97-dd49a2271f4d" LastKnownName="CameraControl" />
+          <nestedChildShapes>
+            <AttributeElementListCompartment Id="0accb155-6a0f-4619-adb3-598e7bd9588c" absoluteBounds="5.515, 6.01533563931783, 3.8449999999999998, 1.6425780728459358" name="AttributesCompartment" titleTextColor="Black" itemTextColor="Black" />
+            <OperationElementListCompartment Id="da7dd9c7-a3e9-43c1-a9fe-1cba25cdc9f2" absoluteBounds="5.515, 7.6679137121637666, 3.8449999999999998, 1.9628905629118285" name="OperationsCompartment" titleTextColor="Black" itemTextColor="Black" />
+          </nestedChildShapes>
+        </classShape>
+        <classShape Id="f525d048-6c06-435b-9710-400fea39ab62" absoluteBounds="5.5, 1, 3.875, 4.0706480300426477" hideQualifiedName="false" increaseHeight="0.18800345897674561" customColor="181, 193, 223">
+          <classMoniker Id="4ae24176-5666-403d-80c5-7c4fb949d477" LastKnownName="GameControl" />
+          <nestedChildShapes>
+            <AttributeElementListCompartment Id="0d65412c-1196-4302-8ca6-c23d9dcb6a70" absoluteBounds="5.515, 1.5153356393178306, 3.8449999999999998, 0.84179684768120444" name="AttributesCompartment" titleTextColor="Black" itemTextColor="Black" />
+            <OperationElementListCompartment Id="3cc15de4-19c9-450c-9e92-efadbf700f4a" absoluteBounds="5.515, 2.3671324869990347, 3.8449999999999998, 2.6035155430436134" name="OperationsCompartment" titleTextColor="Black" itemTextColor="Black" />
+          </nestedChildShapes>
+        </classShape>
+        <associationConnector edgePoints="[(6.87413461538462 : 5.07064803004265); (6.87413461538462 : 5.32064803004265); (8.02769230769231 : 5.32064803004265); (8.02769230769231 : 5.07064803004265)]" fixedFrom="NotFixed" fixedTo="NotFixed" customColor="113, 111, 110" sourceMultiplicity="1" targetMultiplicity="1">
+          <associationMoniker Id="43a2e0dd-728c-46bc-a773-596996e30788" />
+          <relativeChildShapes />
+          <nodes>
+            <classShapeMoniker Id="f525d048-6c06-435b-9710-400fea39ab62" />
+            <classShapeMoniker Id="f525d048-6c06-435b-9710-400fea39ab62" />
+          </nodes>
+        </associationConnector>
+        <classShape Id="1e3ce4ce-0699-4d6e-87e4-c0b60d8fa995" absoluteBounds="1.5, 1, 3.5, 7.7542416658004125" hideQualifiedName="false" increaseHeight="0.18800345897674561" customColor="181, 193, 223">
+          <classMoniker Id="78d781be-d199-4e32-b418-a540440e9a91" LastKnownName="TerrainControl" />
+          <nestedChildShapes>
+            <AttributeElementListCompartment Id="1a86fed7-132c-4b4a-915e-d6925b073aec" absoluteBounds="1.515, 1.5153356393178306, 3.4699999999999998, 3.0839842781424522" name="AttributesCompartment" titleTextColor="Black" itemTextColor="Black" />
+            <OperationElementListCompartment Id="432559cf-6144-4fc8-8e65-d96b80f510f2" absoluteBounds="1.515, 4.609319917460283, 3.4699999999999998, 4.04492174834013" name="OperationsCompartment" titleTextColor="Black" itemTextColor="Black" />
+          </nestedChildShapes>
+        </classShape>
+        <associationConnector edgePoints="[(1.5 : 3.68105102534783); (1.25 : 3.68105102534783); (1.25 : 6.13014634557412); (1.5 : 6.13014634557412)]" fixedFrom="NotFixed" fixedTo="NotFixed" customColor="113, 111, 110" sourceMultiplicity="1" targetMultiplicity="1">
+          <associationMoniker Id="bf706e74-dff3-47e7-9f49-a829f47c4541" />
+          <relativeChildShapes />
+          <nodes>
+            <classShapeMoniker Id="1e3ce4ce-0699-4d6e-87e4-c0b60d8fa995" />
+            <classShapeMoniker Id="1e3ce4ce-0699-4d6e-87e4-c0b60d8fa995" />
+          </nodes>
+        </associationConnector>
+      </nestedChildShapes>
+    </packageShape>
+  </nestedChildShapes>
+</logicalClassDesignerDiagram>

@@ -1,0 +1,101 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{1b0e8581-2188-4a23-960d-ea0a325234eb}</ProjectGuid>
+    <ArchitectureToolsVersion>2.0.0.0</ArchitectureToolsVersion>
+    <Name>TCC</Name>
+    <RootNamespace>TCC</RootNamespace>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <OutputPath>bin\Debug\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <OutputPath>bin\Release\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(VSToolsPath)\ArchitectureTools\Microsoft.VisualStudio.TeamArchitect.ModelingProject.targets" Condition="'$(VSToolsPath)' != ''" />
+  <ItemGroup>
+    <Content Include="HeatAlgorithm.classdiagram">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="HeatAlgorithm.classdiagram.layout">
+      <SubType>Content</SubType>
+      <DependentUpon>HeatAlgorithm.classdiagram</DependentUpon>
+    </Content>
+    <Content Include="ModelDefinition\Package_1042.uml">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ModelDefinition\Package_1647.uml">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ModelDefinition\Package_1652.uml">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="OtherScreens.classdiagram">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="OtherScreens.classdiagram.layout">
+      <SubType>Content</SubType>
+      <DependentUpon>OtherScreens.classdiagram</DependentUpon>
+    </Content>
+    <Content Include="ModelDefinition\Package1_1029.uml">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ModelDefinition\Package1_1048.uml">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ModelDefinition\Package2_1029.uml">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ModelDefinition\Package2_1048.uml">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ModelDefinition\Package3_1048.uml">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ModelDefinition\Package_1029.uml">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ModelDefinition\Package_1048.uml">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ModelDefinition\Package_1637.uml">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ModelDefinition\Package_1645.uml">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="SimulationConfigsScreen.classdiagram">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="SimulationConfigsScreen.classdiagram.layout">
+      <SubType>Content</SubType>
+      <DependentUpon>SimulationConfigsScreen.classdiagram</DependentUpon>
+    </Content>
+    <Content Include="TerrainAlgorithm.classdiagram">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="TerrainAlgorithm.classdiagram.layout">
+      <SubType>Content</SubType>
+      <DependentUpon>TerrainAlgorithm.classdiagram</DependentUpon>
+    </Content>
+    <Content Include="TerrainView.classdiagram">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="TerrainView.classdiagram.layout">
+      <SubType>Content</SubType>
+      <DependentUpon>TerrainView.classdiagram</DependentUpon>
+    </Content>
+    <Folder Include="ModelDefinition\" />
+    <Content Include="ModelDefinition\TCC.uml">
+      <SubType>Content</SubType>
+    </Content>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,120 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm4="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm5="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/LogicalClassDesigner"
+  dslVersion="1.0.0.0"
+  Id="5832c529-d253-470f-85c0-bfe6012a5602"
+  name="TerrainData"
+  visibility="Private" xmlns="http://schemas.microsoft.com/dsltools/ModelStore">
+  <referencesInternal>
+    <reference
+      Id="fccce29e-a983-45da-bbd8-fb87697e8e48"
+      handle="viewcode://./CodeSchema_Namespace?Namespace%3DUtility.TerrainData"
+      tag="ViewCode" />
+  </referencesInternal>
+  <packagedElements>
+    <packageHasNamedElement>
+      <enumeration
+        Id="32b266dc-f893-4394-9ad1-ebc68d980a02"
+        name="SurfaceType"
+        isAbstract="false"
+        isLeaf="false">
+        <referencesInternal>
+          <reference
+            Id="f0947835-3ffe-4081-b04e-0ad1030fac0f"
+            handle="viewcode://./CodeSchema_Enum?Assembly%3Dfile:%2F%2F%2FC:%2FUsers%2FAvell%2FDocuments%2FFURB%2FTCC%2FRepositorio%2FAlpha%2FTemp%2FUnityVS_bin%2FDebug%2FAssembly-CSharp.dll Namespace%3DUtility.TerrainData Type%3DSurfaceType"
+            tag="ViewCode" />
+        </referencesInternal>
+        <appliedStereotypesInternal>
+          <stereotypeInstance
+            Id="45f65993-951c-4f99-9bea-3ee53c5af024"
+            name="enum"
+            profile="CSharpProfile">
+            <propertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="4cf2ad2a-d21b-441f-8ab2-6c510006e612">
+                <propertyInstance
+                  Id="553ca663-1fb5-468c-b16c-4eac68575084"
+                  name="ClrAttributes" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="c3f44e65-14ab-4f12-8bb5-a29c927381e1">
+                <propertyInstance
+                  Id="c4ce3d25-e8b0-4fc8-829e-61fb19bdb067"
+                  name="BaseType"
+                  value="int" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="829eb8e2-5ebf-4f30-bd16-af45e6f0ba4f">
+                <propertyInstance
+                  Id="f5b1f3a8-27df-4c71-8b6c-58386b49de52"
+                  name="PackageVisibility"
+                  value="internal" />
+              </stereotypeInstanceHasPropertyInstances>
+            </propertyInstances>
+          </stereotypeInstance>
+        </appliedStereotypesInternal>
+        <ownedLiterals>
+          <enumerationLiteral
+            Id="f0e8fa53-2467-467d-93e0-7d8b0101e2d4"
+            name="Soil">
+            <referencesInternal>
+              <reference
+                Id="aa2f472a-fcbc-4b31-a62d-1d0abab60ce4"
+                handle="viewcode://./CodeSchema_Field?Assembly%3Dfile:%2F%2F%2FC:%2FUsers%2FAvell%2FDocuments%2FFURB%2FTCC%2FRepositorio%2FAlpha%2FTemp%2FUnityVS_bin%2FDebug%2FAssembly-CSharp.dll Namespace%3DUtility.TerrainData Type%3DSurfaceType Member%3DSoil"
+                tag="ViewCode" />
+            </referencesInternal>
+          </enumerationLiteral>
+          <enumerationLiteral
+            Id="1098cc16-550c-45b5-88bc-be70d2380979"
+            name="Grass">
+            <referencesInternal>
+              <reference
+                Id="5046f44f-68d1-4778-80f1-048843a55454"
+                handle="viewcode://./CodeSchema_Field?Assembly%3Dfile:%2F%2F%2FC:%2FUsers%2FAvell%2FDocuments%2FFURB%2FTCC%2FRepositorio%2FAlpha%2FTemp%2FUnityVS_bin%2FDebug%2FAssembly-CSharp.dll Namespace%3DUtility.TerrainData Type%3DSurfaceType Member%3DGrass"
+                tag="ViewCode" />
+            </referencesInternal>
+          </enumerationLiteral>
+          <enumerationLiteral
+            Id="80a2da8c-6b95-4571-9e67-5dcea8ef5fe1"
+            name="Plants">
+            <referencesInternal>
+              <reference
+                Id="897d01b1-5ccf-45c5-b013-172ed059cff3"
+                handle="viewcode://./CodeSchema_Field?Assembly%3Dfile:%2F%2F%2FC:%2FUsers%2FAvell%2FDocuments%2FFURB%2FTCC%2FRepositorio%2FAlpha%2FTemp%2FUnityVS_bin%2FDebug%2FAssembly-CSharp.dll Namespace%3DUtility.TerrainData Type%3DSurfaceType Member%3DPlants"
+                tag="ViewCode" />
+            </referencesInternal>
+          </enumerationLiteral>
+          <enumerationLiteral
+            Id="6a09d5ca-d935-48ff-b93e-ae30329ee82a"
+            name="Concrete">
+            <referencesInternal>
+              <reference
+                Id="b9b7ff55-d9d5-4b69-96f2-68775377c6a9"
+                handle="viewcode://./CodeSchema_Field?Assembly%3Dfile:%2F%2F%2FC:%2FUsers%2FAvell%2FDocuments%2FFURB%2FTCC%2FRepositorio%2FAlpha%2FTemp%2FUnityVS_bin%2FDebug%2FAssembly-CSharp.dll Namespace%3DUtility.TerrainData Type%3DSurfaceType Member%3DConcrete"
+                tag="ViewCode" />
+            </referencesInternal>
+          </enumerationLiteral>
+          <enumerationLiteral
+            Id="b0b67081-c8f1-4dd9-93f9-ae3ae9799cec"
+            name="Count">
+            <referencesInternal>
+              <reference
+                Id="92b829e9-0b4f-4302-8413-eb462e8aa625"
+                handle="viewcode://./CodeSchema_Field?Assembly%3Dfile:%2F%2F%2FC:%2FUsers%2FAvell%2FDocuments%2FFURB%2FTCC%2FRepositorio%2FAlpha%2FTemp%2FUnityVS_bin%2FDebug%2FAssembly-CSharp.dll Namespace%3DUtility.TerrainData Type%3DSurfaceType Member%3DCount"
+                tag="ViewCode" />
+            </referencesInternal>
+          </enumerationLiteral>
+          <enumerationLiteral
+            Id="efb9e7dc-4d32-411d-9d70-786c2a619177"
+            name="Shade">
+            <referencesInternal>
+              <reference
+                Id="d7cfbe34-16d5-4929-919c-70e109082500"
+                handle="viewcode://./CodeSchema_Field?Assembly%3Dfile:%2F%2F%2FC:%2FUsers%2FAvell%2FDocuments%2FFURB%2FTCC%2FRepositorio%2FAlpha%2FTemp%2FUnityVS_bin%2FDebug%2FAssembly-CSharp.dll Namespace%3DUtility.TerrainData Type%3DSurfaceType Member%3DShade"
+                tag="ViewCode" />
+            </referencesInternal>
+          </enumerationLiteral>
+        </ownedLiterals>
+      </enumeration>
+    </packageHasNamedElement>
+  </packagedElements>
+</package>
