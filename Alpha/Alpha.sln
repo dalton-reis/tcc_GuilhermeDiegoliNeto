@@ -1,8 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.30723.0
-MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alpha.CSharp", "Alpha.CSharp.csproj", "{3D61D6EC-D5D3-1E88-DC2A-6FF5EBA95E38}"
 EndProject
 Project("{F088123C-0E9E-452A-89E6-6BA2F21D5CAC}") = "TCC", "..\TCC\TCC.modelproj", "{1B0E8581-2188-4A23-960D-EA0A325234EB}"
