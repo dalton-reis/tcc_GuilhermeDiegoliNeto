@@ -37,7 +37,7 @@ namespace StatsScreen
             float lowWater = 0;
             float lowHumidity = 0;
             float lowHeight = 0;
-            float lowIncline = 0;
+            float lowIncline = 1;
             float avgSoil = 0;
             float avgWater = 0;
             float avgHumidity = 0;
@@ -90,7 +90,7 @@ namespace StatsScreen
                         inclineCount++;
 
                         if (incline > highIncline) highIncline = incline;
-                        if (incline < lowIncline || lowIncline == 0) lowIncline = incline;
+                        if (incline < lowIncline) lowIncline = incline;
                     }
 
                     surfaceCounter[SurfaceMap[x, y]]++;
