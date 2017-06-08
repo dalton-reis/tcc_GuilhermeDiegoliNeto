@@ -1,25 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<logicalClassDesignerModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm4="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm5="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/ModelStore" dslVersion="1.0.0.0" Id="873a4d9b-fe17-44d9-b17b-81acf34add97" name="TerrainSimulator" linkedPackageId="2a457d7f-30b9-4bb5-b501-afc025a45640" xmlns="http://schemas.microsoft.com/dsltools/LogicalClassDesigner">
-  <profileInstances>
-    <packageHasProfileInstances Id="fefef968-9b8e-48a1-a5b4-bbe30bd9b019">
-      <profileInstance Id="071e2e51-71ce-4e57-9976-4858f4c83601" name="StandardProfileL2">
-        <elementDefinition Id="e34d544e-0fea-4ed6-ac5e-1b74119ac791" />
-      </profileInstance>
-      <elementDefinition Id="0caec977-1f8c-4ba3-a7db-8cc9ad9cc73b" />
-    </packageHasProfileInstances>
-    <packageHasProfileInstances Id="18fe52ee-4d24-4554-811b-054bbed11d57">
-      <profileInstance Id="d6feb78f-c4f7-4059-bcdf-83b5feea71a0" name="StandardProfileL3">
-        <elementDefinition Id="532ea607-fb19-44b8-8502-3351b05452be" />
-      </profileInstance>
-      <elementDefinition Id="29349502-908c-4fda-9054-c48619c59ed0" />
-    </packageHasProfileInstances>
-    <packageHasProfileInstances Id="df4c4cbb-a66f-454a-bff9-ec2021961c9a">
-      <profileInstance Id="d3ce16ec-b1be-4270-a4f1-e84b61279196" name="CSharpProfile">
-        <elementDefinition Id="3e58d2aa-55ae-43cb-8dbc-2a8754c8a8a7" />
-      </profileInstance>
-      <elementDefinition Id="4048572e-b08c-4484-a55e-757f1454b65e" />
-    </packageHasProfileInstances>
-  </profileInstances>
+<logicalClassDesignerModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm4="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/ModelStore" dslVersion="1.0.0.0" Id="873a4d9b-fe17-44d9-b17b-81acf34add97" name="TerrainSimulator" linkedPackageId="2a457d7f-30b9-4bb5-b501-afc025a45640" xmlns="http://schemas.microsoft.com/dsltools/LogicalClassDesigner">
   <packagedElements>
     <logicalClassDesignerModelHasPackages>
       <package Id="11756165-ee90-4337-8f0a-926f02e57aa2" name="TerrainAlgorithm" visibility="Private">
@@ -3982,5 +3962,25 @@
   </packagedElements>
   <package Id="2a457d7f-30b9-4bb5-b501-afc025a45640" name="TCC">
     <elementDefinition Id="d5636da8-d4cb-4d52-b4cb-0d2b2da84d75" />
+    <profileInstances>
+      <packageHasProfileInstances Id="fefef968-9b8e-48a1-a5b4-bbe30bd9b019">
+        <profileInstance Id="071e2e51-71ce-4e57-9976-4858f4c83601" name="StandardProfileL2">
+          <elementDefinition Id="e34d544e-0fea-4ed6-ac5e-1b74119ac791" />
+        </profileInstance>
+        <elementDefinition Id="0caec977-1f8c-4ba3-a7db-8cc9ad9cc73b" />
+      </packageHasProfileInstances>
+      <packageHasProfileInstances Id="18fe52ee-4d24-4554-811b-054bbed11d57">
+        <profileInstance Id="d6feb78f-c4f7-4059-bcdf-83b5feea71a0" name="StandardProfileL3">
+          <elementDefinition Id="532ea607-fb19-44b8-8502-3351b05452be" />
+        </profileInstance>
+        <elementDefinition Id="29349502-908c-4fda-9054-c48619c59ed0" />
+      </packageHasProfileInstances>
+      <packageHasProfileInstances Id="df4c4cbb-a66f-454a-bff9-ec2021961c9a">
+        <profileInstance Id="d3ce16ec-b1be-4270-a4f1-e84b61279196" name="CSharpProfile">
+          <elementDefinition Id="3e58d2aa-55ae-43cb-8dbc-2a8754c8a8a7" />
+        </profileInstance>
+        <elementDefinition Id="4048572e-b08c-4484-a55e-757f1454b65e" />
+      </packageHasProfileInstances>
+    </profileInstances>
   </package>
 </logicalClassDesignerModel>
